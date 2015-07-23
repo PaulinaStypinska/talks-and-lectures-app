@@ -1,0 +1,22 @@
+{
+  "name": "talks-and-lectures-app",
+  "version": "1.0.0",
+  "description": "Talks and Lectures",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/PaulinaStypinska/talks-and-lectures-app.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/PaulinaStypinska/talks-and-lectures-app/issues"
+  },
+  "homepage": "https://github.com/PaulinaStypinska/talks-and-lectures-app",
+  "dependencies": {
+    "pg": "^4.4.0"
+  }
+}
