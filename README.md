@@ -20,3 +20,5 @@ Setup
 Create database
 
     psql postgres < createDatabase.sql 
+    
+node data/venue.js to see initial crud working.
