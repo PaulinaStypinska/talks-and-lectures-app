@@ -1,7 +1,7 @@
 var pg = require('pg');
 var connectionString = 'postgres://localhost:5432/talks';
 
-function create(data, callback) {
+exports.create = function(data, callback) {
     // Get a client from the connection pool
     pg.connect(connectionString, function(err, client) {
         // Insert
@@ -16,7 +16,7 @@ function create(data, callback) {
     });
 }
 
-function retrieve(id, callback) {
+exports.retrieve = function(id, callback) {
     var result = [];
 
     // Get a client from the connection pool
@@ -39,7 +39,7 @@ function retrieve(id, callback) {
     });
 }
 
-function update(data, callback) {
+exports.update = function(data, callback) {
     var result = [];
 
     // Get a client from the connection pool
@@ -65,7 +65,7 @@ function update(data, callback) {
     });
 }
 
-function remove(id, callback) {
+exports.remove = function(id, callback) {
     var result = [];
 
     // Get a client from the connection pool
@@ -94,21 +94,3 @@ function handleError(err, client, callback) {
     }
 }
 
-// These ugly tests will only work with the correct data in the database
-// We will replace these with proper tests
-
-//create({name:"scooby"}, function(err, result) {
-//    console.log(result);
-//});
-
-//retrieve(8, function(err, result) {
-//    console.log(result);
-//});
-
-//update({id:8, name:"Albert Hall"}, function(err, result) {
-//    console.log(result);
-//});
-
-//remove(30, function(err, result) {
-//    console.log(result);
-//});

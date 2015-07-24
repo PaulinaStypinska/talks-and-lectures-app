@@ -6,7 +6,7 @@ var createVenueTable = 'create table venue \ \
                     name varchar(40) not null \
                   )';
 
-function createSchema(databaseName, callback) {
+exports.createSchema = function(databaseName, callback) {
     var connectionString = 'postgres://localhost:5432/' + databaseName;
     pg.connect(connectionString, function(err, client) {
         client.query('drop table if exists venue', function(err, result) {
@@ -16,7 +16,3 @@ function createSchema(databaseName, callback) {
         })
     });
 }
-
-createSchema('talks', function(err, result) {
-    process.exit();
-});

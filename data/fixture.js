@@ -3,7 +3,7 @@ var async = require('async');
 var venues = require('./venues.json');
 var util = require('util');
 
-function createFixtures(databaseName, callback) {
+exports.createFixtures = function(databaseName, callback) {
     var connectionString = 'postgres://localhost:5432/' + databaseName;
     pg.connect(connectionString, function(err, client) {
         deleteAll(client, function(err, result) {
@@ -35,6 +35,4 @@ function createVenues(client, venues, callback) {
     });
 }
 
-createFixtures('talks', function(err, result) {
-    process.exit();
-});
+
