@@ -1,4 +1,4 @@
-﻿
+
 CREATE TABLE venue(
 	id serial PRIMARY KEY,
 	building VARCHAR (40),
@@ -9,7 +9,7 @@ CREATE TABLE venue(
     tel INT
 );
 
-CREATE TABLE lecture(
+CREATE TABLE lectures(
     id serial PRIMARY KEY,
     title VARCHAR (30) NOT NULL,
     dateof DATE NOT NULL,

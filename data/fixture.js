@@ -6,6 +6,7 @@ var util = require('util');
 exports.createFixtures = function(databaseName, callback) {
     var connectionString = 'postgres://localhost:5432/' + databaseName;
     pg.connect(connectionString, function(err, client) {
+        if (err) throw err;
         deleteAll(client, function(err, result) {
             createVenues(client, venues, function(err, result) {
                 callback();

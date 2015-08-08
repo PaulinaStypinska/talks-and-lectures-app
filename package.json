@@ -18,6 +18,7 @@
   "homepage": "https://github.com/PaulinaStypinska/talks-and-lectures-app",
   "dependencies": {
     "async": "^1.4.0",
-    "pg": "^4.4.0"
+    "pg": "^4.4.0",
+    "sequelize": "^3.5.1"
   }
 }
