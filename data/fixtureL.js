@@ -4,7 +4,7 @@ var lectures = require('./lectures.json');
 var util = require('util');
 
 exports.createFixtures = function(databaseName, callback) {
-    var connectionString = 'postgres://orator:password@localhost/' + databaseName;
+    var connectionString = 'postgres://localhost:5432/' + databaseName;
     pg.connect(connectionString, function(err, client) {
         if (err) throw err;
         deleteAll(client, function(err, result) {

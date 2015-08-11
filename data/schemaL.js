@@ -11,7 +11,7 @@ var createLectureTable = 'create table lectures \ \
                   )';
 
 exports.createSchema = function(databaseName, callback) {
-    var connectionString = 'postgres://orator:password@localhost/' + databaseName;
+    var connectionString = 'postgres://localhost:5432/' + databaseName;
     pg.connect(connectionString, function(err, client) {
         if (err) throw err;
         client.query('drop table if exists lectures', function(err, result) {
