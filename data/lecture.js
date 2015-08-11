@@ -1,5 +1,5 @@
 var pg = require('pg');
-var connectionString = 'postgres://localhost:5432/talks';
+var connectionString = 'postgres://orator:password@localhost/talks';
 
 exports.create = function(data, callback) {
     // Get a client from the connection pool
