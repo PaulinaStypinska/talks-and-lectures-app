@@ -4,7 +4,7 @@
   "description": "Talks and Lectures",
   "main": "index.js",
   "scripts": {
-    "test": "mocha"
+    "test": "make test"
   },
   "repository": {
     "type": "git",
@@ -20,5 +20,8 @@
     "async": "^1.4.0",
     "pg": "^4.4.0",
     "sequelize": "^3.5.1"
+  },
+  "devDependencies": {
+    "mocha": "^2.2.5"
   }
 }
