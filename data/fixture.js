@@ -28,7 +28,7 @@ function deleteAll(client, callback) {
 
 function createVenues(client, venues, callback) {
     async.each(venues, function(venue, callback) {
-        client.query('insert into venue(name, building, street, number, postcode) values($1, $2, $3, $4,$5)', [venue.name, venue.building, venue.street, venue.number, venue.postcode], function(err, result) {
+        client.query('insert into venue(name) values($1)', [venue.name], function(err, result) {
             callback(err, result);
             console.log('Inserted venue: ' + util.inspect(venue));
         });
