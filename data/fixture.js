@@ -12,8 +12,6 @@ exports.createFixtures = function(databaseName, callback) {
                 callback();
             });
         });
-        
-        // Call other create functions in the correct order
     });
 }
 
@@ -22,8 +20,6 @@ function deleteAll(client, callback) {
         console.log('Deleted all Venues');
         callback(err, result);
     });
-    
-    // Delete contents of other tables
 }
 
 function createVenues(client, venues, callback) {
