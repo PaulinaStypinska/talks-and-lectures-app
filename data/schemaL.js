@@ -6,8 +6,8 @@ var createLectureTable = 'create table lectures \ \
                     title varchar(40) not null, \
                     venue varchar(40), \
                     speaker varchar(40), \
-                    date date not null, \
-                    time time not null \
+                    date date, \
+                    time time \
                   )';
 
 exports.createSchema = function(databaseName, callback) {
