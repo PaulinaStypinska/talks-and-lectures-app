@@ -5,7 +5,7 @@ var createLectureTable = 'create table lectures \ \
                     id serial primary key, \
                     title varchar(40) not null, \
                     venue varchar(40), \
-                    speaker varchar(40) not null, \
+                    speaker varchar(40), \
                     date date not null, \
                     time time not null \
                   )';
