@@ -1,6 +1,12 @@
-[
-    {"title": "Is there money in the banana stand?", "venue": "ICC", "speaker": "Albert", "date": "05 Sep 2015", "time": "17:00"},
+{
+"venues" : [
+  {"id": 1, "name":"Albert Hall", "building": "lecture hall 01", "street": "Bloomsbury St", "number": "22", "postcode": "W1"},
+  {"name":"ICC", "building": "lecture hall 02", "street": "Waterloo St", "number": "221", "postcode": "SE1"},
+  {"name":"The O2", "building": "lecture hall 03", "street": "The Cut", "number": "3", "postcode": "SE1"}
+],    
+"lectures": [
+    {"venue_id":1, "title": "Is there money in the banana stand?", "venue": "ICC", "speaker": "Albert", "date": "05 Sep 2015", "time": "17:00"},
     {"title": "Burgers", "venue": "Albert Hall", "speaker": "Albert", "date": "15 August 2015", "time": "20:15" },
     {"title": "Arguably the best movie of our time: Pacific Rim", "venue": "ICC", "speaker": "Albert", "date": "20 August 2015", "time": "12:00"}
 ]
-
+}
