@@ -1,6 +1,6 @@
   
  [
-    {"venue_id":1, "title": "Is there money in the banana stand?", "venue": "ICC", "speaker": "Albert", "date": "05 Sep 2015", "time": "17:00"},
+    {"title": "Is there money in the banana stand?", "venue": "ICC", "speaker": "Albert", "date": "05 Sep 2015", "time": "17:00"},
     {"title": "Burgers", "venue": "Albert Hall", "speaker": "Albert", "date": "15 August 2015", "time": "20:15" },
     {"title": "Arguably the best movie of our time: Pacific Rim", "venue": "ICC", "speaker": "Albert", "date": "20 August 2015", "time": "12:00"}
 ]
