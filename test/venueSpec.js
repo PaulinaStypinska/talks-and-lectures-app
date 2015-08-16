@@ -25,7 +25,7 @@ describe('venue test', function() {
     });
 
     it('should create venue', function(done) {
-        venue.create({name:'Test Venue'}, function(err, result) {
+        venue.create({name:'Test Venue', building: "Brewery", street: "Russel Sq", number: 30, postcode: "WC2H"}, function(err, result) {
             assert.equal(true, result.id > 0);
             done();
         });
