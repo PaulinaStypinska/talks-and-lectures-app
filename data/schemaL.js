@@ -2,12 +2,13 @@ var pg = require('pg');
 
 var createLectureTable = 'create table lectures \ \
                   ( \
-                    id serial primary key, \
+                    id int primary key, \
                     title varchar(40) not null, \
-                    venue varchar(40), \
-                    speaker varchar(40), \
+                    venue_id int references venue(id) on delete set null, \
+                    speaker_id int references speaker(id) on delete set null, \
                     date date, \
-                    time time \
+                    time time, \
+                    tags_id int references tags(id) on delete set null \
                   )';
 
 exports.createSchema = function(databaseName, callback) {

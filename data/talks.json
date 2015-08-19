@@ -1,12 +1,23 @@
 {
 "venues" : [
   {"id": 1, "name":"Albert Hall", "building": "lecture hall 01", "street": "Bloomsbury St", "number": "22", "postcode": "W1"},
-  {"name":"ICC", "building": "lecture hall 02", "street": "Waterloo St", "number": "221", "postcode": "SE1"},
-  {"name":"The O2", "building": "lecture hall 03", "street": "The Cut", "number": "3", "postcode": "SE1"}
+  {"id": 2, "name":"ICC", "building": "lecture hall 02", "street": "Waterloo St", "number": "221", "postcode": "SE1"},
+  {"id":3, "name":"The O2", "building": "lecture hall 03", "street": "The Cut", "number": "3", "postcode": "SE1"}
 ],    
 "lectures": [
-    {"venue_id":1, "title": "Is there money in the banana stand?", "venue": "ICC", "speaker": "Albert", "date": "05 Sep 2015", "time": "17:00"},
-    {"title": "Burgers", "venue": "Albert Hall", "speaker": "Albert", "date": "15 August 2015", "time": "20:15" },
-    {"title": "Arguably the best movie of our time: Pacific Rim", "venue": "ICC", "speaker": "Albert", "date": "20 August 2015", "time": "12:00"}
-]
+    {"id":1, "title": "Is there money in the banana stand?", "venue_id":2, "speaker_id": 1, "date": "05 Sep 2015", "time": "17:00", "tags_id":3},
+    {"id":2, "title": "Burgers", "venue_id":2, "speaker_id": 2, "date": "15 August 2015", "time": "20:15", "tags_id": 5},
+    {"id":3, "title": "Arguably the best movie of our time: Pacific Rim", "venue_id":3, "speaker_id": 1, "date": "20 August 2015", "time": "12:00", "tags_id": 4}
+],
+"speakers": [
+        {"id":1, "firstname": "Charlotte", "lastname": "Bunch", "bio": "bio1"},
+        {"id": 2, "firstname": "Joseph", "lastname": "Heller", "bio": "bio2"}
+    ],
+"tags": [
+        {"id": 1, "genre": "Science"},
+        {"id": 2, "genre": "Technology"},
+        {"id": 3, "genre": "History"},
+        {"id": 4, "genre": "Film"},
+        {"id": 5, "genre": "Politics"}
+    ]
 }

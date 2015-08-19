@@ -1,21 +1,17 @@
 var pg = require('pg');
 
-var createVenueTable = 'create table venue \ \
+var createTagTable = 'create table tags \ \
                   ( \
                     id int primary key, \
-                    name varchar(40) not null, \
-                    building varchar(40), \
-                    street varchar(40),\
-                    number int, \
-                    postcode varchar(20) \
+                    genre varchar(40) not null \
                   )';
 
 exports.createSchema = function(databaseName, callback) {
     var connectionString = 'postgres://localhost:5432/' + databaseName;
     pg.connect(connectionString, function(err, client) {
         if (err) throw err;
-        client.query('drop table if exists venue', function(err, result) {
-            client.query(createVenueTable, function(err, result) {
+        client.query('drop table if exists tags', function(err, result) {
+            client.query(createTagTable, function(err, result) {
                 callback(err, result);
             });
         })
