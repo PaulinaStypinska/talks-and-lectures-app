@@ -1,51 +1,136 @@
 var pg = require('pg');
 var async = require('async');
-var talks = require('./talks.json'); //now references the joint json file (renamed talks, previous file still kept as they are for reference)
+var talks = require('./talk.json'); //now references the joint json file (renamed talks, previous file still kept as they are for reference)
 var util = require('util');
+
+//schemas
+var lectureschema = require('./schema/schemaLecture');
+var venueschema = require('./schema/schemaVenue');
+var speakerschema = require('./schema/schemaSpeaker');
+var tagschema = require('./schema/schemaTag');
+
+exports.dropAll = function(databaseName, callback) {
+    async.series([
+            function(callback) {
+                lectureschema.drop(databaseName, function(err, result) {
+                    callback(err, result);
+                })
+            },
+            function(callback) {
+                venueschema.drop(databaseName, function(err, result) {
+                    callback(err, result);
+                })
+            },
+            function(callback) {
+                tagschema.drop(databaseName, function(err, result) {
+                    callback(err, result);
+                })
+            },
+            function(callback) {
+                speakerschema.drop(databaseName, function(err, result) {
+                    callback(err, result);
+                })
+            }],
+        function(err, results) {
+            callback(err, results);
+        });
+}
+
+exports.createAll = function(databaseName, callback) {
+    async.series([
+            function(callback) {
+                venueschema.createSchema(databaseName, function(err, result) {
+                    callback(err, result);
+                })
+            },
+            function(callback) {
+                tagschema.createSchema(databaseName, function(err, result) {
+                    callback(err, result);
+                })
+            },
+            function(callback) {
+                speakerschema.createSchema(databaseName, function(err, result) {
+                    callback(err, result);
+                })
+            },
+            function(callback) {
+                lectureschema.createSchema(databaseName, function(err, result) {
+                    callback(err, result);
+                })
+            }],
+        function(err, results) {
+            callback(err, results);
+        });
+}
 
 exports.createFixtures = function (databaseName, callback) {
     var connectionString = 'postgres://localhost:5432/' + databaseName;
     pg.connect(connectionString, function (err, client) {
         if (err) throw err;
-        deleteAll(client, function(err, result) { //deletes both venues and lectures
-            createVenues(client, talks.venues, function(err, result) {//creates venues
-            })
-            
-             createTags(client, talks.tags, function(err, result) {//creates tags
-            })
-            
-             createSpeakers(client, talks.speakers, function(err, result) {//creates speakers
-            })   
-            
-            createLectures(client, talks.lectures, function (err, result) { //creates lectures and inserts the foreign key
-             callback(); //only calls callback (=done()) after creating lectures
+        async.series([
+            function(callback) {
+                deleteAll(client, function(err, result) {
+                    callback(err, result);
+                })
+            },
+            function(callback) {
+                createVenues(client, talks.venues, function(err, result) {
+                    callback(err, result);
+                })
+            },
+            function(callback) {
+                createTags(client, talks.tags, function(err, result) {
+                    callback(err, result);
+                })
+            },
+            function(callback) {
+                createSpeakers(client, talks.speakers, function(err, result) {
+                    callback(err, result);
+                })
+            },
+            function(callback) {
+                createLectures(client, talks.lectures, function(err, result) {
+                    callback(err, result);
+                })
+            }],
+            function(err, results) {
+                callback(err, results);
             });
-        });     // Call other create functions in the correct order
     });
 }
 
 function deleteAll(client, callback) {
-  client.query('delete from lectures', function(err, result) { 
-      console.log('Deleted all lectures'); 
-      //doesn't call callback, so that createVenues and createLectures isn't called twice
-    });
-    
-      client.query('delete from tags', function(err, result) { 
-      console.log('Deleted all tags'); 
-      //doesn't call callback, so that createVenues and createLectures isn't called twice
-    });
-    
-      client.query('delete from speaker', function(err, result) { 
-      console.log('Deleted all speakers'); 
-      //doesn't call callback, so that createVenues and createLectures isn't called twice
-    }); 
-    
-  //  should work in this order if on delete cascade and on delete update is specified when creating the foreign key
-      client.query('delete from venues', function (err, result) {
-      console.log('Deleted all venues');
-       callback(err, result);
-    });
-        // Delete contents of other tables
+
+    //  should work in this order if on delete cascade and on delete update is specified when creating the foreign key
+    async.series([
+            function(callback) {
+                client.query('delete from lecture', function(err, result) {
+                    console.log('Deleted all Lectures');
+                    callback(err, result);
+                });
+            },
+            function(callback) {
+                client.query('delete from tag', function(err, result) {
+                    console.log('Deleted all Tags');
+                    callback(err, result);
+                });
+            },
+            function(callback) {
+                client.query('delete from speaker', function(err, result) {
+                    console.log('Deleted all Speakers');
+                    callback(err, result);
+                });
+            },
+            function(callback) {
+                client.query('delete from venue', function (err, result) {
+                    console.log('Deleted all Venues');
+                    callback(err, result);
+                });
+            }],
+            // Delete contents of other tables
+            function(err, results) {
+                callback();
+            });
 }
 
 function createVenues(client, venues, callback) {
@@ -65,7 +150,7 @@ function createVenues(client, venues, callback) {
 
 function createLectures(client, lectures, callback) {
     async.each(lectures, function (lecture, callback) {
-        client.query('insert into lectures(id, title, venue_id, speaker_id, date, time, tags_id) values($1, $2, $3, $4, $5, $6, $7)', [lecture.id, lecture.title, lecture.venue_id, lecture.speaker_id, lecture.date, lecture.time, lecture.tags_id], function (err, result) { 
+        client.query('insert into lecture(id, title, venue_id, speaker_id, date, time, tag_id) values($1, $2, $3, $4, $5, $6, $7)', [lecture.id, lecture.title, lecture.venue_id, lecture.speaker_id, lecture.date, lecture.time, lecture.tag_id], function (err, result) {
             callback(err, result);
             console.log('Inserted lecture: ' + util.inspect(lecture));
         });
@@ -79,7 +164,7 @@ function createLectures(client, lectures, callback) {
 
 function createTags(client, tags, callback) {
     async.each(tags, function(tag, callback) {
-        client.query('insert into tags(id, genre) values($1, $2)', [tag.id, tag.genre], function(err, result) { //to change to reference the deeper json structure
+        client.query('insert into tag(id, genre) values($1, $2)', [tag.id, tag.genre], function(err, result) { //to change to reference the deeper json structure
             callback(err, result);
             console.log('Inserted tag: ' + util.inspect(tag));
         });
