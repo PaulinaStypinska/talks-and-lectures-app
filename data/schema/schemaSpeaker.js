@@ -1,0 +1,34 @@
+var pg = require('pg');
+
+var createSpeakerTable = 'create table speaker \ \
+                  ( \
+                    id int primary key, \
+                    firstname varchar(40) not null, \
+                    lastname varchar(40) not null, \
+                    bio varchar(300) \
+                  )';
+
+exports.drop = function(databaseName, callback) {
+    var connectionString = 'postgres://localhost:5432/' + databaseName;
+    pg.connect(connectionString, function(err, client) {
+        if (err) throw err;
+        client.query('drop table if exists speaker cascade', function(err, result) {
+            client.end();
+            callback(err, result);
+        })
+    });
+}
+
+exports.createSchema = function(databaseName, callback) {
+    var connectionString = 'postgres://localhost:5432/' + databaseName;
+    pg.connect(connectionString, function(err, client) {
+        if (err) throw err;
+        client.query(createSpeakerTable, function(err, result) {
+            if(!err) {
+                console.log('Created Speaker Table');
+            }
+            client.end();
+            callback(err, result);
+        });
+    });
+}

@@ -5,7 +5,7 @@ exports.create = function(data, callback) {
     // Get a client from the connection pool
     pg.connect(connectionString, function(err, client) {
         // Insert
-        client.query("insert into tags(id, genre) values($1, $2) returning id", [data.id, data.genre], function(err, result) {
+        client.query("insert into tag(id, genre) values($1, $2) returning id", [data.id, data.genre], function(err, result) {
             client.end();
             if(err) {
                 callback(err);
@@ -22,7 +22,7 @@ exports.retrieve = function(id, callback) {
     // Get a client from the connection pool
     pg.connect(connectionString, function(err, client) {
         // select
-        var query = client.query("select * from tags where id = ($1)", [id]);
+        var query = client.query("select * from tag where id = ($1)", [id]);
 
         // Stream results back one row at a time
         query.on('row', function(row) {
@@ -45,10 +45,10 @@ exports.update = function(data, callback) {
     // Get a client from the connection pool
     pg.connect(connectionString, function(err, client) {
         // Update
-        client.query("update tags set genre=($2) where id=($1)", [data.id, data.genre]);
+        client.query("update tag set genre=($2) where id=($1)", [data.id, data.genre]);
 
         // Select
-        var query = client.query("select * from speaker where id = ($1)", [data.id]);
+        var query = client.query("select * from tag where id = ($1)", [data.id]);
 
         // Stream results back one row at a time
         query.on('row', function(row) {
@@ -71,10 +71,10 @@ exports.remove = function(id, callback) {
     // Get a client from the connection pool
     pg.connect(connectionString, function(err, client) {
         // Delete
-        client.query("delete from tags where id=($1)", [id]);
+        client.query("delete from tag where id=($1)", [id]);
 
         // Select
-        var query = client.query("select * from tags where id = ($1)", [id], function(err) {
+        var query = client.query("select * from tag where id = ($1)", [id], function(err) {
             client.end();
             if(err) {
                 callback(err);

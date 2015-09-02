@@ -5,7 +5,7 @@ exports.create = function(data, callback) {
     // Get a client from the connection pool
     pg.connect(connectionString, function(err, client) {
         // Insert
-        client.query("insert into lecture(id, title, venue_id, speaker_id, date, time, tag_id) values($1, $2, $3, $4, $5, $6, $7) returning id", [data.id, data.title, data.venue_id, data.speaker_id, data.date, data.time, data.tag_id], function(err, result) {
+        client.query("insert into lecturetag(id, lecture_id, tag_id) values($1, $2, $3) returning id", [data.id, data.lecture_id, data.tag_id], function(err, result) {
             client.end();
             if(err) {
                 callback(err);
@@ -22,7 +22,7 @@ exports.retrieve = function(id, callback) {
     // Get a client from the connection pool
     pg.connect(connectionString, function(err, client) {
         // select
-        var query = client.query("select * from lecture where id = ($1)", [id]);
+        var query = client.query("select * from lecturetag where id = ($1)", [id]);
 
         // Stream results back one row at a time
         query.on('row', function(row) {
@@ -45,10 +45,10 @@ exports.update = function(data, callback) {
     // Get a client from the connection pool
     pg.connect(connectionString, function(err, client) {
         // Update
-        client.query("update lecture set title=($2), venue_id=($3), speaker_id=($4), date=($5), time=($6), tag_id=($7) where id=($1)", [data.id, data.title, data.venue_id, data.speaker_id, data.date, data.time, data.tag_id]);
+        client.query("update lecturetag set lecture_id=($2), tag_id=($3) where id=($1)", [data.id, data.lecture_id, data.tag_id]);
 
         // Select
-        var query = client.query("select * from lecture where id = ($1)", [data.id]);
+        var query = client.query("select * from lecturetag where id = ($1)", [data.id]);
 
         // Stream results back one row at a time
         query.on('row', function(row) {
@@ -71,9 +71,10 @@ exports.remove = function(id, callback) {
     // Get a client from the connection pool
     pg.connect(connectionString, function(err, client) {
         // Delete
-        client.query("delete from lecture where id=($1)", [id]);
-                        // Select
-        var query = client.query("select * from lecture where id = ($1)", [id], function(err) {
+        client.query("delete from lecturetag where id=($1)", [id]);
+
+        // Select
+        var query = client.query("select * from lecturetag where id = ($1)", [id], function(err) {
             client.end();
             if(err) {
                 callback(err);
