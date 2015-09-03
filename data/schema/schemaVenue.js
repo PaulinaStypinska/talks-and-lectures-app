@@ -3,7 +3,7 @@ var pg = require('pg');
 var createVenueTable = 'create table venue \ \
                   ( \
                     id int primary key, \
-                    name varchar(06) not null unique, \
+                    name varchar(60) not null unique, \
                     building varchar(40), \
                     street varchar(60),\
                     longitude numeric(6,4), \
