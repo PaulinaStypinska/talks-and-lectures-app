@@ -45,7 +45,7 @@ exports.update = function(data, callback) {
     // Get a client from the connection pool
     pg.connect(connectionString, function(err, client) {
         // Update
-        client.query("update lecture set title=($2), venue_id=($3), speaker_id=($4), date=($5), time=($6) where id=($1)", [data.id, data.title, data.venue_id, data.speaker_id, data.date, data.time);
+        client.query("update lecture set title=($2), venue_id=($3), speaker_id=($4), date=($5), time=($6) where id=($1)", [data.id, data.title, data.venue_id, data.speaker_id, data.date, data.time]);
 
         // Select
         var query = client.query("select * from lecture where id = ($1)", [data.id]);
