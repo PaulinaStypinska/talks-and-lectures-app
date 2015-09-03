@@ -10,6 +10,7 @@ var speakerschema = require('./schema/schemaSpeaker');
 var tagschema = require('./schema/schemaTag');
 var linkSchema = require('./schema/schemaLectureTag');
 
+
 exports.dropAll = function(databaseName, callback) {
     async.series([
             function (callback){
@@ -17,9 +18,6 @@ exports.dropAll = function(databaseName, callback) {
                     callback(err, result);
                 })
             },
-
-exports.dropAll = function(databaseName, callback) {
-    async.series([
             function(callback) {
                 lectureschema.drop(databaseName, function(err, result) {
                     callback(err, result);
