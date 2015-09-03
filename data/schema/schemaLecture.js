@@ -7,7 +7,7 @@ var createLectureTable = 'create table lecture \ \
                     venue_id int references venue(id) on delete set null, \
                     speaker_id int references speaker(id) on delete set null, \
                     date date, \
-                    time time, \
+                    time time \
                   )';
 
 exports.drop = function(databaseName, callback) {

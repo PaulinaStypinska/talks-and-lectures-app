@@ -1,8 +1,8 @@
 {
 "venues" : [
-  {"id": 1, "name":"Albert Hall", "building": "lecture hall 01", "street": "Bloomsbury St", "number": "22", "postcode": "W1"},
-  {"id": 2, "name":"ICC", "building": "lecture hall 02", "street": "Waterloo St", "number": "221", "postcode": "SE1"},
-  {"id": 3, "name":"The O2", "building": "lecture hall 03", "street": "The Cut", "number": "3", "postcode": "SE1"}
+  {"id": 1, "name":"Albert Hall", "building": "lecture hall 01", "street": "Bloomsbury St", "longitude": "0.10", "latitude": "52.12"},
+  {"id": 2, "name":"ICC", "building": "lecture hall 02", "street": "Waterloo St", "longitude": "0.10", "latitude": "52.134"},
+  {"id": 3, "name":"The O2", "building": "lecture hall 03", "street": "The Cut", "longitude": "0.10", "latitude": "52.1567"}
 ],    
 "lectures": [
     {"id": 1, "title": "Is there money in the banana stand?", "venue_id":2, "speaker_id": 1, "date": "05 Sep 2015", "time": "17:00"},

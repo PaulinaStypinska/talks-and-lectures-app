@@ -10,6 +10,7 @@ var venueschema = require('../data/schema/schemaVenue');
 var speakerschema = require('../data/schema/schemaSpeaker');
 var tagschema = require('../data/schema/schemaTag');
 var linkschema = require('../data/schema/schemaLectureTag');
+
 //fixtures file
 var fixtures = require('../data/fixture');
 
@@ -19,6 +20,7 @@ var speaker = require('../data/speaker');
 var tags = require('../data/tag');
 var lecture = require('../data/lecture');
 var lectureTag = require('../data/lecturetag');
+
 
 var databaseName = 'talks';
 
@@ -53,7 +55,7 @@ describe('crud test', function() {
     //testing all venues CRUD operations
     it('should create venues', function(done) {
         venue.create({"id":4, "name":"Piccadilly", "building": "lecture hall 04", "street": "The Cut", "longitude": "0.0109", "latitude": "52.1212"}, function(err, result) {
-            assert.equal(true, result.id > 0);
+        assert.equal(true, result.id > 0);
             done();
         });
     });
@@ -176,5 +178,5 @@ describe('crud test', function() {
             done();
         });
     });
-    
+
 });

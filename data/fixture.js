@@ -17,6 +17,9 @@ exports.dropAll = function(databaseName, callback) {
                     callback(err, result);
                 })
             },
+
+exports.dropAll = function(databaseName, callback) {
+    async.series([
             function(callback) {
                 lectureschema.drop(databaseName, function(err, result) {
                     callback(err, result);
@@ -108,6 +111,7 @@ exports.createFixtures = function (databaseName, callback) {
                 createLectureTag(client, talks.lecturetags, function(err, result)  {
                     callback(err, result);
                 })
+
             }],
             function(err, results) {
                 callback(err, results);
