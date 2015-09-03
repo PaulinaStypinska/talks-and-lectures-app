@@ -5,7 +5,7 @@ exports.create = function(data, callback) {
     // Get a client from the connection pool
     pg.connect(connectionString, function(err, client) {
         // Insert
-        client.query("insert into venue(id, name, building, street, number, postcode) values($1, $2, $3, $4, $5, $6) returning id", [data.id, data.name, data.building, data.street, data.number, data.postcode], function(err, result) {
+        client.query("insert into venue(id, name, building, street, longitude, latitude) values($1, $2, $3, $4, $5, $6) returning id", [data.id, data.name, data.building, data.street, data.longitude, data.latitude], function(err, result) {
             client.end();
             if(err) {
                 callback(err);
@@ -45,7 +45,7 @@ exports.update = function(data, callback) {
     // Get a client from the connection pool
     pg.connect(connectionString, function(err, client) {
         // Update
-        client.query("update venue set name=($2), building=($3), street=($4), number=($5), postcode=($6) where id=($1)", [data.id, data.name, data.building, data.street, data.number, data.postcode]);
+        client.query("update venue set name=($2), building=($3), street=($4), longitude=($5), latitude=($6) where id=($1)", [data.id, data.name, data.building, data.street, data.longitude, data.latitude]);
 
         // Select
         var query = client.query("select * from venue where id = ($1)", [data.id]);
