@@ -1,0 +1,9 @@
+{
+    "dbInfo": {
+        "host": "localhost",
+        "port": 5432
+    },
+    "cron":{
+        "schedule": "00 00 06 * * 1-7"
+    }
+}

@@ -6,7 +6,8 @@ exports.create = function(data, callback) {
     pg.connect(connectionString, function(err, client) {
         // Insert
         client.query("insert into venue(id, name, building, street, longitude, latitude) values($1, $2, $3, $4, $5, $6) returning id", [data.id, data.name, data.building, data.street, data.longitude, data.latitude], function(err, result) {
-            client.end();
+           // client.end();
+            done(); //calls done since end method limits the client pool to 10 at the time and this limits the bulk insert, done seems to release the connection immediately. should client.end() still be called within this function?
             if(err) {
                 callback(err);
             } else {
