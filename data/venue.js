@@ -3,7 +3,7 @@ var connectionString = 'postgres://localhost:5432/talks';
 
 exports.create = function(data, callback) {
     // Get a client from the connection pool
-    pg.connect(connectionString, function(err, client) {
+    pg.connect(connectionString, function(err, client, done) {
         // Insert
         client.query("insert into venue(id, name, building, street, longitude, latitude) values($1, $2, $3, $4, $5, $6) returning id", [data.id, data.name, data.building, data.street, data.longitude, data.latitude], function(err, result) {
            // client.end();
