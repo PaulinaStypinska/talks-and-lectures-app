@@ -30,7 +30,9 @@ makeMeetupRequest(openVenuesMethod, '&country=GB&city=london');
 
 function handleData (err, data){
     if (err) throw err;
+    if (data)
     console.log("All done: " + data.id);
+    else console.log("Duplicate omitted"); //indicates when a duplicate is in the code, to distinguish from relevant data
 }
 
 var obj;

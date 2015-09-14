@@ -4,8 +4,8 @@ var connectionString = 'postgres://localhost:5432/talks';
 exports.create = function(data, callback) {
     // Get a client from the connection pool
     pg.connect(connectionString, function(err, client, done) {
-        // Insert
-        client.query("insert into venue(id, name, building, street, longitude, latitude) values($1, $2, $3, $4, $5, $6) returning id", [data.id, data.name, data.building, data.street, data.longitude, data.latitude], function(err, result) {
+        // Insert; cast is a workaround since there is a data type error when same data is used twice. where indicates when duplicates should be omitted.
+        client.query("insert into venue(id, name, building, street, longitude, latitude) select $1, $2, $3, cast($4 as varchar), $5 where not exists (select 1 from venue where street=$4) returning id", [data.id, data.name, data.building, data.street, data.longitude, data.latitude], function(err, result) { 
            // client.end();
             done(); //calls done since end method limits the client pool to 10 at the time and this limits the bulk insert, done seems to release the connection immediately. should client.end() still be called within this function?
             if(err) {
