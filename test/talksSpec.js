@@ -54,7 +54,7 @@ describe('crud test', function() {
 
     //testing all venues CRUD operations
     it('should create venues', function(done) {
-        venue.create({"id":4, "name":"Piccadilly", "building": "lecture hall 04", "street": "The Cut", "longitude": "0.0109", "latitude": "52.1212"}, function(err, result) {
+        venue.create({"id":4, "name":"Piccadilly", "building": "lecture hall 04", "street": "Lower Marsh", "longitude": "0.0109", "latitude": "52.1212"}, function(err, result) {
         assert.equal(true, result.id > 0);
             done();
         });
