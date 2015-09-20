@@ -215,7 +215,7 @@ function createSpeakers(client, speakers, callback) {
 
 function createLectureTag(client, links, callback) {
     async.each(links, function(link, callback) {
-        client.query('insert into lecturetag(lecture_id, tag_id) values($1, $2, $3)', [link.lecture_id, link.tag_id], function(err, result) { //to change to reference the deeper json structure
+        client.query('insert into lecturetag(lecture_id, tag_id) values($1, $2)', [link.lecture_id, link.tag_id], function(err, result) { //to change to reference the deeper json structure
             callback(err, result);
             console.log('Inserted lectureTag connection: ' + util.inspect(link));
         });
