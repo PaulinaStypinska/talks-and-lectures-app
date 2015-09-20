@@ -5,7 +5,7 @@ exports.create = function(data, callback) {
     // Get a client from the connection pool
     pg.connect(connectionString, function(err, client, done) {
         // Insert. Changed to select where not exists to avoid duplicates and used cast() to get the correct data type (throws error otherwise)
-        client.query("insert into venue(name, building, street, longitude, latitude) select $1, $2, cast($3 as varchar), $4, $5 where not exists (select 1 from venue where street=$3) returning id", [data.name, data.building, data.street, data.longitude, data.latitude], function(err, result) {
+        client.query("insert into venue(name, building, street, longitude, latitude) values($1, $2, $3, $4, $5) returning id", [data.name, data.building, data.street, data.longitude, data.latitude], function(err, result) {
            //client.end();
             done();
             if(err) {
