@@ -6,12 +6,12 @@ var createSpeakerTable = 'create table speaker \ \
                     firstname varchar(40) not null, \
                     lastname varchar(40) not null, \
                     bio varchar(300) \
-                  )';
-/*
+                  );\
+
                     drop sequence if exists speaker_id_seq;\
                     create sequence speaker_id_seq;\
                     alter table speaker alter column id set default nextval(\'speaker_id_seq\')';
-                    */
+                    
 
 exports.drop = function(databaseName, callback) {
     var connectionString = 'postgres://localhost:5432/' + databaseName;

@@ -8,12 +8,11 @@ var createLectureTable = 'create table lecture \ \
                         speaker_id int references speaker(id) on delete set null, \
                         date date, \
                         time time \
-                      )';
-/*
-                        drop sequence if exists lecture_id_seq;\
+                      );\
+                      drop sequence if exists lecture_id_seq;\
                         create sequence lecture_id_seq;\
                       alter table lecture alter column id set default nextval(\'lecture_id_seq\')';
-                      */
+                      
 
 
 exports.drop = function(databaseName, callback) {

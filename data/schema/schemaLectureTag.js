@@ -5,12 +5,11 @@ var createLectureTagTable = 'create table lecturetag \ \
                     id int primary key not null, \
                     lecture_id int not null references lecture(id) on delete cascade, \
                     tag_id int references tag(id) on delete cascade \
-                      )';
-/*
+                      );\
                         drop sequence if exists lecturetag_id_seq;\
                         create sequence lecturetag_id_seq;\
                       alter table lecturetag alter column id set default nextval(\'lecturetag_id_seq\')';
-                      */
+                      
 
 exports.drop = function(databaseName, callback) {
     var connectionString = 'postgres://localhost:5432/' + databaseName;

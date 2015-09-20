@@ -4,12 +4,10 @@ var createTagTable = 'create table tag \ \
                   ( \
                     id int primary key not null, \
                     genre varchar(40) not null \
-                  )';
-/*
+                  );\
                     drop sequence if exists tag_id_seq;\
                     create sequence tag_id_seq;\
                     alter table tag alter column id set default nextval(\'tag_id_seq\')';
-*/
 
 exports.drop = function(databaseName, callback) {
     var connectionString = 'postgres://localhost:5432/' + databaseName;
