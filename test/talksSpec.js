@@ -58,7 +58,7 @@ describe('crud test', function() {
         });
     });
 
-
+/*
 
     it('should retrieve venues', function(done) {
         venue.retrieve(1, function(err, result) {
@@ -179,6 +179,6 @@ describe('crud test', function() {
             done();
         });
     });
-   
+   */
     
 });
