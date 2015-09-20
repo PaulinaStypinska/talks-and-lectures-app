@@ -3,10 +3,11 @@ var connectionString = 'postgres://localhost:5432/talks';
 
 exports.create = function(data, callback) {
     // Get a client from the connection pool
-    pg.connect(connectionString, function(err, client) {
+    pg.connect(connectionString, function(err, client, done) {
         // Insert
-        client.query("insert into tag(id, genre) values($1, $2) returning id", [data.id, data.genre], function(err, result) {
-            client.end();
+        client.query("insert into tag(genre) select cast($1 as varchar) where not exists (select 1 from tag where genre=$1) returning id", [data.genre], function(err, result) {
+            //client.end();
+            done();
             if(err) {
                 callback(err);
             } else {
@@ -20,7 +21,7 @@ exports.retrieve = function(id, callback) {
     var result = [];
 
     // Get a client from the connection pool
-    pg.connect(connectionString, function(err, client) {
+    pg.connect(connectionString, function(err, client, done) {
         // select
         var query = client.query("select * from tag where id = ($1)", [id]);
 
@@ -31,7 +32,8 @@ exports.retrieve = function(id, callback) {
 
         // After all data is returned, close connection and return results
         query.on('end', function() {
-            client.end();
+           // client.end();
+            done();
             callback(null, result[0]);
         });
 
@@ -43,12 +45,12 @@ exports.update = function(data, callback) {
     var result = [];
 
     // Get a client from the connection pool
-    pg.connect(connectionString, function(err, client) {
+    pg.connect(connectionString, function(err, client, done) {
         // Update
         client.query("update tag set genre=($2) where id=($1)", [data.id, data.genre]);
 
         // Select
-        var query = client.query("select * from tag where id = ($1)", [data.id]);
+        var query = client.query("select * from speaker where id = ($1)", [data.id]);
 
         // Stream results back one row at a time
         query.on('row', function(row) {
@@ -57,7 +59,8 @@ exports.update = function(data, callback) {
 
         // After all data is returned, close connection and return results
         query.on('end', function() {
-            client.end();
+           // client.end();
+            done();
             callback(null, result[0]);
         });
 
@@ -69,13 +72,14 @@ exports.remove = function(id, callback) {
     var result = [];
 
     // Get a client from the connection pool
-    pg.connect(connectionString, function(err, client) {
+    pg.connect(connectionString, function(err, client, done) {
         // Delete
         client.query("delete from tag where id=($1)", [id]);
 
         // Select
         var query = client.query("select * from tag where id = ($1)", [id], function(err) {
-            client.end();
+           // client.end();
+            done();
             if(err) {
                 callback(err);
             } else {

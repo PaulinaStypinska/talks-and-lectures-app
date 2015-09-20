@@ -2,19 +2,22 @@ var pg = require('pg');
 
 var createVenueTable = 'create table venue \ \
                   ( \
-                    id int primary key, \
-                    name varchar(60) not null unique, \
+                    id int primary key not null, \
+                    name varchar(60) not null, \
                     building varchar(40), \
                     street varchar(60),\
                     longitude numeric(6,4), \
                     latitude numeric(6,4) \
-                  )';
+                  );\
+                    drop sequence if exists venue_id_seq;\
+                    create sequence venue_id_seq;\
+                    alter table venue alter column id set default nextval(\'venue_id_seq\')';
 
 exports.drop = function(databaseName, callback) {
     var connectionString = 'postgres://localhost:5432/' + databaseName;
     pg.connect(connectionString, function(err, client) {
         if (err) throw err;
-        client.query('drop table if exists venue cascade', function(err, result) {
+        client.query('alter sequence venue_id_seq restart with 1; drop table if exists venue cascade', function(err, result) {
             client.end();
             callback(err, result);
         })

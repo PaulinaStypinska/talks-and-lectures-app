@@ -2,17 +2,20 @@ var pg = require('pg');
 
 var createSpeakerTable = 'create table speaker \ \
                   ( \
-                    id int primary key, \
+                    id int primary key not null, \
                     firstname varchar(40) not null, \
                     lastname varchar(40) not null, \
                     bio varchar(300) \
-                  )';
+                  );\
+                    drop sequence if exists speaker_id_seq;\
+                    create sequence speaker_id_seq;\
+                    alter table speaker alter column id set default nextval(\'speaker_id_seq\')';
 
 exports.drop = function(databaseName, callback) {
     var connectionString = 'postgres://localhost:5432/' + databaseName;
     pg.connect(connectionString, function(err, client) {
         if (err) throw err;
-        client.query('drop table if exists speaker cascade', function(err, result) {
+        client.query('alter sequence if exists speaker_id_seq restart with 1; drop table if exists speaker cascade', function(err, result) {
             client.end();
             callback(err, result);
         })

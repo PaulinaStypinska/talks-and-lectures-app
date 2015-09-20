@@ -10,7 +10,6 @@ var speakerschema = require('./schema/schemaSpeaker');
 var tagschema = require('./schema/schemaTag');
 var linkSchema = require('./schema/schemaLectureTag');
 
-
 exports.dropAll = function(databaseName, callback) {
     async.series([
             function (callback){
@@ -109,7 +108,6 @@ exports.createFixtures = function (databaseName, callback) {
                 createLectureTag(client, talks.lecturetags, function(err, result)  {
                     callback(err, result);
                 })
-
             }],
             function(err, results) {
                 callback(err, results);
@@ -159,7 +157,7 @@ function deleteAll(client, callback) {
 
 function createVenues(client, venues, callback) {
     async.each(venues, function(venue, callback) {
-        client.query('insert into venue(id, name, building, street, longitude, latitude) values($1, $2, $3, $4, $5, $6)', [venue.id, venue.name, venue.building, venue.street, venue.longitude, venue.latitude], function(err, result) { //to change to reference the deeper json structure
+        client.query('insert into venue(name, building, street, longitude, latitude) values($1, $2, $3, $4, $5)', [venue.name, venue.building, venue.street, venue.longitude, venue.latitude], function(err, result) { //to change to reference the deeper json structure
             callback(err, result);
             console.log('Inserted venue: ' + util.inspect(venue));
         });
@@ -174,7 +172,7 @@ function createVenues(client, venues, callback) {
 
 function createLectures(client, lectures, callback) {
     async.each(lectures, function (lecture, callback) {
-        client.query('insert into lecture(id, title, venue_id, speaker_id, date, time) values($1, $2, $3, $4, $5, $6)', [lecture.id, lecture.title, lecture.venue_id, lecture.speaker_id, lecture.date, lecture.time], function (err, result) {
+        client.query('insert into lecture(title, venue_id, speaker_id, date, time) values($1, $2, $3, $4, $5)', [lecture.title, lecture.venue_id, lecture.speaker_id, lecture.date, lecture.time], function (err, result) {
             callback(err, result);
             console.log('Inserted lecture: ' + util.inspect(lecture));
         });
@@ -188,7 +186,7 @@ function createLectures(client, lectures, callback) {
 
 function createTags(client, tags, callback) {
     async.each(tags, function(tag, callback) {
-        client.query('insert into tag(id, genre) values($1, $2)', [tag.id, tag.genre], function(err, result) { //to change to reference the deeper json structure
+        client.query('insert into tag(genre) values($1)', [tag.genre], function(err, result) { //to change to reference the deeper json structure
             callback(err, result);
             console.log('Inserted tag: ' + util.inspect(tag));
         });
@@ -202,7 +200,7 @@ function createTags(client, tags, callback) {
 
 function createSpeakers(client, speakers, callback) {
     async.each(speakers, function(speaker, callback) {
-        client.query('insert into speaker(id, firstname, lastname, bio) values($1, $2, $3, $4)', [speaker.id, speaker.firstname, speaker.lastname, speaker.bio], function(err, result) { 
+        client.query('insert into speaker(firstname, lastname, bio) values($1, $2, $3)', [speaker.firstname, speaker.lastname, speaker.bio], function(err, result) { 
             callback(err, result);
             console.log('Inserted speaker: ' + util.inspect(speaker));
         });
@@ -217,7 +215,7 @@ function createSpeakers(client, speakers, callback) {
 
 function createLectureTag(client, links, callback) {
     async.each(links, function(link, callback) {
-        client.query('insert into lecturetag(id, lecture_id, tag_id) values($1, $2, $3)', [link.id, link.lecture_id, link.tag_id], function(err, result) { //to change to reference the deeper json structure
+        client.query('insert into lecturetag(lecture_id, tag_id) values($1, $2, $3)', [link.lecture_id, link.tag_id], function(err, result) { //to change to reference the deeper json structure
             callback(err, result);
             console.log('Inserted lectureTag connection: ' + util.inspect(link));
         });

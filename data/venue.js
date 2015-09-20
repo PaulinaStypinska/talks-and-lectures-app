@@ -4,10 +4,10 @@ var connectionString = 'postgres://localhost:5432/talks';
 exports.create = function(data, callback) {
     // Get a client from the connection pool
     pg.connect(connectionString, function(err, client, done) {
-        // Insert; cast is a workaround since there is a data type error when same data is used twice. where indicates when duplicates should be omitted.
-        client.query("insert into venue(id, name, building, street, longitude, latitude) select $1, $2, $3, cast($4 as varchar), $5, $6 where not exists (select 1 from venue where street=$4) returning id", [data.id, data.name, data.building, data.street, data.longitude, data.latitude], function(err, result) { 
-           // client.end();
-            done(); //calls done since end method limits the client pool to 10 at the time and this limits the bulk insert, done seems to release the connection immediately. should client.end() still be called within this function?
+        // Insert. Changed to select where not exists to avoid duplicates and used cast() to get the correct data type (throws error otherwise)
+        client.query("insert into venue(name, building, street, longitude, latitude) select $1, $2, cast($3 as varchar), $4, $5 where not exists (select 1 from venue where street=$3) returning id", [data.name, data.building, data.street, data.longitude, data.latitude], function(err, result) {
+           //client.end();
+            done();
             if(err) {
                 callback(err);
             } else {
@@ -21,7 +21,7 @@ exports.retrieve = function(id, callback) {
     var result = [];
 
     // Get a client from the connection pool
-    pg.connect(connectionString, function(err, client) {
+    pg.connect(connectionString, function(err, client, done) {
         // select
         var query = client.query("select * from venue where id = ($1)", [id]);
 
@@ -32,7 +32,8 @@ exports.retrieve = function(id, callback) {
 
         // After all data is returned, close connection and return results
         query.on('end', function() {
-            client.end();
+            done();
+            //client.end();
             callback(null, result[0]);
         });
 
@@ -44,7 +45,7 @@ exports.update = function(data, callback) {
     var result = [];
 
     // Get a client from the connection pool
-    pg.connect(connectionString, function(err, client) {
+    pg.connect(connectionString, function(err, client, done) {
         // Update
         client.query("update venue set name=($2), building=($3), street=($4), longitude=($5), latitude=($6) where id=($1)", [data.id, data.name, data.building, data.street, data.longitude, data.latitude]);
 
@@ -58,7 +59,8 @@ exports.update = function(data, callback) {
 
         // After all data is returned, close connection and return results
         query.on('end', function() {
-            client.end();
+           // client.end();
+            done();
             callback(null, result[0]);
         });
 
@@ -70,13 +72,14 @@ exports.remove = function(id, callback) {
     var result = [];
 
     // Get a client from the connection pool
-    pg.connect(connectionString, function(err, client) {
+    pg.connect(connectionString, function(err, client, done) {
         // Delete
         client.query("delete from venue where id=($1)", [id]);
 
         // Select
         var query = client.query("select * from venue where id = ($1)", [id], function(err) {
-            client.end();
+           // client.end();
+            done();
             if(err) {
                 callback(err);
             } else {

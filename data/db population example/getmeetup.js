@@ -17,7 +17,7 @@ function makeMeetupRequest(method, params) {
   var uri = util.format('http://api.meetup.com/%s?key=%s', method, key);
   uri = uri + params;
   
-  request(uri, populateTable) //named the callback for it to become recursive
+  request(uri, populateTable) //named the callback in order to make it a recursive function
   }
 
 // Get categories

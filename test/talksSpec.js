@@ -10,7 +10,6 @@ var venueschema = require('../data/schema/schemaVenue');
 var speakerschema = require('../data/schema/schemaSpeaker');
 var tagschema = require('../data/schema/schemaTag');
 var linkschema = require('../data/schema/schemaLectureTag');
-
 //fixtures file
 var fixtures = require('../data/fixture');
 
@@ -20,7 +19,6 @@ var speaker = require('../data/speaker');
 var tags = require('../data/tag');
 var lecture = require('../data/lecture');
 var lectureTag = require('../data/lecturetag');
-
 
 var databaseName = 'talks';
 
@@ -54,18 +52,13 @@ describe('crud test', function() {
 
     //testing all venues CRUD operations
     it('should create venues', function(done) {
-        venue.create({"id":4, "name":"Piccadilly", "building": "lecture hall 04", "street": "Lower Marsh", "longitude": "0.0109", "latitude": "52.1212"}, function(err, result) {
-        assert.equal(true, result.id > 0);
-            done();
-        });
-    });
-
-    it('should update venues', function(done) {
-        venue.update({"id":2, "name":"St Andrew's", "building": "lecture hall 04", "street": "Shoreditch High Street", "longitude": "0.0102", "latitude": "52.3456"}, function(err, result) {
+        venue.create({"name":"Piccadilly", "building": "lecture hall 05", "street": "Lower Marsh", "longitude": "0.0109", "latitude": "52.1212"}, function(err, result) {
             assert.equal(true, result.id > 0);
             done();
         });
     });
+
+
 
     it('should retrieve venues', function(done) {
         venue.retrieve(1, function(err, result) {
@@ -74,17 +67,25 @@ describe('crud test', function() {
             done();
         });
     });
+   
+        it('should update venues', function(done) {
+        venue.update({"id":2, "name":"St Andrew's", "building": "lecture hall 04", "street": "Shoreditch High Street", "longitude": "0.0102", "latitude": "52.3456"}, function(err, result) {
+            assert.equal(true, result.id > 0);
+            done();
+        });
+    });
 
-    it('should remove venues', function(done) {
+    it('should remove a venue', function(done) {
         venue.remove(4, function(err, result) {
             assert.equal(true, result);
             done();
         });
     });
+    
 
     //testing all speaker CRUD ops
     it('should create speaker', function(done) {
-        speaker.create({"id":3, "firstname": "Ava", "lastname": "DuVernay", "bio": "bio3"}, function(err, result) {
+        speaker.create({"firstname": "Ava", "lastname": "DuVernay", "bio": "bio3"}, function(err, result) {
             if(err) {
                 console.log(err);
             }
@@ -116,7 +117,7 @@ describe('crud test', function() {
 
     //testing all tags CRUD ops
     it('should create tags', function(done) {
-        tags.create({"id":6, "genre":"Literature"}, function(err, result) {
+        tags.create({"genre":"Literature"}, function(err, result) {
             assert.equal(true, result.id > 0);
             done();
         });
@@ -142,10 +143,10 @@ describe('crud test', function() {
             done();
         });
     });
-
+ 
     //testing all lecture CRUD ops
     it('should create lectures', function(done) {
-        lecture.create({id:4, title: "Buttercup", venue_id:1, speaker_id:3, date:"07 Sep 2015", time:"18:00"}, function(err, result) {
+        lecture.create({title: "Buttercup", venue_id:1, speaker_id:3, date:"07 Sep 2015", time:"18:00"}, function(err, result) {
             assert.equal(true, result.id > 0);
             done();
         });
@@ -173,10 +174,11 @@ describe('crud test', function() {
     });
     
     it('should insert a tag and lecture connection', function(done) {
-        lectureTag.create({"id":2, "lecture_id": 1, "tag_id":3}, function (err, result) {
+        lectureTag.create({"lecture_id": 1, "tag_id":3}, function (err, result) {
             assert.equal(true, result.id > 0);
             done();
         });
     });
-
+   
+    
 });
