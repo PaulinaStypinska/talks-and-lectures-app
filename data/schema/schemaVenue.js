@@ -9,11 +9,12 @@ var createVenueTable = 'create table venue \ \
                     longitude numeric(6,4), \
                     latitude numeric(6,4) \
                   )';
-                  /*
+/*
                     drop sequence if exists venue_id_seq;\
                     create sequence venue_id_seq;\
                     alter table venue alter column id set default nextval(\'venue_id_seq\')';
                     */
+                    
 
 exports.drop = function(databaseName, callback) {
     var connectionString = 'postgres://localhost:5432/' + databaseName;
