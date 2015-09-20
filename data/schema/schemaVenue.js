@@ -8,7 +8,7 @@ var createVenueTable = 'create table venue \ \
                     street varchar(60),\
                     longitude numeric(6,4), \
                     latitude numeric(6,4) \
-                  );'
+                  )';
                   /*
                     drop sequence if exists venue_id_seq;\
                     create sequence venue_id_seq;\
