@@ -174,7 +174,7 @@ describe('crud test', function() {
     });
     
     it('should insert a tag and lecture connection', function(done) {
-        lectureTag.create({"lecture_id": 2, "tag_id":3}, function (err, result) {
+        lectureTag.create({"lecture_id": 3, "tag_id":2}, function (err, result) {
             assert.equal(true, result.id > 0);
             done();
         });
