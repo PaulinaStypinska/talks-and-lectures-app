@@ -8,17 +8,19 @@ var createLectureTable = 'create table lecture \ \
                         speaker_id int references speaker(id) on delete set null, \
                         date date, \
                         time time \
-                      );\
+                      )';
+/*
                         drop sequence if exists lecture_id_seq;\
                         create sequence lecture_id_seq;\
                       alter table lecture alter column id set default nextval(\'lecture_id_seq\')';
+                      */
 
 
 exports.drop = function(databaseName, callback) {
     var connectionString = 'postgres://localhost:5432/' + databaseName;
     pg.connect(connectionString, function(err, client) {
         if (err) throw err;
-        client.query('alter sequence if exists lecture_id_seq restart with 1; drop table if exists lecture cascade', function(err, result) {
+        client.query('drop table if exists lecture cascade', function(err, result) {
             client.end();
             callback(err, result);
         })
