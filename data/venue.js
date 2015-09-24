@@ -17,6 +17,20 @@ exports.create = function(data, callback) {
     });
 }
 
+exports.upsert = function(data, callback) {
+    pg.connect(connectionString, function(err, client, done) {
+        client.query('with upsert as (update venue set name=$1, building=$2, longitude=$4, latitude=$5 where street=$3 returning *) insert into venue(name, building, street, longitude, latitude) select $1,$2,$3,$4,$5 where not exists (select * from upsert) returning id', [data.name, data.building, data.street, data.longitude, data.latitude], function(err, result) {
+           //client.end();
+            done();
+            if(err) {
+                callback(err);
+            } else {
+                callback(err, result.rows[0]);
+            }
+        });
+    });
+}
+
 exports.retrieve = function(id, callback) {
     var result = [];
 
