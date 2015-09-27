@@ -51,21 +51,17 @@ function updateData (error, response, body) { //transforms meetup data and calls
         }
 }
 //'with upsert as (update venue set name=$1, building=$2, longitude=$4, latitude=$5 where street=$3 returning *) insert into venue(name, building, street, longitude, latitude) select $1,$2,$3,$4,$5 where not exists (select * from upsert) returning id'
-
-function upsert(arr, callback){    //calls async each on the exported upsert function
+function upsert(arr, callback){    
     async.each(arr, function(item, callback) {
          venue.upsert({"name": item.name, "building": null,"street": item.address_1, "longitude": item.lon, "latitude": item.lat}, function(err, result) { //doesn't work on upsert code
              callback(err, result);
-             if (result)
-             console.log("All done: " + result.id);
-             else console.log("Updated"); //not sure about this one, should it still return id if it's only updated? seems to be working so far
+             console.log("Updated");
             }),
           function(err){
         if (err) throw err;
         }
     });
 }
-
 
 function handleData (err, result){
     if (err) throw err;

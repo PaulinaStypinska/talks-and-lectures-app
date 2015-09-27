@@ -25,7 +25,7 @@ exports.upsert = function(data, callback) {
             if(err) {
                 callback(err);
             } else {
-                callback(err, result.rows[0]);
+                callback(null, true);
             }
         });
     });

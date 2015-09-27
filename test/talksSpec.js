@@ -58,6 +58,12 @@ describe('crud test', function() {
         });
     });
 
+       it('should upsert venues', function(done) {
+        venue.upsert({"name":"Piccadilly", "building": "lecture hall 06", "street": "Lower Marsh", "longitude": "0.0109", "latitude": "52.1234"}, function(err, result) {
+            assert.equal(true, result);
+            done();
+        });
+    });
 
 
     it('should retrieve venues', function(done) {
@@ -174,11 +180,11 @@ describe('crud test', function() {
     });
     
     it('should insert a tag and lecture connection', function(done) {
-        lectureTag.create({"lecture_id": 3, "tag_id":2}, function (err, result) {
+        lectureTag.create({"lecture_id": 3, "tag_id":3}, function (err, result) {
             assert.equal(true, result.id > 0);
             done();
         });
     });
-
+   
     
 });
