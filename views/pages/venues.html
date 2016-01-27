@@ -1,0 +1,26 @@
+ <!--- ANGULAR CODE FOR VENUES --->    
+<div id="container">
+    
+    <select name="nameSelector" class="selectOption" ng-model="search" ng-options="data.name for data in venues">
+        <option value="">Filter by names</option>
+    </select>
+    
+        <div id="items" ng-repeat="data in venues | filter:query | filter:search">
+    
+            <table class="layout">
+                <caption class='name'><a name={{data.name}} id={{data.id}} href='/#/venue/{{data.name}}'> {{data.name}}</a></caption>
+                <tr><td class='identifier'>address:</td>
+                    <td class="data">
+                    {{data.building}}, <br>{{data.street}}
+                    </td>
+                     </tr>
+            </table>
+        </div> <!-- END OF ITEMS --->
+
+    </div> <!--- END OF CONTAINER --------------------->
+
+                        <ui-gmap-google-map center='map.center' zoom='map.zoom'>
+        <ui-gmap-markers models="markers" coords="'self'" icon="'icon'" options="'options'" events= "'events'">
+        </ui-gmap-markers>
+                                </ui-gmap-google-map>
+

@@ -1,0 +1,30 @@
+ <!--- ANGULAR CODE FOR VENUES --->    
+
+
+<div id="container">
+        <div id="items" ng-repeat="data in lectures | filter:query">
+    
+            <table class="layout">
+                <caption class='name'><a name={{data.title}} href='#/event/{{data.title}}'>{{data.title}}</a></caption>
+                <tr><td class='identifier'>Date:</td>
+                    <td class="data">
+
+                    </td>
+                     </tr>
+               <tr><td class='venue'>Venue:</td>
+                    <td class="data">
+<!------ WILL LATER REDIRECT TO VENUE CUSTOM PAGE, SHOWING ALL TALKS AND DIRECTIONS ----->
+                   <a href='#venue/{{data.name}}'>  {{data.name}}</a>
+                    </td>
+                     </tr>
+                <tr class="buttons">
+
+<div class="addthis_sharing_toolbox"></div>
+
+                </tr>
+            </table>
+        </div> <!-- END OF ITEMS --->
+
+    </div> <!--- END OF CONTAINER --------------------->
+
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-569d74cb68f3fa83" async="async"></script>

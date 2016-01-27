@@ -1,0 +1,20 @@
+
+<div ng-controller="evController">
+
+<h1>{{lecture.title}}</h1>
+
+<div class='info'>
+    Where: {{lecture.name}}<br>
+    When: {{lecture.time}}<br>
+    Who: {{lecture.speaker}}<br>
+    What: {{lecture.description}}<br>
+    Website: {{lecture.url}}<br>
+</div>
+    
+                            <ui-gmap-google-map center='map.center' zoom='map.zoom'>
+        <ui-gmap-marker coords="marker.coords" idkey="marker.id">
+        </ui-gmap-marker>
+                                </ui-gmap-google-map>
+    
+    
+</div>
