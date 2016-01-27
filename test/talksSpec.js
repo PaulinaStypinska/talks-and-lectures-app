@@ -5,20 +5,20 @@ var assert = require('assert');
 var async = require('async');
 
 //schemas
-var lectureschema = require('../data/schema/schemaLecture');
-var venueschema = require('../data/schema/schemaVenue');
-var speakerschema = require('../data/schema/schemaSpeaker');
-var tagschema = require('../data/schema/schemaTag');
-var linkschema = require('../data/schema/schemaLectureTag');
+var lectureschema = require('../lib/data/schema/schemaLecture');
+var venueschema = require('../lib/data/schema/schemaVenue');
+var speakerschema = require('../lib/data/schema/schemaSpeaker');
+var tagschema = require('../lib/data/schema/schemaTag');
+var linkschema = require('../lib/data/schema/schemaLectureTag');
 //fixtures file
-var fixtures = require('../data/fixture');
+var fixtures = require('../lib/data/fixture');
 
 //all CRUD modules
-var venue = require('../data/venue');
-var speaker = require('../data/speaker');
-var tags = require('../data/tag');
-var lecture = require('../data/lecture');
-var lectureTag = require('../data/lecturetag');
+var venue = require('../lib/data/venue');
+var speaker = require('../lib/data/speaker');
+var tags = require('../lib/data/tag');
+var lecture = require('../lib/data/lecture');
+var lectureTag = require('../lib/data/lecturetag');
 
 var databaseName = 'talks';
 
