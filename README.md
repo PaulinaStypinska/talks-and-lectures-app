@@ -32,7 +32,7 @@ Setup
     
 Create database
 
-    psql postgres < createDatabase.sql 
+    psql postgres < lib/createDatabase.sql 
     
 Testing
 -------
