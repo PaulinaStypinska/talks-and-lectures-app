@@ -5,9 +5,9 @@
   {"id": 3, "name":"The O2", "building": "lecture hall 03", "street": "The Cut", "longitude": "0.10", "latitude": "52.1567"}
 ],    
 "lectures": [
-    {"id": 1, "title": "Is there money in the banana stand?", "venue_id":2, "speaker_id": 1, "date": "05 Sep 2015", "time": "17:00"},
-    {"id": 2, "title": "Burgers", "venue_id":2, "speaker_id": 2, "date": "15 August 2015", "time": "20:15"},
-    {"id": 3, "title": "Pacific Rim", "venue_id":3, "speaker_id": 1, "date": "20 August 2015", "time": "12:00"}
+    {"id": 1, "title": "Is there money in the banana stand?", "venue_id":2, "tag_id": 1, "datetime": "1999-01-08 04:05:06 -7:00", "description": "Description1"},
+    {"id": 2, "title": "Burgers", "venue_id":2, "tag_id": 2, "datetime": "1999-01-08 04:05:06 -7:00", "description": "Description2"},
+    {"id": 3, "title": "Pacific Rim", "venue_id":3, "tag_id": 1, "datetime": "1999-01-08 04:05:06 -6:00", "description": "Description1"}
 ],
 "speakers": [
         {"id": 1, "firstname": "Charlotte", "lastname": "Bunch", "bio": "bio1"},
