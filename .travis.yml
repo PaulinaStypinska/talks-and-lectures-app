@@ -4,11 +4,6 @@ node_js:
   - "iojs"
   - "iojs-v1.0.4"
 
-env:
-  global:
-  - NODE_ENV=test
-  - PGPORT=5433
-  - PGHOST=localhost
 
 addons:
   apt:
@@ -30,7 +25,7 @@ before_script:
   - sudo /etc/init.d/postgresql start
   - sudo /etc/init.d/postgresql status
   - psql --version
-  - psql -c 'create database talks;' -U postgres
+  - psql -c 'create database talks;' -U postgres -p 5433
 
 install: 
 - npm install
