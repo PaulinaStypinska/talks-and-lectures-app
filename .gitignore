@@ -46,14 +46,5 @@ Temporary Items
 .idea
 talks-and-lectures-app.iml
 node_modules
-/data/keys.json
-
-conString.js
-lodash.js
-angular-simple-logger.js
-angular-google-maps.js
-keys.json
-/cron example
-gettags.js
 
 .env
