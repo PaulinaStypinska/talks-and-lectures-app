@@ -3,6 +3,7 @@ node_js:
   - "iojs"
   - "iojs-v1.0.4"
   
+sudo:required
 
 addons:
   apt:
@@ -14,6 +15,8 @@ addons:
   postgresql: 9.5
     
 before_script:
+  - sudo cp /etc/postgresql/9.4/main/pg_hba.conf /etc/postgresql/9.5/main/pg_hba.conf
+  - sudo /etc/init.d/postgresql restart
   - psql -c 'create database talks;' -U postgres
 
 install: 
