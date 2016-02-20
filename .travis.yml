@@ -15,7 +15,7 @@ addons:
     - postgresql-contrib-9.5
   postgresql: 9.5
   
-before_script:
+before_install:
   - sudo /etc/init.d/postgresql stop
   - sudo apt-get -y remove --purge postgresql-9.1
   - sudo apt-get -y remove --purge postgresql-9.2
@@ -29,6 +29,7 @@ before_script:
   - sudo sh -c 'echo "local all postgres trust" > /etc/postgresql/9.5/main/pg_hba.conf'
   - sudo sh -c 'echo -n "host all all 127.0.0.1/32 trust" >> /etc/postgresql/9.5/main/pg_hba.conf'
   - sudo /etc/init.d/postgresql restart
+  - psql --version
   - psql -c 'create database talks;' -U postgres
 
 install: 
