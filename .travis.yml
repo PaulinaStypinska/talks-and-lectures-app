@@ -27,10 +27,11 @@ before_script:
   - sudo apt-get -y remove --purge postgresql-9.3
   - sudo apt-get -y remove --purge postgresql-9.4
   - sudo sh -c 'echo -n "host all all 127.0.0.1/32 trust" >> /etc/postgresql/9.5/main/pg_hba.conf'
+  - sudo sh -c 'echo "local all postgres trust" > /etc/postgresql/9.5/main/pg_hba.conf's
   - sudo /etc/init.d/postgresql start
   - sudo /etc/init.d/postgresql status
   - psql --version
-  - psql -c 'create database talks;' -U postgres
+  - psql -c 'create database talks;' -U postgres -p 5432
 
 install: 
 - npm install
