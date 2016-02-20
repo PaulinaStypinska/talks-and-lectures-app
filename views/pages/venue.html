@@ -1,13 +1,27 @@
-<h1>{{venue.name}}</h1>
-<div class="info">
-    ok
-   Address: {{venue.latitude}}
-    {{venue.building}}
-    {{venue.street}}
-    
+<div class="content row">
+    <div class="col-md-12 dets text-center">
+        <p>
+        <address>
+        <h2>{{venue.name}}</h2>
+        <p ng-show="venue.address1 !=null">{{venue.address1}}</p>
+        <p ng-show="venue.address2 !=null">{{venue.address2}}</p>
+        <p ng-show="venue.post_code !=null">{{venue.post_code | uppercase}}, London</p>
+        </address>
+        </p>
     </div>
+</div>
+<div class="content row">
+    <div class="col-md-3 text-center">
+        <p class="text-center lead">
+        <h2>Current events</h2>
+        <p ng-repeat="lecture in venue.lectures"><a href="/event/{{lecture.f1}}">{{lecture.f2}}</a></p>
+        </p>
+    </div>
+    <div class="col-md-9 text-left">
 
                             <ui-gmap-google-map center='map.center' zoom='map.zoom'>
         <ui-gmap-marker coords="marker.coords" idkey="marker.id">
         </ui-gmap-marker>
                                 </ui-gmap-google-map>
+    </div>  <!---- end of individual_map--->
+    </div> <!--- end of content ---->

@@ -1,20 +1,15 @@
 
-<div ng-controller="evController">
-
-<h1>{{lecture.title}}</h1>
-
-<div class='info'>
-    Where: {{lecture.name}}<br>
-    When: {{lecture.time}}<br>
-    Who: {{lecture.speaker}}<br>
-    What: {{lecture.description}}<br>
-    Website: {{lecture.url}}<br>
+<div class='content row'>
+    <div class="col-md-12 dets text-center">
+    <p class="text-left lead"><h3>{{lecture.title}}</h3><br>
+    <a href="/venue/{{lecture.vid}}">{{lecture.name}}</a> @ {{lecture.datetime | date:'H:mm on EEEE, d MMMM yyyy'}}<br>
+    <a href="{{lecture.url}}">Visit to the website</a><br></p>
 </div>
-    
-                            <ui-gmap-google-map center='map.center' zoom='map.zoom'>
-        <ui-gmap-marker coords="marker.coords" idkey="marker.id">
-        </ui-gmap-marker>
-                                </ui-gmap-google-map>
-    
-    
-</div>
+</div> <!----end of the title row---->
+<div class='content row'>
+
+    <div class="col-md-12 text-justify">
+        <div ng-bind-html="lecture.description | trustThis"></div>
+    </div>
+</div>  
+

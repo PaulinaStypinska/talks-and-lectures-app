@@ -1,29 +1,33 @@
 <!DOCTYPE html>
-<html ng-app="myApp">
+<html ng-app="myApp" >
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="fragment" content="!">
         
-        <title>Library</title>
-        <link rel="stylesheet" type="text/css" href="/stylesheets/main.css">
+        <!--- for prerender io ---->
+        <meta name="fragment" content="!">
+        <base href="/">
+        <title>London Talk and Lectures App</title>
+        
+        <meta name="description" content="{{seo.metaDescription}}">
+        
+                <link rel="stylesheet" type="text/css" href="/bootstrap/dist/css/bootstrap.css">
+                <link rel="stylesheet" type="text/css" href="/stylesheets/main.css">
+                <link rel="stylesheet" href="/angular-material/angular-material.css">
 
 
     </head>
     <body>
-
+        <div>
         <header>
-        <nav class="navigation">
-                <a href='#'>Home</a>
-                <a href="#event">Events</a>
-                <a href="#venue">Venue</a>
-                <a href="#lecturer">People</a>
-            </ul>
-        </nav>
+        <ul class="nav nav-tabs nav-justified pull-right">
+                <li><a href="/">About</a></li>
+                <li><a href="/event">Events</a></li>
+                <li><a href="/venue">Places</a></li>
+        </ul>
         </header> 
-        <div id="main">
-                  Search: <input ng-model="query">
+        <div id="main" class="container-fluid">
    
             <!-- ANGULAR TEMPLATING -->
             <div ng-view></div>
@@ -31,15 +35,23 @@
     </div>
     <!-----------SCRIPTS ---------------------------------------->
 
-    
-    <!---- ANGULAR GOOGLE MAPS SCRIPTS ---->
-    <script src="javascripts/lodash.js"></script>
-      <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular.min.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular-route.js"></script>
-    <script src="javascripts/angular-simple-logger.js"></script>
-    <script src="javascripts/angular-google-maps.js"></script>
- 
-   
+    </div> <!--- END OF THE CONTAINER ------>
+        
+    <!---- ANGULAR AND ANGULAR GOOGLE MAPS SCRIPTS ---->
+    <script src="/lodash/lodash.js"></script>
+    <script src="/angular/angular.min.js"></script>
+        
+    <script src="/angular-route/angular-route.js"></script>
+    <script src="/angular-google-maps/node_modules/angular-simple-logger/dist/angular-simple-logger.js"></script>
+    <script src="angular-google-maps/dist/angular-google-maps.js"></script>
+        
+        
+    <script src="/angular-ui-bootstrap/dist/ui-bootstrap.js"></script>
+        
+        <!----------- ANGULAR MATERIAL --------------------->
+    <script src="/angular-aria/angular-aria.js"></script>
+    <script src="/angular-animate/angular-animate.js"></script>
+    <script src="/angular-material/angular-material.js"></script>
     
     <script src="javascripts/app.js"></script>
     

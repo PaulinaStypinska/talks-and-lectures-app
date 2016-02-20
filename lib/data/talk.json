@@ -1,24 +1,24 @@
 {
 "venues" : [
-  {"id": 1, "name":"Albert Hall", "building": "lecture hall 01", "street": "Bloomsbury St", "longitude": "0.10", "latitude": "52.12"},
-  {"id": 2, "name":"ICC", "building": "lecture hall 02", "street": "Waterloo St", "longitude": "0.10", "latitude": "52.134"},
-  {"id": 3, "name":"The O2", "building": "lecture hall 03", "street": "The Cut", "longitude": "0.10", "latitude": "52.1567"}
+  {"id": 1, "name":"Albert Hall", "address1": "lecture hall 01", "address2": "Bloomsbury St", "post_code": "N1 SJ7","longitude": "0.10", "latitude": "52.12"},
+  {"id": 2, "name":"ICC", "address1": "lecture hall 02", "address2": "Waterloo St", "post_code":"EC6 IJ8","longitude": "0.10", "latitude": "52.134"},
+  {"id": 3, "name":"The O2", "address1": "lecture hall 03", "address2": "The Cut", "post_code":"RW8 9IH","longitude": "0.10", "latitude": "52.1567"}
 ],    
 "lectures": [
-    {"id": 1, "title": "Is there money in the banana stand?", "venue_id":2, "tag_id": 1, "datetime": "1999-01-08 04:05:06 -7:00", "description": "Description1"},
-    {"id": 2, "title": "Burgers", "venue_id":2, "tag_id": 2, "datetime": "1999-01-08 04:05:06 -7:00", "description": "Description2"},
-    {"id": 3, "title": "Pacific Rim", "venue_id":3, "tag_id": 1, "datetime": "1999-01-08 04:05:06 -6:00", "description": "Description1"}
+    {"id": 1, "title": "Is there money in the banana stand?", "venue_id":1, "tag_id": "2", "datetime": "1999-01-08 04:05:06 -7:00", "description": "Description1"},
+    {"id": 2, "title": "Burgers", "venue_id":2, "tag_id": "2", "datetime": "1999-01-08 04:05:06 -7:00", "description": "Description2"},
+    {"id": 3, "title": "Pacific Rim", "venue_id":3, "tag_id": "3", "datetime": "1999-01-08 04:05:06 -6:00", "description": "Description1"}
 ],
 "speakers": [
         {"id": 1, "firstname": "Charlotte", "lastname": "Bunch", "bio": "bio1"},
         {"id": 2, "firstname": "Joseph", "lastname": "Heller", "bio": "bio2"}
     ],
 "tags": [
-        {"id": 1, "genre": "Science"},
-        {"id": 2, "genre": "Technology"},
-        {"id": 3, "genre": "History"},
-        {"id": 4, "genre": "Film"},
-        {"id": 5, "genre": "Politics"}
+        {"id": 1, "genre": "Arts","eventbrite_id":[1, 7], "eventbrite":["Arts"],"meetup_id":[1],"meetup": ["Arts", "Book Clubs"]},
+        {"id": 2, "genre": "Business & Development","eventbrite_id":[2, 9], "eventbrite":["Business"],"meetup_id":[2],"meetup":["Business"]},
+        {"id": 3, "genre": "Automotive", "eventbrite_id":["3", "10"],"eventbrite":["Auto, Boat & Air"],"meetup_id":["3"],"meetup":["Auto"]},
+        {"id": 4, "genre": "Community & Culture","eventbrite_id":["4", "11"], "eventbrite":["Community","Charity & Causes"],"meetup_id":["4"],"meetup":["Community", "Support"]},
+        {"id": 5, "genre": "Misc","eventbrite_id":["5", "6"], "eventbrite":["Family & Education"],"meetup_id":["5"],"meetup":["Education","Moms & Dads"]}
     ],
 "lecturetags": [
     {"id": 1, "lecture_id": 1, "tag_id": 3}

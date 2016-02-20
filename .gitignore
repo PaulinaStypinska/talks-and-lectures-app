@@ -54,3 +54,6 @@ angular-simple-logger.js
 angular-google-maps.js
 keys.json
 /cron example
+gettags.js
+
+.env

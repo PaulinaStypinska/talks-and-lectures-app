@@ -1,28 +1,25 @@
             html, body {width:100%; height:100%;}
             
-    /* CSS NORMALISE & SCROLLBAR ETC */        
-            ul {
-            list-style-type:none;
-            }
-            a {
-                text-decoration:none;
-                color:inherit;
-            }
+    /* CSS NORMALISE IS WITHIN BOOTSTRAP */        
+
+a:hover {
+    text-decoration:none;
+}
+
     /* CONTAINER & BODY CSS */
-            
-         #container {
+        .all_items {
                 display:flex;
                 flex-direction:row;
                 flex-wrap:wrap;
-                justify-content:flex-start;
-                align-items:flex-start;
+                justify-content:space-between;
+                align-items:baseline;
                 align-content:left;    
                 padding-top:20px;
             }
             #items {
                 width:auto;
                 height:auto;
-                margin:auto;
+                margin-bottom:10px;
                 padding:5px;
                 border:1px solid #000;
                 font-family: Calibri;
@@ -32,57 +29,78 @@
                 overflow:hidden;
             }
         /* TABLES */
+    
             td {
                 vertical-align:top;
-                align:center;
+                text-align:left;
             }
             .identifier {
                 font-weight:bold;
             }
-            .data {}
             caption {
                 background-color:#000;
                 color:#fff;
                 font-size:13px;
+            }
+            .name {
+                text-align:center;
+                        }
+            .name a:hover {
+                filter:invert(50%);
+            }
+
+            .name a {
+                color:#fff;
             }
             
             /*MAPS */
     /* will look into changing map sizes depending on page */      
           .angular-google-map-container { 
               height: 400px; 
-              width:500px;
-              margin:10px auto;
-              float:left
+              border:1px solid black;
           }   
 
-            .highlight {
-                background-color:#fff;
-                color: #000;
-            }
-        /* NAVIGATION AND HEADER CSS */
-            
-            .navigation {
-                background-color:black;
-                color:#fff;
-                font: normal small-caps normal 14px/1.4 'Calibri';
-                width:100%;
-                text-align:right;
-
-            }
-            .navigation a {
-                padding-right:10px;
-                margin-right:10px;
-            }
-
-            .navigation a:hover {
-                color: #000;
-                background-color:#fff;
-                padding:10px;
-            }
             
             /* event page */
             
             .info {
-                float:right;
-                margin-right:100px;
+                padding:5px;
+                margin: 20px 50px;
+                width:300px;
+                text-transform:uppercase;
+                font-size:1em;
+                border:1px solid black;
+                
             }
+
+            .content {
+                margin-top:80px;
+            }
+
+            .about {
+                margin-top:50px;
+            }
+
+            .search {
+                width:600px;
+                display:inline-block;
+                top:10px;
+                margin:auto;
+                float:right;
+            }
+
+            .dets {
+                background-color:black;
+                color:white;
+            }
+
+            .event_description::first-letter {
+                font-weight:bold;
+                font-size:16px;
+            }
+
+            .event_description {
+                lline-height:15px;
+            }
+
+

@@ -1,26 +1,39 @@
  <!--- ANGULAR CODE FOR VENUES --->    
-<div id="container">
+
+<!--------------ALL SELECTORS ------------------>
+
+<div>
+    <md-input-container>
+        <md-select ng-model="venueName" placeholder="Select a venue" md-on-close="selVenue(venueName)">
+        <md-option ng-repeat="venue in venues" value={{venue.name}}>{{venue.name}} {{venue.address1}} {{venue.address2}} {{venue.post_code | uppercase}}</md-option>
+    </md-input-container>
+
+</div>  
     
-    <select name="nameSelector" class="selectOption" ng-model="search" ng-options="data.name for data in venues">
-        <option value="">Filter by names</option>
-    </select>
+<div class="row">
+    <div class="col-md-12">
+        <ui-gmap-google-map center='map.center' zoom='map.zoom'>
+        <ui-gmap-markers models="markers" coords="'self'" icon="'icon'" options="'options'" events= "'events'">
+        </ui-gmap-markers>
+                                </ui-gmap-google-map>   
+    </div> <!--- END OF GMAP DIV----------------------------------------->
+</div> <!--------------------END OF GMAP ROW----------------------------------------------->    
     
-        <div id="items" ng-repeat="data in venues | filter:query | filter:search">
+<div class="row">
+
+<div class="all_items col-md-12">
     
+        <div id="items" ng-repeat="data in venues" class="col-md-8">
             <table class="layout">
-                <caption class='name'><a name={{data.name}} id={{data.id}} href='/#/venue/{{data.name}}'> {{data.name}}</a></caption>
+                <caption class='name'><a class="major" name={{data.name}} id={{data.vid}} href='/venue/{{data.vid}}'> {{data.name}}</a></caption>
                 <tr><td class='identifier'>address:</td>
                     <td class="data">
-                    {{data.building}}, <br>{{data.street}}
+                    <span ng-show="data.address1 !=null">{{data.address1}}<br></span><span ng-show="data.address2 !=null">{{data.address2}}<br></span>{{data.post_code | uppercase}}
                     </td>
                      </tr>
             </table>
         </div> <!-- END OF ITEMS --->
 
-    </div> <!--- END OF CONTAINER --------------------->
-
-                        <ui-gmap-google-map center='map.center' zoom='map.zoom'>
-        <ui-gmap-markers models="markers" coords="'self'" icon="'icon'" options="'options'" events= "'events'">
-        </ui-gmap-markers>
-                                </ui-gmap-google-map>
-
+    </div>  <!---- END OF ALL ITEMS------------------------------>
+    
+</div> <!-------------- END OF ITEMS ROW ------------------------------------------------->   
