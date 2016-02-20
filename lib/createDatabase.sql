@@ -17,4 +17,3 @@ create table venue
   name varchar(40) not null
 );
 
-create databa
