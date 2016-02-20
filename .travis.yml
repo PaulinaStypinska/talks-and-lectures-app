@@ -25,6 +25,7 @@ before_script:
   - sudo /etc/init.d/postgresql start
   - sudo /etc/init.d/postgresql status
   - psql --version
+  - psql -p 5433 -h localhost
   - psql -c 'create database talks;' -U postgres
 
 install: 
