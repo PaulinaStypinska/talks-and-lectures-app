@@ -22,10 +22,11 @@ before-install:
   
 before_script:
   - sudo cp /etc/postgresql/9.4/main/pg_hba.conf /etc/postgresql/9.5/main/pg_hba.conf
+  - sudo sh -c 'echo -n "host all all 127.0.0.1/32 trust" >> /etc/postgresql/9.5/main/pg_hba.conf'
   - sudo /etc/init.d/postgresql start
   - sudo /etc/init.d/postgresql status
   - psql --version
-  - psql -p 5433 -h localhost
+  - psql -U postgres -p 5432
   - psql -c 'create database talks;' -U postgres
 
 install: 
