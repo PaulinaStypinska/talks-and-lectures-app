@@ -3,6 +3,9 @@ node_js:
   - "iojs"
   - "iojs-v1.0.4"
   
+addons:
+    postgresql: "9.5"
+    
 before_script:
   - psql -c 'create database talks;' -U postgres
 
