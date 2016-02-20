@@ -4,9 +4,6 @@ node_js:
   - "iojs"
   - "iojs-v1.0.4"
 
-env:
-  global:
-  - PGPORT=5433
 
 addons:
   apt:
