@@ -26,7 +26,7 @@ before_script:
   - sudo /etc/init.d/postgresql start
   - sudo /etc/init.d/postgresql status
   - psql --version
-  - psql -c 'create database talks;' -U postgres
+  - psql -c 'create database talks;' -U postgres -h localhost -p 5432
 
 install: 
 - npm install
