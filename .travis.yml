@@ -14,8 +14,6 @@ addons:
   postgresql: 9.5
     
 before_script:
-  - cp /etc/postgresql/9.4/main/pg_hba.conf /etc/postgresql/9.5/main/pg_hba.conf
-  -  /etc/init.d/postgresql restart
   - psql -c 'create database talks;' -U postgres
 
 install: 
