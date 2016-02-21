@@ -1,6 +1,6 @@
 [![Build Status](https://travis-ci.org/PaulinaStypinska/talks-and-lectures-app.svg)](https://travis-ci.org/PaulinaStypinska/talks-and-lectures-app)
 
-This is a full stack website that helps people find talks and lectures in London based on their location and interests. At the moment, it gets data from meetup and Eventbrite.
+A full-stack website for all seminars, talks & lectures in London. [Feel free to take a look.] (https://secure-fortress-51530.herokuapp.com/)
 
 Requirements:
 
