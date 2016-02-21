@@ -15,12 +15,12 @@ Requirements:
 
 # How to run this locally
 
-## Make sure you have postgreSQL installed on your system. You can follow the steps below for a Mac installation or go to the [PostgreSQL site] (http://www.postgresql.org/download/) to configure and set it up.
+## Make sure you have postgreSQL installed on your system.
+You can follow the steps below for a Mac installation or go to the [PostgreSQL site] (http://www.postgresql.org/download/) to configure and set it up.
 
 You will need postgreSQL version 9.5.
 
-Postgresql on Mac OSX
------------------------
+###Postgresql on Mac OSX
 
 Install Postgresql
 
@@ -35,19 +35,22 @@ Stop Postgresql
 
     pg_ctl -D /usr/local/var/postgres stop
 
-Setup
------
-    
+###Setup
+
 Create database
 
     psql postgres < createDatabase.sql 
  
 ## Run npm install in your command window to install your dependencies
 
-## Configure a [dotenv] (https://www.npmjs.com/package/dotenv) file - ESPECIALLY process.env.DATABASE_URL variable which you will need to run the tests. You may not need to configure your API keys for this.
+## Configure a dotenv file.
+For full information, see [the dotenv npm site] (https://www.npmjs.com/package/dotenv) file. The only process.env variable you will need for this is process.env.DATABASE_URL which is essential for your tests. Locally this should be configured to your user and password.
+You may not need to configure your API keys for this.
 
-## Run npm test in your command window, which will populate your database with test data and ensure all queries are passing the tests.
+## Run npm test in your command window.
+This will populate your database with test data and ensure all queries are passing the tests.
 
-## Run npm start and open your browser at localhost:8080. Test data should be displayed.
+## Run npm start. 
+And open your browser at localhost:8080. Test data should be displayed.
 
 
