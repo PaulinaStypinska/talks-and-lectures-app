@@ -58,8 +58,10 @@ And open your browser at localhost:8080. Test data should be displayed.
 
 I am using an object-relational database system (PostgreSQL). I have used mongoDB in the past, but have decided to go with postgreSQL for this project. I have wanted to use a relational database, and postgreSQL also offers very good data validity checks and ability to store JSON data, should I want to.
 
-Here is an example of table setup:
-
+Here is an example of table setup (using node-postgres):
+* ids are customised because I use joins on almost every select function in my code and use the ids frequently,
+* unique constraints ensure same data from different sources won't be duplicated
+* sequence rules ensure ids get reset for every test
 ```
 var createLectureTable = 'create table lecture \ \
                        ( \
