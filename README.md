@@ -83,5 +83,32 @@ var createLectureTable = 'create table lecture \ \
 
 #### Node
 
-I use [node-postgres] (https://github.com/brianc/node-postgres) as a client for postgreSQL. I have created a CRUD layer (it is in [a lib/data folder] (https://github.com/PaulinaStypinska/talks-and-lectures-app/tree/master/lib/data)) for all of my tables.
+I use [node-postgres] (https://github.com/brianc/node-postgres) as a client for postgreSQL. 
+
+I have created a CRUD layer  for all of my tables. (It is in [a lib/data folder] (https://github.com/PaulinaStypinska/talks-and-lectures-app/tree/master/lib/data)).
+
+Here is an example of a lecture upsert query, which:
+*as of postgres v. 9.5, checks for an existence of a row (based on url and datetime unique rule) and if it doesn't exist, updates selected row
+*references venue table id (vid) based on the venue name
+*reference tag table id (tid) based on the tag/genre id. If missing, uses COALESCE() function to insert a 'Misc' tag id.
+*returns lecture table id (lid) in a callback function for test purposes
+*calls done() returns a client instance to the pool. 
+```
+//upserts data
+exports.upsert = function(data, callback) {
+    pg.connect(connectionString, function(err, client, done) {
+        client.query("insert into lecture(title, venue_id, tag_id, datetime, url, description) select $1, (select vid from venue where venue.name=$5), COALESCE((select tid from tag where $6=ANY(tag.eventbrite_id) OR $6=ANY(tag.meetup_id)),(select tid from tag where genre='Misc')), cast($2 as timestamp),$3, $4 ON CONFLICT (url, datetime) DO UPDATE SET (title,description, venue_id, tag_id)=($1,$4,(select vid from venue where venue.name=$5),COALESCE((select tid from tag where $6=ANY(tag.eventbrite_id) OR $6=ANY(tag.meetup_id)),(select tid from tag where genre='Misc'))) returning lid", [data.title, data.datetime, data.url, data.description, data.name, data.category_id], function(err, result) {
+           //client.end();
+            done();
+            if(err) {
+                callback(err);
+            } else {
+                callback(null, result.rows[0]);
+            }
+        });
+    });
+}
+```
+
+
 
