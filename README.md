@@ -2,6 +2,8 @@
 
 A full-stack website for all seminars, talks & lectures in London. [It is now hosted on Heroku. Click here to take a look.] (https://secure-fortress-51530.herokuapp.com/)
 
+Please scroll down for the code breakdown.
+
 You can also run it locally by following the instructions below.
 
 Requirements:
@@ -81,5 +83,5 @@ var createLectureTable = 'create table lecture \ \
 
 #### Node
 
-I use [node-postgres] (https://github.com/brianc/node-postgres) as a client for postgreSQL. I have created a 
+I use [node-postgres] (https://github.com/brianc/node-postgres) as a client for postgreSQL. I have created a CRUD layer (it is in [a link] (https://github.com/PaulinaStypinska/talks-and-lectures-app/tree/master/lib/data))
 
