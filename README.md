@@ -88,11 +88,11 @@ I use [node-postgres] (https://github.com/brianc/node-postgres) as a client for 
 I have created a CRUD layer  for all of my tables. (It is in [a lib/data folder] (https://github.com/PaulinaStypinska/talks-and-lectures-app/tree/master/lib/data)).
 
 Here is an example of a lecture upsert query, which:
-*as of postgres v. 9.5, checks for an existence of a row (based on url and datetime unique rule) and if it doesn't exist, updates selected row
-*references venue table id (vid) based on the venue name
-*reference tag table id (tid) based on the tag/genre id. If missing, uses COALESCE() function to insert a 'Misc' tag id.
-*returns lecture table id (lid) in a callback function for test purposes
-*calls done() returns a client instance to the pool. 
+* as of postgres v. 9.5, checks for an existence of a row (based on url and datetime unique rule) and if it doesn't exist, updates selected row
+* references venue table id (vid) based on the venue name
+* reference tag table id (tid) based on the tag/genre id. If missing, uses COALESCE() function to insert a 'Misc' tag id.
+* returns lecture table id (lid) in a callback function for test purposes
+* calls done() returns a client instance to the pool. 
 ```
 //upserts data
 exports.upsert = function(data, callback) {
