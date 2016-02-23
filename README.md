@@ -83,5 +83,5 @@ var createLectureTable = 'create table lecture \ \
 
 #### Node
 
-I use [node-postgres] (https://github.com/brianc/node-postgres) as a client for postgreSQL. I have created a CRUD layer (it is in [a link] (https://github.com/PaulinaStypinska/talks-and-lectures-app/tree/master/lib/data))
+I use [node-postgres] (https://github.com/brianc/node-postgres) as a client for postgreSQL. I have created a CRUD layer (it is in [a lib/data folder] (https://github.com/PaulinaStypinska/talks-and-lectures-app/tree/master/lib/data)) for all of my tables.
 
