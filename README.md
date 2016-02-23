@@ -54,7 +54,7 @@ This will populate your database with test data and ensure all queries are passi
 And open your browser at localhost:8080. Test data should be displayed.
 
 
-# A few words on the setup, ie a process breakdown
+# A few words on the setup, ie a my application organisation structure
 
 #### Database
 
@@ -109,6 +109,90 @@ exports.upsert = function(data, callback) {
     });
 }
 ```
+###### My testing framework of choice is [mocha] (https://github.com/mochajs/mocha). 
+All the tests are [here] (https://github.com/PaulinaStypinska/talks-and-lectures-app/tree/master/test) and below is an example. Using async, I:
+* first create my schema and the tables
+* then create [my test fixture] (https://github.com/PaulinaStypinska/talks-and-lectures-app/blob/master/lib/data/fixture.js).
 
+``` 
 
+describe('crud test', function() {
+
+    // Run once before all tests
+    before(function(done) {
+        this.timeout(0);
+        async.series([
+            function(callback) {
+                fixtures.dropAll(databaseName, function(err, result) {
+                    callback(err, result);
+                })
+            },
+            function(callback) {
+                fixtures.createAll(databaseName, function(err, result) {
+                    callback(err, result);
+                })
+            },
+            function(callback) {
+                fixtures.createFixtures(databaseName, function(err, result) {
+                    callback(err, result);
+                })
+            }],
+            function(err, results) {
+                if(err) {
+                    console.log(err);
+                }
+                done();
+            });
+    });
+    
+```
+
+And an example of a test:
+
+```
+    it('should create venues', function(done) {
+        venue.create({"name":"Piccadilly", "address1": "lecture hall 05", "address2": "Lower Marsh", "post_code":"SE8 IR9","longitude": "0.0109", "latitude": "52.1212"}, function(err, result) {
+            assert.equal(true, result.vid > 0);
+            done();
+        });
+    });
+```   
+
+#### Express
+
+I'm using Express as the my Node.js framework. 
+
+My main (server.js) [https://github.com/PaulinaStypinska/talks-and-lectures-app/blob/master/server.js] file does the following:
+* instantiates the express app,
+* loads my dotenv file, with all of my process.env variables
+* sets up my Prerender.io settings
+* sets up multiple static assets directories
+* refers to my index.js file for all routes.
+
+My (index.js) [https://github.com/PaulinaStypinska/talks-and-lectures-app/blob/master/routes/index.js] file sets up my routes.
+* refers my index file to my default route, AND
+* refers my index file to all routes (as in the code below) to ensure the index.js file gets called in all ng-view instances.
+ 
+```
+router.all('/*', function(req, res, next) {
+  res.sendFile(path.join(__dirname, '../views', 'index.html'));
+});
+
+```
+
+* uses GET method and my CRUD layer to return my data as JSON. Requests are directed at altered URI (ie 'api/event' rather than 'event') so the app can differentiate between the Angular route and the Express one (serves pure JSON otherwise).
+
+```
+router.get('/api/event', function(req, res) {
+        lecture.retrieve(function(err, results){
+            if (err){
+              console.log(err);
+              return res.status(500).json({ success: false, data: err});
+            }
+          return res.json(results);
+        })
+        
+});
+```
+### Front end - Angular and Bootstrap
 
