@@ -162,14 +162,14 @@ And an example of a test:
 
 I'm using Express as the my Node.js framework. 
 
-My main (server.js) [https://github.com/PaulinaStypinska/talks-and-lectures-app/blob/master/server.js] file does the following:
+My main [server.js] (https://github.com/PaulinaStypinska/talks-and-lectures-app/blob/master/server.js) file does the following:
 * instantiates the express app,
 * loads my dotenv file, with all of my process.env variables
 * sets up my Prerender.io settings
 * sets up multiple static assets directories
 * refers to my index.js file for all routes.
 
-My (index.js) [https://github.com/PaulinaStypinska/talks-and-lectures-app/blob/master/routes/index.js] file sets up my routes.
+My [index.js] (https://github.com/PaulinaStypinska/talks-and-lectures-app/blob/master/routes/index.js) file sets up my routes.
 * refers my index file to my default route, AND
 * refers my index file to all routes (as in the code below) to ensure the index.js file gets called in all ng-view instances.
  
