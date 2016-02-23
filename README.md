@@ -60,7 +60,7 @@ I am using an object-relational database system (PostgreSQL). I have used mongoD
 
 Here is an example of table setup:
 
-'''
+```
 var createLectureTable = 'create table lecture \ \
                        ( \
                         lid int primary key not null, \
@@ -75,7 +75,7 @@ var createLectureTable = 'create table lecture \ \
                       drop sequence if exists lecture_lid_seq;\
                       create sequence lecture_lid_seq;\
                       alter table lecture alter column lid set default nextval(\'lecture_lid_seq\')';
-'''
+```
 
 #### Node
 
