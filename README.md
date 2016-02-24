@@ -198,7 +198,7 @@ router.get('/api/event', function(req, res) {
 
 I am using Angular (v.1.5), an MVC framework, to display my data, through ng-view and multiple partials.
 
-Here is the directory & file structure for my VIEWS folders:
+Here is the directory & file structure for my VIEWS folder:
 ```
 .
 ├── index.html
@@ -210,3 +210,129 @@ Here is the directory & file structure for my VIEWS folders:
 |   |__ event.html
 
 ```
+and my app.js file is located in:
+```
+|__ public 
+|   |__ javascripts 
+|       |__ app.js
+```
+
+The HTML partials are configured using ngRoute module:
+
+```
+myApp.config(function($routeProvider, $locationProvider){
+    $routeProvider
+    
+    .when('/', {
+        templateUrl: 'pages/about.html',
+        controller: 'mainController'
+    })
+    
+    .when('/venue', {
+        templateUrl: 'pages/venues.html',
+        controller: 'venuesController'
+    })
+    .when('/event', {
+        templateUrl: 'pages/events.html',
+        controller: 'eventController'
+    })
+    .when('/venue/:id', {
+        templateUrl:'pages/venue.html',
+        controller: 'venueController'
+    })
+    
+    .when('/event/:id', {
+        templateUrl:'pages/event.html',
+        controller: 'evController'
+    });
+    
+    //some more config code
+    });
+```
+
+##### Each view has a separate controller, with its separate $scope and functions.
+
+EventController and VenueController:
+* call http.get on the route configured in index.js file (e.g. 'api/event') and get JSON data from my database as a response,
+* contains functions necessary for my ngMaterial UI components,
+* in the case of venueController, initalises uiGoogleMapApi.
+
+Individual events and venues' controllers:
+* associates $route.param with the item's id,
+* uses http.get to request a specific table and filters it by route param,
+* in the case of venues, initialises uiGoogleMapApi.
+
+##### My ngMaterial components:
+* SELECT: filters events by genre, and venues by name. Displays only selected.
+            On each choice, the venues and events scopes get reset so the original object is filtered.
+            NOTE: at this point, it has some UX limitations - it does not reset to a placeholder when another ngMaterial component is being used. It's one of the things I plan to be working on in the upcoming days.
+
+```
+    \\ passes 'chosen' genre from the UI component to the function as an argument, for example 'Sci fi'
+    $scope.selGenre = function (chosen) {
+       \\ makes sure the lectures object (all of my lecture table) gets reset. My HTTP.get method defines $scope.allLectures variable. 
+        $scope.lectures = $scope.allLectures;
+        \\ tempGen is a temporary object, holding filtered lectures
+       var tempGen = $scope.lectures.filter(function(el,i){
+           \\ $scope.lectures[i].genre is abstracted away in a variable for legiblity
+           var lectGenre = $scope.lectures[i].genre;
+           \\ returns all lectures with the chosen genre
+           return lectGenre == chosen;
+        });
+        \\ returns a new filtered $scope.lectures
+        $scope.lectures = tempGen;
+        return $scope.lectures, $scope.myDate;
+    }
+
+```
+
+* DATEPICKER: selects events based on the selected date (onwards).
+
+```
+    //datetime picker settings
+    \\ automatic date is today
+    $scope.myDate = new Date();
+
+    $scope.selectDate = function (){
+    \\resets the scope so all events are being filtered
+            $scope.lectures = $scope.allLectures;
+        
+        var temp = $scope.lectures.filter(function(el,i){
+        \\ makes sure the date format is identical to the one passed on from my table, which is in DATETIME format.
+        \\ $scope.myDate is the date picked in the datepicker
+            var chosenDate = $scope.myDate;
+            var cdString = chosenDate.toISOString(); 
+        \\ returns a new $scope.lectures, where the chosen date is either the same or 'bigger'
+            return $scope.lectures[i].datetime >= cdString;
+
+        });
+        console.log(temp);
+        $scope.lectures = temp;
+        \\ returns the new filtered $scope.lectures
+        return $scope.lectures;
+    };
+
+
+```
+
+* AUTOCOMPLETE: serves as a search functionality, filtering all events 
+
+```
+    //function for search
+    // passes the searchText, ie the text typed in the autocomplete, as an argument
+    $scope.getMatches = function (searchText){   
+        $scope.lectures = $scope.allLectures;
+        var results = $scope.lectures.filter(function(el,i){
+        \\makes sure each title is compared in the same case
+            var title = $scope.lectures[i].title;
+            title = title.toLowerCase();
+            \\ returns only lectures where title includes the typed text
+         return title.includes(searchText.toLowerCase());
+        });
+        $scope.lectures = results;
+        return $scope.lectures;
+    };
+
+```
+        NOTE:at this point, automplete has been converted to a search bar. Works well for partial matches but it requires a click outside of the search bar (rather than clicking on a match) for the autocomplete to disappear. It's one of the issues I plan on fixing/parts I want to improve. Selecting a title also does not work properly unless a letter has been deleted and added - also to be fixed imminently.
+
