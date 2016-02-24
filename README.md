@@ -180,7 +180,7 @@ router.all('/*', function(req, res, next) {
 
 ```
 
-* uses GET method and my CRUD layer to return my data as JSON. Requests are directed at altered URI (ie 'api/event' rather than 'event') so the app can differentiate between the Angular route and the Express one (serves pure JSON otherwise).
+* uses GET method and my CRUD layer to return my data as JSON. Requests are directed at altered URI (ie 'api/event' rather than 'event') so the app can differentiate between the Angular route and the Express one (serves pure JSON otherwise). 
 
 ```
 router.get('/api/event', function(req, res) {
@@ -196,4 +196,17 @@ router.get('/api/event', function(req, res) {
 ```
 ### Front end - Angular
 
-I am using Angular (v.1.5), an MVC framework, to display my data.
+I am using Angular (v.1.5), an MVC framework, to display my data, through ng-view and multiple partials.
+
+Here is the directory & file structure for my VIEWS folders:
+
+.
+├── index.html
+├── pages
+|   ├── about.html
+|   └── venue.html
+|   |__ venues.html
+|   |__ events.html
+|   |__ event.html
+
+
