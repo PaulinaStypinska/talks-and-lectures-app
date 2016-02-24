@@ -199,7 +199,7 @@ router.get('/api/event', function(req, res) {
 I am using Angular (v.1.5), an MVC framework, to display my data, through ng-view and multiple partials.
 
 Here is the directory & file structure for my VIEWS folders:
-
+```
 .
 ├── index.html
 ├── pages
@@ -209,4 +209,4 @@ Here is the directory & file structure for my VIEWS folders:
 |   |__ events.html
 |   |__ event.html
 
-
+```
