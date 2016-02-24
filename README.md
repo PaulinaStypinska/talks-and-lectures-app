@@ -171,7 +171,7 @@ My main [server.js] (https://github.com/PaulinaStypinska/talks-and-lectures-app/
 
 My [index.js] (https://github.com/PaulinaStypinska/talks-and-lectures-app/blob/master/routes/index.js) file sets up my routes.
 * refers my index file to my default route, AND
-* refers my index file to all routes (as in the code below) to ensure the index.js file gets called in all ng-view instances.
+* refers my index file to all routes (as in the code below) to ensure the index.html file gets called in all ng-view instances.
  
 ```
 router.all('/*', function(req, res, next) {
@@ -194,5 +194,6 @@ router.get('/api/event', function(req, res) {
         
 });
 ```
-### Front end - Angular and Bootstrap
+### Front end - Angular
 
+I am using Angular (v.1.5), an MVC framework, to display my data.
