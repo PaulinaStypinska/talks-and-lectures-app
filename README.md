@@ -64,7 +64,7 @@ And open your browser at localhost:8080. Test data should be displayed.
 
 #### Database
 
-I am using an object-relational database system (PostgreSQL). I have used mongoDB in the past, but have decided to go with postgreSQL for this project. I have wanted to use a relational database, and postgreSQL also offers very good data validity checks and ability to store JSON data, should I want to.
+I am using an object-relational database system (PostgreSQL). I have used mongoDB in the past, but have decided to go with postgreSQL for this project. I have wanted to use an ORDBMS, and PostgreSQL offers very good data validity checks and ability to store JSON data, should I want to implement that.
 
 Here is an example of table setup (using node-postgres):
 * ids are customised because I use joins on almost every select function in my code and use the ids frequently,
@@ -348,7 +348,7 @@ Individual events and venues' controllers:
 I am using prerender.io, a middleware designed to render Javascript in browsers, making it crawlable to search engines.
 
 To do this, I have:
-1. set up the HTML5 mode in my app.js file:
+* set up the HTML5 mode in my app.js file:
 
 ```
     //need to include the prerender io settings
@@ -358,7 +358,7 @@ To do this, I have:
     });
       $locationProvider.hashPrefix('!');
 ```
-2. set up my prerender token in my server.js file:
+* set up my prerender token in my server.js file:
 
 ```
 var token = process.env.PRERENDER_TOKEN;
@@ -367,6 +367,6 @@ var token = process.env.PRERENDER_TOKEN;
 
 app.use(require('prerender-node').set('prerenderToken', token));
 ```
-3. rewritten my index.js so that it serves the index.html files to all ('/*') routes.
+* rewritten my index.js so that it serves the index.html files to all ('/*') routes.
 
 
