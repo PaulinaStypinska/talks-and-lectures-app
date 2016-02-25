@@ -4,6 +4,14 @@ A full-stack website for all seminars, talks & lectures in London. [It is now ho
 
 Please scroll down for the code breakdown. You can also run it locally by following the instructions below.
 
+#### Few related notes and disclaimers:
+
+* This is an ongoing project that I want to be hosted for free at this point. This is why:
+    * there is limited amount of data hosted (there is a limit of rows in the free heroku postgres plan), and
+    * loading the website for the first time might be slow (the app sleeps after 30 mins of inactivity).
+* My own CSS file is tiny so I didn't feel the need to use Sass or Less. My objective was to create a clean-looking website, so that the data displayed would be legible and accessible. I am no designer!
+* **I have a lot of ideas for improvements and would be happy to chat. All comments and feedback are welcome.**
+
 Requirements:
 
 - [PostgreSQL] (http://www.postgresql.org/download/)
@@ -90,7 +98,7 @@ Here is an example of a lecture upsert query, which:
 * references venue table id (vid) based on the venue name
 * reference tag table id (tid) based on the tag/genre id. If missing, uses COALESCE() function to insert a 'Misc' tag id.
 * returns lecture table id (lid) in a callback function for test purposes
-* calls done() returns a client instance to the pool. 
+* calls done(), which returns a client instance to the pool and allows to run the query in batch updates.
 ```
 //upserts data
 exports.upsert = function(data, callback) {
@@ -145,7 +153,7 @@ describe('crud test', function() {
     
 ```
 
-And an example of a test:
+And here is an example of a test:
 
 ```
     it('should create venues', function(done) {
@@ -192,7 +200,7 @@ router.get('/api/event', function(req, res) {
         
 });
 ```
-### Front end - Angular
+#### Front end - Angular
 
 I am using Angular (v.1.5), an MVC framework, to display my data, through ng-view and multiple partials.
 
@@ -335,9 +343,30 @@ Individual events and venues' controllers:
 ```
 **NOTE**: at this point, automplete has been converted to a search bar. Works well for partial matches but it requires a click outside of the search bar (rather than clicking on a match or just clicking enter) for the autocomplete to disappear. It's one of the issues I plan on fixing. Selecting a title also does not work properly unless a letter has been deleted and added - also to be fixed imminently.
 
-#### Few related notes and disclaimers:
+##### Prerender 
 
-* This is an ongoing project that I want to be hosted for free at this point. This is why:
-    * there is limited amount of data hosted (there is a limit of rows in the free heroku postgres plan), and
-    * loading the website for the first time might be slow (the app sleeps after 30 mins of inactivity).
-* My own CSS file is tiny so I didn't feel the need to use Sass or Less. My objective was to create a clean-looking website, so that the data displayed would be legible and accessible. 
+I am using prerender.io, a middleware designed to render Javascript in browsers, making it crawlable to search engines.
+
+To do this, I have:
+1. set up the HTML5 mode in my app.js file:
+
+```
+    //need to include the prerender io settings
+    $locationProvider.html5Mode({
+      enabled: true,
+      requireBase: false
+    });
+      $locationProvider.hashPrefix('!');
+```
+2. set up my prerender token in my server.js file:
+
+```
+var token = process.env.PRERENDER_TOKEN;
+
+//for prerender set up
+
+app.use(require('prerender-node').set('prerenderToken', token));
+```
+3. rewritten my index.js so that it serves the index.html files to all ('/*') routes.
+
+
