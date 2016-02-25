@@ -2,9 +2,7 @@
 
 A full-stack website for all seminars, talks & lectures in London. [It is now hosted on Heroku. Click here to take a look.] (https://secure-fortress-51530.herokuapp.com/)
 
-Please scroll down for the code breakdown.
-
-You can also run it locally by following the instructions below.
+Please scroll down for the code breakdown. You can also run it locally by following the instructions below.
 
 Requirements:
 
@@ -265,7 +263,8 @@ Individual events and venues' controllers:
 ##### My ngMaterial components:
 * SELECT: filters events by genre, and venues by name. Displays only selected.
             On each choice, the venues and events scopes get reset so the original object is filtered.
-            NOTE: at this point, it has some UX limitations - it does not reset to a placeholder when another ngMaterial component is being used. It's one of the things I plan to be working on in the upcoming days.
+
+**NOTE**: at this point, it has some UX limitations - it does not reset to a placeholder when another ngMaterial component is being used. It's one of the things I plan to be working on in the upcoming days.
 
 ```
     \\ passes 'chosen' genre from the UI component to the function as an argument, for example 'Sci fi'
@@ -334,5 +333,11 @@ Individual events and venues' controllers:
     };
 
 ```
-        NOTE:at this point, automplete has been converted to a search bar. Works well for partial matches but it requires a click outside of the search bar (rather than clicking on a match) for the autocomplete to disappear. It's one of the issues I plan on fixing/parts I want to improve. Selecting a title also does not work properly unless a letter has been deleted and added - also to be fixed imminently.
+**NOTE**: at this point, automplete has been converted to a search bar. Works well for partial matches but it requires a click outside of the search bar (rather than clicking on a match or just clicking enter) for the autocomplete to disappear. It's one of the issues I plan on fixing. Selecting a title also does not work properly unless a letter has been deleted and added - also to be fixed imminently.
 
+#### Few related notes and disclaimers:
+
+* This is an ongoing project that I want to be hosted for free at this point. This is why:
+    * there is limited amount of data hosted (there is a limit of rows in the free heroku postgres plan), and
+    * loading the website for the first time might be slow (the app sleeps after 30 mins of inactivity).
+* My own CSS file is tiny so I didn't feel the need to use Sass or Less. My objective was to create a clean-looking website, so that the data displayed would be legible and accessible. 
