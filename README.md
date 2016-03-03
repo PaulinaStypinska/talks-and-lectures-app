@@ -1,15 +1,15 @@
 [![Build Status](https://travis-ci.org/PaulinaStypinska/talks-and-lectures-app.svg)](https://travis-ci.org/PaulinaStypinska/talks-and-lectures-app)
 
-A full-stack website for all seminars, talks & lectures in London. [It is now hosted on Heroku. Click here to take a look.] (https://secure-fortress-51530.herokuapp.com/)
+A full-stack website for all seminars, talks & lectures in London. [THE DEMO IS NOW HOSTED ON HEROKU. PLEASE CLICK HERE TO TAKE A LOOK!] (https://secure-fortress-51530.herokuapp.com/)
 
 Please scroll down for the code breakdown. You can also run it locally by following the instructions below.
 
 #### Few related notes and disclaimers:
 
 * This is an ongoing project that I want to be hosted for free at this point. This is why:
-    * there is limited amount of data hosted (there is a limit of rows in the free heroku postgres plan), and
-    * loading the website for the first time might be slow (the app sleeps after 30 mins of inactivity).
-* My own CSS file is tiny so I didn't feel the need to use Sass or Less. My objective was to create a clean-looking website, so that the data displayed would be legible and accessible. I am no designer!
+    * there is limited amount of data hosted, and
+    * loading the website for the first time might be slow (the app sleeps after 30 mins of inactivity). Please bear with this.
+    * My own CSS file is quite small so I didn't feel the need to use Sass or Less. My objective - at this time - was to create a clean-looking website, so that the data displayed would be legible and accessible. 
 * **I have a lot of ideas for improvements and would be happy to chat. All comments and feedback are welcome.**
 
 Requirements:
