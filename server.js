@@ -4,8 +4,8 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
-var dotenv = require('dotenv').load();
-
+var dotenv = require('dotenv').config({path: __dirname + '/.env'});
+console.log(process.env.DB_CONNECTION_STRING);
 var token = process.env.PRERENDER_TOKEN;
 
 
