@@ -1,8 +1,8 @@
 sudo: required
 language: node_js
 node_js:
+  - "node"
   - "iojs"
-  - "iojs-v1.0.4"
 
 env:
   global:
