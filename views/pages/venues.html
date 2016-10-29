@@ -25,7 +25,11 @@
     
         <div id="items" ng-repeat="data in venues" class="col-md-8">
             <table class="layout">
-                <caption class='name'><a class="major" name={{data.name}} id={{data.vid}} href='/venue/{{data.vid}}'> {{data.name}}</a></caption>
+                <tr class="caption">
+                    <td colspan="2" class="text-center text-uppercase name">
+                        <a class="major" name={{data.name}} id={{data.vid}} href='/venue/{{data.vid}}'> {{data.name}}</a>
+                    </td>    
+                </tr>    
                 <tr><td class='identifier'>address:</td>
                     <td class="data">
                     <span ng-show="data.address1 !=null">{{data.address1}}<br></span><span ng-show="data.address2 !=null">{{data.address2}}<br></span>{{data.post_code | uppercase}}

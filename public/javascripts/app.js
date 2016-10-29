@@ -60,8 +60,7 @@ myApp.controller('eventController', function($scope, $http, uiGmapGoogleMapApi){
      $scope.lectures = {};
     $scope.genres = [];
 
-    
-    
+
     
     //function for search
     $scope.getMatches = function (searchText){   
@@ -106,14 +105,23 @@ myApp.controller('eventController', function($scope, $http, uiGmapGoogleMapApi){
 
     
     //http get function
-            $http.get('/event')
+            $http.get('/api/event', {'Accept':'application/json'})
         .then(function(response) {
                 var collection = response.data;
+                var today = new Date();
+                console.log(collection);
             $scope.lectures = collection;  
             collection.forEach(function(el, i){
                     if ($scope.genres.indexOf(el.genre)== -1){
                         $scope.genres.push(el.genre);
                     }
+                
+              $scope.lectures = $scope.lectures.filter(function(el,i){
+                    var element = $scope.lectures;
+                    var today = new Date();
+                    return element[i].datetime >= today.toISOString();
+                });
+                
              $scope.allLectures = $scope.lectures;
                 });
         }, function(error) {
@@ -165,7 +173,7 @@ myApp.controller('venuesController', function($scope, $http, uiGmapGoogleMapApi)
     
     
 //http get
-            $http.get('/venue')
+            $http.get('/api/venue')
         .then(function(response) {
             var info= response.data;
             $scope.venues = info;
@@ -222,7 +230,7 @@ myApp.controller('venuesController', function($scope, $http, uiGmapGoogleMapApi)
 myApp.controller('venueController', function($scope, $http, $routeParams, uiGmapGoogleMapApi){
     $scope.vid = $routeParams.id;
     $scope.venue = {};
-    $http.get('/venue')
+            $http.get('/api/venue')
         .then(function(response){
         //gets data and accesses it
         var details = response.data;
@@ -249,50 +257,26 @@ myApp.controller('venueController', function($scope, $http, $routeParams, uiGmap
         }, function(error){
         console.log('Error: ' + error);
     });   
-            //seo settings
-    
-    $scope.seo = {
-        pageTitle: $scope.venue.name,
-        pageDescription:'Find oout what happens in your favorite venue'
-    }
+
     
     
 });
 
 
 
-myApp.controller('evController', function($scope, $http, $routeParams, uiGmapGoogleMapApi){
+myApp.controller('evController', function($scope, $http, $routeParams){
     $scope.lid = $routeParams.id;
     $scope.lecture = {};
-    $http.get('/event')
+    $http.get('/api/event')
         .then(function(response){
         var details = response.data;
             $scope.lecture = details.filter(function(entry){
                 return entry.lid  == $scope.lid;
             })[0];
-        console.log($scope.lecture);
-        // a map will display the place of the talk
-    uiGmapGoogleMapApi.then(function(maps) {
-                $scope.map = { center: { latitude: 51.5033, longitude: 0.1197 }, zoom: 11 };
-                $scope.marker = {
-                    id: 0,
-                    coords: {
-                    latitude: $scope.lecture.latitude,
-                    longitude: $scope.lecture.longitude
-                }
-                };
-            }); 
+
     }, function(error){
         console.log('Error: ' + error);
     });    
-    
-                //seo settings
-    
-    $scope.seo = {
-        pageTitle: $scope.lecture.title,
-        pageDescription: 'Your new event'
-    }
-    
     
 });
 

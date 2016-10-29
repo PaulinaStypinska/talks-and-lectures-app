@@ -17,7 +17,7 @@ a:hover {
                 padding-top:20px;
             }
             #items {
-                width:auto;
+                max-width:200px;
                 height:auto;
                 margin-bottom:10px;
                 padding:5px;
@@ -33,25 +33,27 @@ a:hover {
             td {
                 vertical-align:top;
                 text-align:left;
+                padding:3px;
             }
             .identifier {
                 font-weight:bold;
             }
-            caption {
+            .caption {
                 background-color:#000;
                 color:#fff;
                 font-size:13px;
+                padding:5px;
+                min-height:50px;
+                
             }
-            .name {
-                text-align:center;
-                        }
-            .name a:hover {
+            .caption a {
+                color:#fff;
+    
+            }
+            .caption a:hover {
                 filter:invert(50%);
             }
 
-            .name a {
-                color:#fff;
-            }
             
             /*MAPS */
     /* will look into changing map sizes depending on page */      

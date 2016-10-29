@@ -16,7 +16,7 @@
     <md-option ng-repeat="genre in genres" value={{genre}}>{{genre}}</md-option>
 </md-input-container>
   
-   <md-autocomplete md-selected-item="selectedItem" md-search-text="searchText" md-items="lecture in getMatches(searchText)" md-item-text="lecture.title" md-min-length="0" placeholder="Search for a lecture" class="search">
+   <md-autocomplete md-selected-item="selectedItem" md-search-text="searchText" md-items="lecture in getMatches(searchText)" md-item-text="lecture.title" md-min-length="0" placeholder="Search for a lecture" class="search" md-selected-item-change="getSelected(selectedItem)">
     <span md-highlight-text="searchText">{{lecture.title}}</span>
 </md-autocomplete>
 
@@ -27,18 +27,24 @@
         <div id="items" ng-repeat="data in lectures">
     
             <table class="layout">
-                <caption class='name'><a name={{data.lid}} href='/event/{{data.lid}}'>{{data.title}}</a></caption>
-                <tr><td class='identifier'>Date:</td>
+                <tr class="caption">
+                    <td colspan="2" class="text-center text-uppercase name">
+                        <a name={{data.lid}} href='/event/{{data.lid}}'>{{data.title}}</a>
+                    </td>
+                </tr>    
+                <tr>
+                    <td class='identifier'>Date:</td>
                     <td class="data">
                         {{data.datetime | date:'H:mm on EEEE, dd.MM.yy'}}
                     </td>
-                     </tr>
-               <tr><td class='venue'>Venue:</td>
+                </tr>
+                <tr>
+                   <td class='venue'>Venue:</td>
                     <td class="data">
 <!------ WILL LATER REDIRECT TO VENUE CUSTOM PAGE, SHOWING ALL TALKS AND DIRECTIONS ----->
                    <a href='venue/{{data.vid}}'> {{data.name}}</a>
                     </td>
-                     </tr>
+                </tr>
                 <tr>
                     <td colspan="2" class="text-center text-uppercase"><a href="/event/{{data.lid}}">Read more</a></td>
                 </tr>

@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        
+        <base href="/">
         <!--- for prerender io ---->
         <meta name="fragment" content="!">
         <base href="/">
@@ -21,11 +21,12 @@
     <body>
         <div>
         <header>
-        <ul class="nav nav-tabs nav-justified pull-right">
-                <li><a href="/">About</a></li>
-                <li><a href="/event">Events</a></li>
-                <li><a href="/venue">Places</a></li>
-        </ul>
+            <md-tabs md-dynamic-height md-border-bottom md-stretch-tabs="always">
+                <md-tab><a href="/">About</a>
+                </md-tab>
+                <md-tab><a href="/event">Events</a></md-tab>
+                <md-tab><a href="/venue">Venues</a></md-tab>
+            </md-tabs>
         </header> 
         <div id="main" class="container-fluid">
    
