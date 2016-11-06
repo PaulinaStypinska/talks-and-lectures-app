@@ -1,4 +1,3 @@
-
 // force the test environment to 'test'
 process.env.NODE_ENV = 'test';
 var assert = require('assert');
@@ -83,50 +82,8 @@ describe('crud test', function() {
             done();
         });
     });
-/*
-    it('should remove a venue', function(done) {
-        venue.remove(4, function(err, result) {
-            assert.equal(true, result);
-            done();
-        });
-    });
-    */
 
-    /*
-    //testing all speaker CRUD ops
-    it('should create speaker', function(done) {
-        speaker.create({"firstname": "Ava", "lastname": "DuVernay", "bio": "bio3"}, function(err, result) {
-            if(err) {
-                console.log(err);
-            }
-            assert.equal(true, result.id > 0);
-            done();
-        });
-    });
-
-    it('should update speaker', function(done) {
-        speaker.update({"id":2, "firstname": "William","lastname": "Goldman", "bio": "bio3"}, function(err, result) {
-            assert.equal(true, result.id > 0);
-            done();
-        });
-    });
-
-    it('should retrieve speaker', function(done) {
-        speaker.retrieve(1, function(err, result) {
-            assert.equal(true, result.id > 0);
-            done();
-        });
-    });
-
-    it('should remove speaker', function(done) {
-        speaker.remove(1, function(err, result) {
-            assert.equal(true, result);
-            done();
-        });
-    });
-    
-    
-*/
+ 
     //testing all tags CRUD ops
     it('should create tags', function(done) {
         tags.create({"genre":"Literature", "eventbrite_id": ["11"], "eventbrite": ["Culture"],"meetup_id":[12], "meetup": ["Culture & Social"]}, function(err, result) {
@@ -149,13 +106,7 @@ describe('crud test', function() {
         });
     });
 
- /*   it('should remove a tag', function(done) {
-        tags.remove(1, function(err, result) {
-            assert.equal(true, result);
-            done();
-        });
-    });
- */
+
     //testing all lecture CRUD ops
    it('should create lectures', function(done) {
         lecture.create({title: "Buttercup", datetime:"1999-01-08 04:05:06 -5:00", url:"www.google.com", description: "Description 4", name: "The O2", category_id:6}, function(err, result) {
@@ -183,13 +134,6 @@ describe('crud test', function() {
             done();
         });
     });
-    /*
-    it('should insert a tag and lecture connection', function(done) {
-        lectureTag.create({"lecture_id": 3, "tag_id":3}, function (err, result) {
-            assert.equal(true, result[1].id > 0);
-            done();
-        });
-    });
-   */
+
     
 });
