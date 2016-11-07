@@ -4,9 +4,12 @@ var assert = require('assert');
 var nock = require('nock');
 var apiRequest = require('../lib/data/db-population-example/makeApiRequest');
 var request = require('request');
+var apiRes = require('./responses/apiResponses');
+var arrRes = require('./responses/arrResponses');
 
 const MEETUP_URL = 'http://api.meetup.com/';
 const EVENTBRITE_URL = 'https://www.eventbriteapi.com/v3/';
+
 
 
 describe('api requests to populate tables', () => {
@@ -30,10 +33,10 @@ describe('api requests to populate tables', () => {
     it('should get a response from meetup',  (done) => {
         var meetupKey = process.env.MEETUP_TOKEN;
         var meetupMethod = '2/open_events';
-        var meetupParams = '&country=GB&city=London';
+        var meetupParams = '&country=GB&city=London&fields=category,venue';
         nock(MEETUP_URL)
         .get(`/${meetupMethod}`)
-        .query({key: meetupKey, country: 'GB', city: 'London'})
+        .query({key: meetupKey, country: 'GB', city: 'London', fields: 'category,venue'})
         .reply(200, 'results')
         .log(console.log)
         apiRequest.sendRequest('http://api.meetup.com/%s?key=%s', meetupMethod, meetupKey, meetupParams, (err, res, body) => {
@@ -65,6 +68,34 @@ describe('api requests to populate tables', () => {
                 throw new Error('Fail');
             }
         }); 
+    });
+    
+    it('should transform results from meetup', () => {
+        var response = {
+            statusCode: 200,
+            req: {
+                headers: {
+                        host: 'api.meetup.com'
+                }    
+            }
+        };
+        var body = JSON.stringify(apiRes.meetup);
+        var actualRes = apiRequest.transformResults(null, response, body);
+        assert.deepEqual(actualRes, arrRes.meetupRes, 'results from meetup are fine');
+    });
+    
+    it('should transform results from eventbrite', () => {
+        var response = {
+            statusCode: 200,
+            req: {
+                headers: {
+                        host: 'api.eventbrite.com'
+                }    
+            }
+        };
+        var body = JSON.stringify(apiRes.eventbrite);
+        var actualRes = apiRequest.transformResults(null, response, body);
+        assert.deepEqual(actualRes, arrRes.eventbriteRes, 'results from eventbrite are fine');
     });
     
 });
