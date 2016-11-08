@@ -12,7 +12,7 @@ const EVENTBRITE_URL = 'https://www.eventbriteapi.com/v3/';
 
 
 
-describe('api requests to populate tables', () => {
+describe('api requests to populate tables', (done) => {
     
     it('tests nock',  (done) => {
         nock('http://www.google.com')
@@ -38,7 +38,6 @@ describe('api requests to populate tables', () => {
         .get(`/${meetupMethod}`)
         .query({key: meetupKey, country: 'GB', city: 'London', fields: 'category,venue'})
         .reply(200, 'results')
-        .log(console.log)
         apiRequest.sendRequest('http://api.meetup.com/%s?key=%s', meetupMethod, meetupKey, meetupParams, (err, res, body) => {
             if (!err && res.statusCode == 200) {
                 console.log(res.req.headers.host);
@@ -58,7 +57,6 @@ describe('api requests to populate tables', () => {
         .get(`/${eventbriteMethod}`)
         .query({token: eventbriteKey, expand: 'category,format,venue'})
         .reply(200, 'results')
-        .log(console.log)
         apiRequest.sendRequest('https://www.eventbriteapi.com/v3/%s?token=%s', eventbriteMethod, eventbriteKey, eventbriteParams, (err, res, body) => {
             if (!err && res.statusCode == 200) {
                 console.log(res.req.headers.host);
