@@ -48,8 +48,8 @@ var responseObjects = {
             "venue": {
                 "name": "fhskjf",
                 "address": {
-                    "address1": "address1",
-                    "address2": "address2",
+                    "address_1": "address1",
+                    "address_2": "address2",
                     "postal_code": "NW4 89H",
                     "longitude": 957302740,
                     "latitude": 8572550723

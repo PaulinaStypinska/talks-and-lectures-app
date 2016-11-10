@@ -61,7 +61,6 @@ describe('crud test', function() {
     //testing all venues CRUD operations
     it('should upsert venues', function(done) {
         venue.upsert({"name":"Piccadilly", "address1": "lecture hall 12", "address2": "Castle Hohenzollern", "post_code":"SE8 IWS","longitude": "0.0109", "latitude": "52.1212"}, function(err, result) {
-            console.log(result);
             assert.equal(true, result.vid > 0);
             done();
         });
