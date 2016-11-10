@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node server.js",
     "test": "mocha ./test/*.js",
-    "posttest": "psql -d talks -f ./lib/cleanDbAfterTest.sql"
+    "posttest": "./cleanDB.sh"
   },
   "repository": {
     "type": "git",

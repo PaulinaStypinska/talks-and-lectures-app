@@ -24,5 +24,4 @@ insert into tag (genre, eventbrite_id, eventbrite, meetup_id, meetup) values
 ('Holidays','{"116"}','{"Holiday"}',null,null),
 ('Travel & Outdoors','{"109"}','{"Travel & Outdoor"}','{"23"}','{"Outdoors"}'),
 ('Science & Tech','{"102"}','{"Science & Tech"}','{"34","29"}','{"Tech", "Sci fi"}'),
-('Misc','{"199"}','{"Other"}',null,null)
-returning *;
+('Misc','{"199"}','{"Other"}',null,null);
