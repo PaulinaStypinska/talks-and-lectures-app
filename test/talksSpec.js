@@ -19,6 +19,9 @@ var tags = require('../lib/data/tag');
 var lecture = require('../lib/data/lecture');
 var lectureTag = require('../lib/data/lecturetag');
 
+
+var arrRes = require('./responses/arrResponses');
+var insertData = require('../lib/data/db-population-example/insertData');
 var databaseName = 'talks';
 
 describe('crud test', function() {
@@ -132,6 +135,19 @@ describe('crud test', function() {
             assert.equal(true, result);
             done();
         });
+    });
+    
+    it('inserts events into table', function (done) {
+
+        insertData(arrRes.dataArr, function (err, result) {
+                  if (err) {
+                        throw new Error('Problems with inserting data.');
+                } else {
+                    var expectedResult = ['venue upsert has finished', 'lecture upsert has finished'];
+                    assert.deepEqual(result, expectedResult, 'inserts data into tables');
+                    done();
+                }
+       });
     });
 
     

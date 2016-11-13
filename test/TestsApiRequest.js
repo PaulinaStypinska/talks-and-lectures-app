@@ -98,16 +98,5 @@ describe('api requests to populate tables', function() {
         assert.deepEqual(actualRes, arrRes.eventbriteRes, 'results from eventbrite are fine');
     });
     
-    it('inserts events into table', function (done) {
-       insertData(arrRes.meetupRes, (err, result) => {
-                  if (err) {
-                        throw new Error('Problems with inserting data.');
-                } else {
-                    var expectedResult = ['venue upsert finished', 'lecture upsert finished'];
-                    assert.deepEqual(result, expectedResult, 'inserts data into tables');
-                    done();
-                }
-       });
-    });
     
 });
