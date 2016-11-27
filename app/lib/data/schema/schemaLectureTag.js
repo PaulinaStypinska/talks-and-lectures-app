@@ -1,7 +1,4 @@
 var pg = require('pg');
-//requires dotenv and splits config for clarity
-var dotenv = require('dotenv');
-
 
 
 var connectionString = process.env.DB_CONNECTION_STRING || 'postgres://localhost:5432/talks';

@@ -11,7 +11,11 @@ exports.create = function(data, callback) {
     // Get a client from the connection pool
     pg.connect(connectionString, function(err, client, done) {
         // Insert
-        client.query("insert into lecture(title, venue_id, tag_id, datetime, url, description) select cast($1 as varchar),(select vid from venue where venue.name=$5),COALESCE((select tid from tag where $6=ANY(tag.eventbrite_id)),(select tid from tag where genre='Misc')), cast($2 as timestamp), cast ($3 as text), $4 where not exists (select * from lecture where title=$1 and datetime=$2) returning lid", [data.title, data.datetime, data.url, data.description, data.name, data.category_id], function(err, result) {
+        client.query("insert into lecture(title, venue_id, tag_id, datetime, url, description) select cast($1 as varchar)," +
+            "(select vid from venue where venue.name=$5),COALESCE((select tid from tag where $6=ANY(tag.eventbrite_id))," +
+            "(select tid from tag where genre='Misc')), cast($2 as timestamp), cast ($3 as text), $4 where not exists" +
+            " (select * from lecture where title=$1 and datetime=$2) returning lid",
+            [data.title, data.datetime, data.url, data.description, data.name, data.category_id], function(err, result) {
             //client.end();
             done();
             if(err) {

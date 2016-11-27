@@ -1,0 +1,12 @@
+{
+    "meetup": {
+        "uri": "http://api.meetup.com/%s?key=%s",
+        "method": "2/open_events",
+        "param": "&country=GB&city=London&fields=category,venue"
+    },
+    "eventbrite": {
+        "uri": "https://www.eventbriteapi.com/v3/%s?token=%s",
+        "method": "events/search/",
+        "param": "&expand=category,format,venue&formats=1,2,9,10,19&location.address=GB"
+    }
+}

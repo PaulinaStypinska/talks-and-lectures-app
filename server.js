@@ -4,12 +4,11 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
-var dotenv = require('dotenv').config({path: __dirname + '/.env'});
 var token = process.env.PRERENDER_TOKEN;
 
 //methods
 
-var routes = require('./routes/index');
+var routes = require('./app/routes/index');
 
 var app = express();
 var port = process.env.PORT || 8080;

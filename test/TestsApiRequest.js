@@ -2,15 +2,23 @@
 
 var assert = require('assert');
 var nock = require('nock');
-var apiRequest = require('../lib/data/db-population-example/makeApiRequest');
+var apiRequest = require('../app/lib/api_calls/makeApiRequest');
 var request = require('request');
 var apiRes = require('./responses/apiResponses');
 var arrRes = require('./responses/arrResponses');
-var insertData = require('../lib/data/db-population-example/insertData');
+var insertData = require('../app/lib/api_calls/insertData');
 
 const MEETUP_URL = 'http://api.meetup.com/';
 const EVENTBRITE_URL = 'https://www.eventbriteapi.com/v3/';
 
+function cb (err, result, body) {
+    if (!err && result.statusCode == 200) {
+        assert(body, 'results');
+        done();
+    } else {
+        throw new Error('Fail');
+    }
+}
 
 
 describe('api requests to populate tables', function() {
@@ -40,17 +48,19 @@ describe('api requests to populate tables', function() {
         .get(`/${meetupMethod}`)
         .query({key: meetupKey, country: 'GB', city: 'London', fields: 'category,venue'})
         .reply(200, 'results')
-        apiRequest.sendRequest('http://api.meetup.com/%s?key=%s', meetupMethod, meetupKey, meetupParams, function (err, res, body) {
+
+
+        apiRequest.sendRequest('http://api.meetup.com/%s?key=%s',
+            function (err, res, body) {
             if (!err && res.statusCode == 200) {
-                console.log(res.req.headers.host);
                 assert(body, 'results');
                 done();
             } else {
                 throw new Error('Fail');
             }
-        }); 
+        }, [meetupMethod, meetupKey, meetupParams]);
     });
-    
+
     it('should get a response from eventbrite', function (done) {
         var eventbriteKey = process.env.EVENTBRITE_TOKEN;
         var eventbriteMethod = 'events/search/';
@@ -59,44 +69,17 @@ describe('api requests to populate tables', function() {
         .get(`/${eventbriteMethod}`)
         .query({token: eventbriteKey, expand: 'category,format,venue'})
         .reply(200, 'results')
-        apiRequest.sendRequest('https://www.eventbriteapi.com/v3/%s?token=%s', eventbriteMethod, eventbriteKey, eventbriteParams, function (err, res, body) {
+
+
+        apiRequest.sendRequest('https://www.eventbriteapi.com/v3/%s?token=%s', function (err, res, body) {
             if (!err && res.statusCode == 200) {
-                console.log(res.req.headers.host);
                 assert(body, 'results');
                 done();
             } else {
                 throw new Error('Fail');
             }
-        }); 
+        }, [eventbriteMethod, eventbriteKey, eventbriteParams]);
     });
-    
-    it('should transform results from meetup', function () {
-        var response = {
-            statusCode: 200,
-            req: {
-                headers: {
-                        host: 'api.meetup.com'
-                }    
-            }
-        };
-        var body = JSON.stringify(apiRes.meetup);
-        var actualRes = apiRequest.transformResults(null, response, body);
-        assert.deepEqual(actualRes, arrRes.meetupRes, 'results from meetup are fine');
-    });
-    
-    it('should transform results from eventbrite', function () {
-        var response = {
-            statusCode: 200,
-            req: {
-                headers: {
-                        host: 'api.eventbrite.com'
-                }    
-            }
-        };
-        var body = JSON.stringify(apiRes.eventbrite);
-        var actualRes = apiRequest.transformResults(null, response, body);
-        assert.deepEqual(actualRes, arrRes.eventbriteRes, 'results from eventbrite are fine');
-    });
-    
+
     
 });

@@ -3,46 +3,78 @@
 var request = require('request');
 var util = require('util');
 
+var config = require('../../config');
+var insertEvents = require('./insertData');
+
 const MEETUP = 'api.meetup.com';
-const EVENTBRITE = 'api.eventbrite.com';
+const EVENTBRITE = 'www.eventbriteapi.com';
 
-var meetupArray = [];
-
-function sendRequest (initalUri, method, key, params, cb){
-    var uri = util.format(initalUri,method,key);
-    uri = uri + params;
+function sendRequest (initialUri, cb, ...optionsArr){
+    if (optionsArr[0].length !== 0) {
+        var uri = util.format(initialUri, optionsArr[0][0], optionsArr[0][1]);
+        uri = uri + optionsArr[0][2];
+    } else {
+        uri = initialUri;
+    }
     request(uri, cb);
 }
+
+
 //callback to sendRequest
 function transformResults (error, response, body) {
     if (!error && response.statusCode == 200) {
-        var host = response.req.headers.host;
+        var host = response.req._headers.host;
         var obj = JSON.parse(body);
-        var lectures;
+        var nextPage, lectures, options;
         if (host == MEETUP) {
-           lectures = obj.results;
+            lectures = obj.results;
+            nextPage = obj.meta.next;
+            options = [];
         } else if (host == EVENTBRITE) {
-           lectures = obj.events;
+            lectures = obj.events;
+            var eventbriteNext = getEventbriteNextPage(obj);
+            nextPage = eventbriteNext[0];
+            options = eventbriteNext[1];
         }
-        var events = validateEvents(lectures, host);
-        return mapEvents(events, host);
-        
+        saveEvents(lectures, host);
+        sendRequest(nextPage, transformResults, options);
+    } else if (typeof response === 'undefined') {
+        return 'finished importing all of the data.'
     } else {
-        
-        throw new Error('Populate table has failed.');  
-        
+        throw new Error('Populate table has failed.');     
     }
 }
 
+function saveEvents (events, host) {
+    events = mapEvents(validateEvents(events, host), host);
+    insertEvents(events, (err, result) => {
+        if (err) throw err;
+        else console.log(result);
+    });
+}
+
+function getEventbriteNextPage (lectures) {
+    var totalPages = lectures.pagination.page_count;
+    var thisPage = lectures.pagination.page_number;
+    if (totalPages > thisPage){
+        var eventbriteOptions = config.get('eventbrite');
+        var eventbriteUri = eventbriteOptions.uri;
+        var nextPage = thisPage + 1;
+        var param = eventbriteOptions.param + '&page=' + nextPage;
+        return [eventbriteUri, [eventbriteOptions.method, process.env.EVENTBRITE_TOKEN, param]];
+    } else {
+        throw new Error('Issues with page numbering in eventbrite');
+    }
+}
+
+
 function validateEvents (events, host) {
-    var eventArray = Array.prototype.slice.call(events);
-    
-    return eventArray.filter((el, i) => {
+    return events.filter((el, i) => {
            if (host === MEETUP) {
                 if ('venue' in el)
                    return true;
            } else if (host === EVENTBRITE) {
-                if ('venue' in el && el.venue.name !== null)
+                if ('venue' in el && el.venue !== null && el.venue.name !== null && el.venue.address.city == 'London')
                    return true; 
            } else throw new Error('Host of the request doesn\'t match.');
         });

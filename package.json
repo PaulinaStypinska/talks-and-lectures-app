@@ -5,7 +5,8 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "test": "mocha ./test/*.js"
+    "test": "mocha ./test/*.js",
+    "posttest": "./cleanDB.sh"
   },
   "repository": {
     "type": "git",
@@ -36,6 +37,7 @@
     "less": "^2.6.0",
     "lodash": "^4.3.0",
     "morgan": "~1.6.1",
+    "nconf": "^0.8.4",
     "nock": "^9.0.2",
     "pg": "^6.1.0",
     "prerender-node": "^2.2.0",

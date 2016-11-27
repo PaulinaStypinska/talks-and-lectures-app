@@ -1,7 +1,5 @@
 var pg = require('pg');
 
-
-
 var connectionString = process.env.DB_CONNECTION_STRING || 'postgres://localhost:5432/talks';
     
 var createVenueTable = 'create table venue \ \

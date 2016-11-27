@@ -4,24 +4,24 @@ var assert = require('assert');
 var async = require('async');
 
 //schemas
-var lectureschema = require('../lib/data/schema/schemaLecture');
-var venueschema = require('../lib/data/schema/schemaVenue');
-var speakerschema = require('../lib/data/schema/schemaSpeaker');
-var tagschema = require('../lib/data/schema/schemaTag');
-var linkschema = require('../lib/data/schema/schemaLectureTag');
+var lectureschema = require('../app/lib/data/schema/schemaLecture');
+var venueschema = require('../app/lib/data/schema/schemaVenue');
+var speakerschema = require('../app/lib/data/schema/schemaSpeaker');
+var tagschema = require('../app/lib/data/schema/schemaTag');
+var linkschema = require('../app/lib/data/schema/schemaLectureTag');
 //fixtures file
-var fixtures = require('../lib/data/fixture');
+var fixtures = require('../app/lib/data/fixture');
 
 //all CRUD modules
-var venue = require('../lib/data/venue');
-var speaker = require('../lib/data/speaker');
-var tags = require('../lib/data/tag');
-var lecture = require('../lib/data/lecture');
-var lectureTag = require('../lib/data/lecturetag');
+var venue = require('../app/lib/data/venue');
+var speaker = require('../app/lib/data/speaker');
+var tags = require('../app/lib/data/tag');
+var lecture = require('../app/lib/data/lecture');
+var lectureTag = require('../app/lib/data/lecturetag');
 
 
 var arrRes = require('./responses/arrResponses');
-var insertData = require('../lib/data/db-population-example/insertData');
+var insertData = require('../app/lib/api_calls/insertData');
 var databaseName = 'talks';
 
 describe('crud test', function() {

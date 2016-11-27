@@ -1,5 +1,5 @@
-var venue = require('../venue');
-var lecture = require('../lecture');
+var venue = require('../data/venue');
+var lecture = require('../data/lecture');
 var async = require('async');
 
 function insertEvents (events, cb) {
@@ -10,10 +10,12 @@ function insertEvents (events, cb) {
                             if (err) cb(err);
                             else cb();
                         });
-            }, function (err) {
+            },
+            function (err) {
                 if (err) cb(err);
                 else cb(null, 'venue upsert has finished');
-            });
+            }
+            )
         },
         function (cb) {
             async.each(events, (event, cb) => {
@@ -21,10 +23,12 @@ function insertEvents (events, cb) {
                             if (err) cb(err);
                             else cb();
                         });
-            }, function (err) {
+            },
+            function (err) {
                 if (err) cb(err);
                 else cb(null, 'lecture upsert has finished');
-            });
+            }
+            )
         }], 
         function (err, result) {
             if (err) {
@@ -34,7 +38,5 @@ function insertEvents (events, cb) {
             }
         }
     )
-};
-    
-
+}
 module.exports = insertEvents;
