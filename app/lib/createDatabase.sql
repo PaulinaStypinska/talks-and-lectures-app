@@ -3,7 +3,7 @@ drop database if exists talks;
 
 -- Create user
 drop user if exists orator;
-create user orator createdb createuser password 'password';
+create role orator createdb createrole password 'password';
 
 -- Create database
 create database talks owner orator;

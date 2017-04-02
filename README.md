@@ -32,11 +32,11 @@ Setup
     
 Create database
 
-    psql postgres < createDatabase.sql 
+    psql postgres < app/lib/createDatabase.sql 
     
 Testing
 -------
      npm install -g mocha
-     mocha
+     npm test
 
 

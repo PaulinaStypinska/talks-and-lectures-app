@@ -30,7 +30,14 @@ exports.create = function(data, callback) {
 //upserts data
 exports.upsert = function(data, callback) {
     pg.connect(connectionString, function(err, client, done) {
-        client.query("insert into lecture(title, venue_id, tag_id, datetime, url, description) select $1, (select vid from venue where venue.name=$5), COALESCE((select tid from tag where $6=ANY(tag.eventbrite_id) OR $6=ANY(tag.meetup_id)),(select tid from tag where genre='Misc')), cast($2 as timestamp),$3, $4 ON CONFLICT (url, datetime) DO UPDATE SET (title,description, venue_id, tag_id)=($1,$4,(select vid from venue where venue.name=$5),COALESCE((select tid from tag where $6=ANY(tag.eventbrite_id) OR $6=ANY(tag.meetup_id)),(select tid from tag where genre='Misc'))) returning lid", [data.title, data.datetime, data.url, data.description, data.name, data.category_id], function(err, result) {
+        client.query("insert into lecture(title, venue_id, tag_id, datetime, url, description) select $1, " +
+            "(select vid from venue where venue.name=$5), COALESCE((select tid from tag where $6=ANY(tag.eventbrite_id)" +
+            " OR $6=ANY(tag.meetup_id)),(select tid from tag where genre='Misc')), cast($2 as timestamp),$3, $4 " +
+            "ON CONFLICT (url, datetime) DO UPDATE SET (title,description, venue_id, tag_id)=" +
+            "($1,$4,(select vid from venue where venue.name=$5),COALESCE((select tid from tag where " +
+            "$6=ANY(tag.eventbrite_id) OR $6=ANY(tag.meetup_id)),(select tid from tag where genre='Misc'))) " +
+            "returning lid", [data.title, data.datetime, data.url, data.description, data.name,
+            data.category_id], function(err, result) {
            //client.end();
             done();
             if(err) {

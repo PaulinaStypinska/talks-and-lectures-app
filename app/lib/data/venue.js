@@ -12,7 +12,10 @@ exports.create = function(data, callback) {
         // Insert. Changed to select where not exists to avoid duplicates and used cast() to get the correct data type (throws error otherwise)
 
         
-        client.query("insert into venue (name, address1, address2, post_code, longitude, latitude) select cast($1 as text), $2, cast($3 as text), cast($4 as text), $5, $6 where not exists (select * from venue where name=$1) returning vid", [data.name, data.address1, data.address2, data.post_code, data.longitude, data.latitude], function(err, result) {
+        client.query("insert into venue (name, address1, address2, post_code, longitude, latitude) select " +
+            "cast($1 as text), $2, cast($3 as text), cast($4 as text), $5, $6 where not exists " +
+            "(select * from venue where name=$1) returning vid", [data.name, data.address1, data.address2,
+            data.post_code, data.longitude, data.latitude], function(err, result) {
            //client.end();
             done();
             if(err) {
@@ -26,7 +29,10 @@ exports.create = function(data, callback) {
 
 exports.upsert = function(data, callback) {
     pg.connect(connectionString, function(err, client, done) {
-        client.query("insert into venue (name, address1, address2, post_code, longitude, latitude) select COALESCE($1, $2), $2, $3, $4, $5, $6 ON CONFLICT (name) DO UPDATE SET (address1,address2,post_code, longitude, latitude) = ($2,$3,$4,$5,$6) returning vid", [data.name, data.address1, data.address2, data.post_code, data.longitude, data.latitude], function(err, result) {
+        client.query("insert into venue (name, address1, address2, post_code, longitude, latitude) select " +
+            "COALESCE($1, $2), $2, $3, $4, $5, $6 ON CONFLICT (name) DO UPDATE SET (address1,address2,post_code, " +
+            "longitude, latitude) = ($2,$3,$4,$5,$6) returning vid", [data.name, data.address1, data.address2,
+            data.post_code, data.longitude, data.latitude], function(err, result) {
            //client.end();
             done();
             if(err) {

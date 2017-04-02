@@ -2,12 +2,10 @@
 
 var nconf = require('nconf');
 var path = require('path');
+var fs = require('fs');
 
-nconf.argv().env().file({file:path.resolve('config.json')});
+nconf.argv().env();
 
-console.log(path.resolve('config/config.json'));
+nconf.file({file: path.resolve('config/config.json')});
 
-module.exports = {
-    get: nconf.get.bind(nconf),
-    set: nconf.set.bind(nconf)
-};
+module.exports = nconf;

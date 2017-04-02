@@ -10,4 +10,5 @@ function getEvents (origin) {
     return call.sendRequest(details.uri, call.transformResults, params)
  }
 
- getEvents('eventbrite');
+
+getEvents('eventbrite');
