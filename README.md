@@ -4,11 +4,11 @@ This is a full stack website that helps people find talks and lectures in London
 
 Requirements:
 
-- [PostgreSQL] (http://www.postgresql.org/download/)
-- [node-postgres] (https://github.com/brianc/node-postgres)
-- [Node] (https://nodejs.org/en/)
-- [Express] (http://expressjs.com/)
-- [Angular] (https://angularjs.org/)
+- [PostgreSQL](http://www.postgresql.org/download/)
+- [node-postgres](https://github.com/brianc/node-postgres)
+- [Node](https://nodejs.org/en/)
+- [Express](http://expressjs.com/)
+- [Angular](https://angularjs.org/)
 
 
 Postgresql on Mac OSX
