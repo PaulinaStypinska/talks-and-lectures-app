@@ -47,3 +47,4 @@ Temporary Items
 talks-and-lectures-app.iml
 node_modules
 .env
+babel_cache

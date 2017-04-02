@@ -1,44 +1,15 @@
-var express = require('express');
-var router = express.Router();
-var path = require('path');
 
+import React from 'react';
+import { Route, IndexRoute } from 'react-router';
+import Layout from '../components/Layout';
+import Index from '../components/Index';
+import NotFound from '../components/NotFound';
 
-//connect to the venues middleware
-var venue = require('../lib/data/venue.js');
-var lecture = require('../lib/data/lecture.js');
+const routes = (
+    <Route path="/" component={Layout}>
+        <IndexRoute component={Index}/>
+        <Route path="*" component={NotFound}/>
+    </Route>
+);
 
-
-router.get('/api/venue', function(req, res) {
-
-    venue.retrieve(function(err, results){
-        if (err){
-          console.log(err);
-          return res.status(500).json({ success: false, data: err});
-        }
-        return res.json(results);
-    })
-
-
-});
-
-router.get('/api/event', function(req, res) {
-        lecture.retrieve(function(err, results){
-            if (err){
-              console.log(err);
-              return res.status(500).json({ success: false, data: err});
-            }
-          return res.json(results);
-        })
-        
-});
-
-
-
-
-
-router.all('/*', function(req, res, next) {
-  res.sendFile(path.join(__dirname, '../views', 'index.html'));
-});
-
-
-module.exports = router;
+export default routes;
