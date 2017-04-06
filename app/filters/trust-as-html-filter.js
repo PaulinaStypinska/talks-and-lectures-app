@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('myApp.trust-as-html-filter', ["ui.bootstrap", "ngRoute", "uiGmapgoogle-maps", 'ngMaterial'])
+angular.module('myApp.filters.trust-as-html-filter', [])
 
 
 .filter('trustThis', ['$sce', function ($sce){

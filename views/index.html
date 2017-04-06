@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app="myApp" >
+<html ng-app="myApp">
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -14,49 +14,67 @@
         
                 <link rel="stylesheet" type="text/css" href="/bootstrap/dist/css/bootstrap.css">
                 <link rel="stylesheet" type="text/css" href="/stylesheets/main.css">
-                <link rel="stylesheet" href="/angular-material/angular-material.css">
+                <link rel="stylesheet" type="text/csss" href="/angular-material/angular-material.css">
 
 
     </head>
     <body>
+
         <div>
         <header>
-            <md-tabs md-dynamic-height md-border-bottom md-stretch-tabs="always">
-                <md-tab><a href="/">About</a>
-                </md-tab>
-                <md-tab><a href="/event">Events</a></md-tab>
-                <md-tab><a href="/venue">Venues</a></md-tab>
-            </md-tabs>
-        </header> 
+            <!--<md-tabs md-dynamic-height md-border-bottom md-stretch-tabs="always">-->
+                <!--<md-tab><a href="/">About</a></md-tab>-->
+                <!--<md-tab><a href="/event">Events</a></md-tab>-->
+                <!--<md-tab><a href="/venue">Venues</a></md-tab>-->
+            <!--</md-tabs>-->
+            <ul>
+                <li><a href="/">About</a></li>
+                <li><a href="/event">Events</a></li>
+                <li><a href="/venue">Venues</a></li>
+            </ul>
+        </header>
         <div id="main" class="container-fluid">
-   
+            <p>here</p>
             <!-- ANGULAR TEMPLATING -->
             <div ng-view></div>
+
+            <p>here too</p>
 
     </div>
     <!-----------SCRIPTS ---------------------------------------->
 
     </div> <!--- END OF THE CONTAINER ------>
-        
+
     <!---- ANGULAR AND ANGULAR GOOGLE MAPS SCRIPTS ---->
-    <script src="/lodash/lodash.js"></script>
-    <script src="/angular/angular.min.js"></script>
-        
-    <script src="/angular-route/angular-route.js"></script>
-    <script src="/angular-google-maps/node_modules/angular-simple-logger/dist/angular-simple-logger.js"></script>
-    <script src="angular-google-maps/dist/angular-google-maps.js"></script>
-        
-        
-    <script src="/angular-ui-bootstrap/dist/ui-bootstrap.js"></script>
-        
+
+
+    <script type="text/javascript" src="/lodash/lodash.js"></script>
+    <script type="text/javascript" src="/angular/angular.js"></script>
+
+    <script type="text/javascript" src="/angular-route/angular-route.js"></script>
+    <script type="text/javascript" src="/angular-simple-logger/dist/angular-simple-logger.js"></script>
+    <script type="text/javascript" src="/angular-google-maps/dist/angular-google-maps.js"></script>
+
+
+    <script type="text/javascript" src="/angular-ui-bootstrap/dist/ui-bootstrap.js"></script>
+
         <!----------- ANGULAR MATERIAL --------------------->
-    <script src="/angular-aria/angular-aria.js"></script>
-    <script src="/angular-animate/angular-animate.js"></script>
-    <script src="/angular-material/angular-material.js"></script>
-    
-    <script src="../app/app.js"></script>
-    
-             
+    <script type="text/javascript" src="/angular-aria/angular-aria.js"></script>
+    <script type="text/javascript" src="/angular-animate/angular-animate.js"></script>
+    <script type="text/javascript" src="/angular-material/angular-material.js"></script>
+
+    <script type="text/javascript" src="/app.js"></script>
+    <script type="text/javascript" src="/controllers/mainController.js"></script>
+    <script type="text/javascript" src="/controllers/eventController.js"></script>
+    <script type="text/javascript" src="/controllers/eventsController.js"></script>
+    <script type="text/javascript" src="/controllers/venueController.js"></script>
+    <script type="text/javascript" src="/controllers/venuesController.js"></script>
+    <script type="text/javascript" src="/filters/filters.js"></script>
+    <script type="text/javascript" src="/filters/remove-duplicates-filter.js"></script>
+    <script type="text/javascript" src="/filters/trust-as-html-filter.js"></script>
+
+
+
 
     </body>
 </html>

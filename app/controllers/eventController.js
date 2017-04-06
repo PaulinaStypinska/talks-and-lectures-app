@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('myApp.event', ["ui.bootstrap", "ngRoute", "uiGmapgoogle-maps", 'ngMaterial'])
+angular.module('myApp.event', ["ngRoute"])
 
     .config(['$routeProvider', function($routeProvider) {
 

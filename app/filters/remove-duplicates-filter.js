@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('myApp.remove-duplicates', ["ui.bootstrap", "ngRoute", "uiGmapgoogle-maps", 'ngMaterial'])
+angular.module('myApp.filters.remove-duplicates-filter', [])
 
     .filter("removeDups", function(){
         return function(data) {

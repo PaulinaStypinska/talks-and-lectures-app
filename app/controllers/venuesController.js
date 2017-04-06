@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('myApp.venues', ["ui.bootstrap", "ngRoute", "uiGmapgoogle-maps", 'ngMaterial'])
+angular.module('myApp.venues', ["ngRoute", "uiGmapgoogle-maps"])
 
     .config(['$routeProvider', function($routeProvider) {
 
@@ -11,7 +11,7 @@ angular.module('myApp.venues', ["ui.bootstrap", "ngRoute", "uiGmapgoogle-maps", 
     }])
 
 
-    .controller('venuesController', function($scope, $http, uiGmapGoogleMapApi){
+    .controller('venuesController', function($scope, $http,uiGmapGoogleMapApi){
         $scope.venues = {};
 
         //all ng material code

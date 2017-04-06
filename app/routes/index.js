@@ -36,8 +36,8 @@ router.get('/api/event', function(req, res) {
 
 
 
-router.all('/*', function(req, res, next) {
-  res.sendFile(path.join(__dirname, '../views', 'index.html'));
+router.all('/*', function(req, res) {
+    res.sendFile(path.join(__dirname, '../../views', 'index.html'));
 });
 
 

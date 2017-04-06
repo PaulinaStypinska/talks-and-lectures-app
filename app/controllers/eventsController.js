@@ -6,7 +6,7 @@ angular.module('myApp.events', ["ui.bootstrap", "ngRoute", "uiGmapgoogle-maps", 
 
         $routeProvider.when('/event', {
             templateUrl: 'pages/events.html',
-            controller: 'controllers/eventController'
+            controller: 'eventController'
         });
     }])
 

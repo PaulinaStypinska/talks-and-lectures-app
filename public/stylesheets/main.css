@@ -22,7 +22,7 @@ a:hover {
                 margin-bottom:10px;
                 padding:5px;
                 border:1px solid #000;
-                font-family: Calibri;
+                font-family: Calibri, sans-serif;
                 letter-spacing:1px;
                 font-size:11px;
                 text-transform: uppercase;
@@ -102,7 +102,7 @@ a:hover {
             }
 
             .event_description {
-                lline-height:15px;
+                line-height:15px;
             }
 
 
