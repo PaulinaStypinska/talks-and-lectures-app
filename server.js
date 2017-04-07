@@ -14,7 +14,8 @@ var app = express();
 var port = process.env.PORT || 8080;
 
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
+app.engine('html', require('ejs').renderFile);
+app.set('view engine', 'html');
 
 
 app.use(logger('dev'));
@@ -65,8 +66,6 @@ app.use(function(req, res, next) {
 
 app.listen(port, function(){
   console.log("listening in on port 8080");
-  console.log(path.join(__dirname, 'node_modules'));
-  console.log("after path")
 });
 
 module.exports = app;

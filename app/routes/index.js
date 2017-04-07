@@ -33,10 +33,7 @@ router.get('/api/event', function(req, res) {
 });
 
 
-
-
-
-router.all('/*', function(req, res) {
+router.get('/*', function(req, res) {
     res.sendFile(path.join(__dirname, '../../views', 'index.html'));
 });
 
