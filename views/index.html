@@ -11,34 +11,32 @@
         <title>London Talk and Lectures App</title>
         
         <meta name="description" content="{{seo.metaDescription}}">
-        
-                <link rel="stylesheet" type="text/css" href="/bootstrap/dist/css/bootstrap.css">
-                <link rel="stylesheet" type="text/css" href="/stylesheets/main.css">
-                <link rel="stylesheet" type="text/csss" href="/angular-material/angular-material.css">
 
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic">
+        <link rel="stylesheet" type="text/css" href="/bootstrap/dist/css/bootstrap.css">
+        <link rel="stylesheet" type="text/css" href="/stylesheets/main.css">
+        <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
 
     </head>
     <body>
 
         <div>
         <header>
-            <!--<md-tabs md-dynamic-height md-border-bottom md-stretch-tabs="always">-->
-                <!--<md-tab><a href="/">About</a></md-tab>-->
-                <!--<md-tab><a href="/event">Events</a></md-tab>-->
-                <!--<md-tab><a href="/venue">Venues</a></md-tab>-->
-            <!--</md-tabs>-->
-            <ul>
-                <li><a href="/">About</a></li>
-                <li><a href="/event">Events</a></li>
-                <li><a href="/venue">Venues</a></li>
-            </ul>
+            <div layout="row" layout-align="center">
+                <md-nav-bar md-selected-nav-item="currentNavItem" aria-label="navigation links">
+                    <md-nav-item md-nav-sref="about" name="about" aria-label="About">About</md-nav-item>
+                    <md-nav-item md-nav-sref="event" name="events" aria-label="Events">Events</md-nav-item>
+                    <md-nav-item md-nav-sref="venue" name="venues" aria-label="Venues">Venues</md-nav-item>
+                </md-nav-bar>
+            </div>
+            <!--<a ui-sref="about">About</a>-->
+            <!--<a ui-sref="event">Events</a>-->
+            <!--<a ui-sref="venue">Venues</a>-->
         </header>
         <div id="main" class="container-fluid">
-            <p>here</p>
             <!-- ANGULAR TEMPLATING -->
-            <div ng-view></div>
+            <ui-view></ui-view>
 
-            <p>here too</p>
 
     </div>
     <!-----------SCRIPTS ---------------------------------------->
@@ -49,9 +47,12 @@
 
 
     <script type="text/javascript" src="/lodash/lodash.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script type="text/javascript" src="/angular/angular.js"></script>
 
-    <script type="text/javascript" src="/angular-route/angular-route.js"></script>
+    <script type="text/javascript" src="/angular-ui-router/release/angular-ui-router.min.js"></script>
+    <script type="text/javascript" src="/ng-infinite-scroll/build/ng-infinite-scroll.min.js"></script>
+
     <script type="text/javascript" src="/angular-simple-logger/dist/angular-simple-logger.js"></script>
     <script type="text/javascript" src="/angular-google-maps/dist/angular-google-maps.js"></script>
 

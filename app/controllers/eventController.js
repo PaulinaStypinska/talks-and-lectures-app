@@ -1,16 +1,22 @@
 'use strict';
 
-angular.module('myApp.event', ["ngRoute"])
+angular.module('myApp.event', ["ui.router"])
 
-    .config(['$routeProvider', function($routeProvider) {
+    .config(['$stateProvider', function($stateProvider) {
 
-        $routeProvider.when('/event/:id', {
-            templateUrl:'pages/event.html',
-            controller: 'evController'
-        });
+        var eventState = {
+            url:'/event/:id',
+            templateUrl: 'pages/event.html',
+            controller: 'evController',
+            name: 'event/:id'
+        }
+
+        $stateProvider.state(eventState);
+
     }])
 
     .controller('evController', function($scope, $http, $routeParams){
+        $scope.currentNavItem = 'event';
         $scope.lid = $routeParams.id;
         $scope.lecture = {};
         $http.get('/api/event')

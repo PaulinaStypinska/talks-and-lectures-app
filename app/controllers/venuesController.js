@@ -1,18 +1,25 @@
 'use strict';
 
-angular.module('myApp.venues', ["ngRoute", "uiGmapgoogle-maps"])
+angular.module('myApp.venues', ["ui.router", "uiGmapgoogle-maps"])
 
-    .config(['$routeProvider', function($routeProvider) {
+    .config(['$stateProvider', function($stateProvider) {
 
-        $routeProvider.when('/venue', {
+
+        var venuesState = {
+            url: '/venue',
             templateUrl: 'pages/venues.html',
-            controller: 'venuesController'
-        });
+            controller: 'venuesController',
+            name: 'venue'
+        };
+
+
+        $stateProvider.state(venuesState);
     }])
 
 
     .controller('venuesController', function($scope, $http,uiGmapGoogleMapApi){
         $scope.venues = {};
+        $scope.currentNavItem = 'venue';
 
         //all ng material code
 
@@ -34,7 +41,8 @@ angular.module('myApp.venues', ["ngRoute", "uiGmapgoogle-maps"])
     //http get
         $http.get('/api/venue')
             .then(function(response) {
-                var info= response.data;
+                var info= response.data.slice(0,50);
+                console.log(info);
                 $scope.venues = info;
                 $scope.allVenues = $scope.venues;
                 uiGmapGoogleMapApi.then(function(maps) {

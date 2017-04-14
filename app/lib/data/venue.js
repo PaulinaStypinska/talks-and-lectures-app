@@ -9,7 +9,8 @@ var connectionString = process.env.DB_CONNECTION_STRING || 'postgres://localhost
 exports.create = function(data, callback) {
     // Get a client from the connection pool
     pg.connect(connectionString, function(err, client, done) {
-        // Insert. Changed to select where not exists to avoid duplicates and used cast() to get the correct data type (throws error otherwise)
+        // Insert. Changed to select where not exists to avoid duplicates and used cast() to get the correct data type
+        // (throws error otherwise)
 
         
         client.query("insert into venue (name, address1, address2, post_code, longitude, latitude) select " +
@@ -50,7 +51,8 @@ exports.retrieve = function(callback) {
     // Get a client from the connection pool
     pg.connect(connectionString, function(err, client, done) {
         // select
-        var query = client.query("SELECT DISTINCT ON (venue.vid) venue.*, to_json(ARRAY_AGG(row(lecture.lid,lecture.title))) as lectures FROM venue, lecture WHERE venue.vid=lecture.venue_id GROUP BY venue.vid;");
+        var query = client.query("SELECT DISTINCT ON (venue.vid) venue.*, to_json(ARRAY_AGG(row(lecture.lid,lecture.title)))" +
+            " as lectures FROM venue, lecture WHERE venue.vid=lecture.venue_id GROUP BY venue.vid;");
 
         // Stream results back one row at a time
         query.on('row', function(row) {
@@ -74,7 +76,9 @@ exports.update = function(data, callback) {
     // Get a client from the connection pool
     pg.connect(connectionString, function(err, client, done) {
         // Update
-        client.query("update venue set name=($2), address1=($3), address2=($4), post_code=($5), longitude=($6), latitude=($7) where vid=($1)", [data.id, data.name, data.address1, data.address2, data.post_code, data.longitude, data.latitude]);
+        client.query("update venue set name=($2), address1=($3), address2=($4), post_code=($5), longitude=($6), " +
+            "latitude=($7) where vid=($1)", [data.id, data.name, data.address1, data.address2, data.post_code,
+            data.longitude, data.latitude]);
 
         // Select
         var query = client.query("select * from venue where vid = ($1)", [data.id]);

@@ -1,13 +1,18 @@
 'use strict';
 
-angular.module('myApp.main', ["ui.bootstrap", "ngRoute", "uiGmapgoogle-maps", 'ngMaterial'])
+angular.module('myApp.main', ["ui.bootstrap", "ui.router", "uiGmapgoogle-maps", 'ngMaterial'])
 
-    .config(['$routeProvider', function($routeProvider) {
+    .config(['$stateProvider', function($stateProvider) {
 
-        $routeProvider.when('/', {
+        var aboutState = {
             templateUrl: 'pages/about.html',
-            controller: 'mainController'
-        });
+            controller: 'mainController',
+            url: '/',
+            name: 'about'
+        };
+
+        $stateProvider.state(aboutState)
+
     }])
 
     .controller('mainController', function($scope){
@@ -16,4 +21,5 @@ angular.module('myApp.main', ["ui.bootstrap", "ngRoute", "uiGmapgoogle-maps", 'n
         $scope.message2 = "Here is my github page.";
         $scope.link = "https://github.com/PaulinaStypinska/talks-and-lectures-app";
         $scope.message3 = "Please visit for a full breakdown of my thought process on this and my plan for improvements.";
+        $scope.currentNavItem = 'about';
     });

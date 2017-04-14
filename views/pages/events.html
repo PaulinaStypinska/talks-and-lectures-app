@@ -21,35 +21,34 @@
 </md-autocomplete>
 
 </div> <!------------------ END OF OPTIONS ROW ------------------------------>
-<div classs="row">
+<div class="row">
+    <div>{{lectures[0].lid}}</div>
+    <div class="all_items">
+            <div id="items" ng-repeat="data in lectures">
 
-<div class="all_items">
-        <div id="items" ng-repeat="data in lectures">
-    
-            <table class="layout">
-                <tr class="caption">
-                    <td colspan="2" class="text-center text-uppercase name">
-                        <a name={{data.lid}} href='/event/{{data.lid}}'>{{data.title}}</a>
-                    </td>
-                </tr>    
-                <tr>
-                    <td class='identifier'>Date:</td>
-                    <td class="data">
-                        {{data.datetime | date:'H:mm on EEEE, dd.MM.yy'}}
-                    </td>
-                </tr>
-                <tr>
-                   <td class='venue'>Venue:</td>
-                    <td class="data">
-<!------ WILL LATER REDIRECT TO VENUE CUSTOM PAGE, SHOWING ALL TALKS AND DIRECTIONS ----->
-                   <a href='venue/{{data.vid}}'> {{data.name}}</a>
-                    </td>
-                </tr>
-                <tr>
-                    <td colspan="2" class="text-center text-uppercase"><a href="/event/{{data.lid}}">Read more</a></td>
-                </tr>
-            </table>
-        </div> <!-- END OF ITEMS --->
+                <table class="layout">
+                    <tr class="caption">
+                        <td colspan="2" class="text-center text-uppercase name">
+                            <a name={{data.lid}} href='/event/{{data.lid}}'>{{data.title}}</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class='identifier'>Date:</td>
+                        <td class="data">
+                            {{data.datetime | date:'H:mm on EEEE, dd.MM.yy'}}
+                        </td>
+                    </tr>
+                    <tr>
+                       <td class='venue'>Venue:</td>
+                        <td class="data">
+                       <a href='venue/{{data.vid}}'> {{data.name}}</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" class="text-center text-uppercase"><a href="/event/{{data.lid}}">Read more</a></td>
+                    </tr>
+                </table>
+            </div> <!-- END OF ITEMS --->
 
-    </div> <!-----------END OF ALL ITEMS-------------------->
+        </div> <!-----------END OF ALL ITEMS-------------------->
 </div> <!----- END OF EVENTS ROW ----------------------------------------->

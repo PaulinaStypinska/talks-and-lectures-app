@@ -1,16 +1,21 @@
 'use strict';
 
-angular.module('myApp.events', ["ui.bootstrap", "ngRoute", "uiGmapgoogle-maps", 'ngMaterial'])
+angular.module('myApp.events', ["infinite-scroll", "ui.bootstrap", "ui.router", 'ngMaterial'])
 
-    .config(['$routeProvider', function($routeProvider) {
+    .config(['$stateProvider', function($stateProvider) {
 
-        $routeProvider.when('/event', {
+        var eventsState = {
+            url: '/event',
             templateUrl: 'pages/events.html',
-            controller: 'eventController'
-        });
+            controller: 'eventController',
+            name: 'event'
+        };
+
+        $stateProvider.state(eventsState)
     }])
 
-    .controller('eventController', function($scope, $http, uiGmapGoogleMapApi){
+    .controller('eventController', function($scope, $http){
+        $scope.currentNavItem = 'event';
         $scope.lectures = {};
         $scope.genres = [];
 
@@ -61,9 +66,9 @@ angular.module('myApp.events', ["ui.bootstrap", "ngRoute", "uiGmapgoogle-maps", 
         //http get function
         $http.get('/api/event', {'Accept':'application/json'})
             .then(function(response) {
-                var collection = response.data;
-                var today = new Date();
+                var collection = response.data.slice(0,50);
                 console.log(collection);
+                var today = new Date();
                 $scope.lectures = collection;
                 collection.forEach(function(el, i){
                     if ($scope.genres.indexOf(el.genre)== -1){
@@ -79,6 +84,7 @@ angular.module('myApp.events', ["ui.bootstrap", "ngRoute", "uiGmapgoogle-maps", 
                     $scope.allLectures = $scope.lectures;
                 });
             }, function(error) {
+                console.log("error");
                 console.log('Error: ' + error);
             });
 
