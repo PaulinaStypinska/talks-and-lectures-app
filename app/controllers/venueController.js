@@ -19,10 +19,11 @@ angular.module('myApp.venue', ["ui.bootstrap", "ui.router", "uiGmapgoogle-maps",
         $scope.currentNavItem = 'venue';
         $scope.vid = $routeParams.id;
         $scope.venue = {};
+
         $http.get('/api/venue')
             .then(function(response){
                 //gets data and accesses it
-                var details = response.data.slice;
+                var details = response.data;
                 $scope.venue = details.filter(function(entry){
                     return entry.vid  == $scope.vid;
                 })[0];

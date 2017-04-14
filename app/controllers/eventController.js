@@ -9,7 +9,7 @@ angular.module('myApp.event', ["ui.router"])
             templateUrl: 'pages/event.html',
             controller: 'evController',
             name: 'event/:id'
-        }
+        };
 
         $stateProvider.state(eventState);
 
