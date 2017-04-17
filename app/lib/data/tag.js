@@ -9,7 +9,9 @@ exports.create = function(data, callback) {
     // Get a client from the connection pool
     pg.connect(connectionString, function(err, client, done) {
         // Insert
-        client.query("insert into tag(genre, eventbrite_id,eventbrite, meetup_id,meetup) select cast($1 as varchar), $2, $3, $4, $5 where not exists (select 1 from tag where genre=$1) returning tid", [data.genre, data.eventbrite_id, data.eventbrite, data.meetup_id, data.meetup], function(err, result) {
+        client.query("insert into tag(genre, eventbrite_id,eventbrite, meetup_id,meetup) select cast($1 as varchar), " +
+            "$2, $3, $4, $5 where not exists (select 1 from tag where genre=$1) returning tid",
+            [data.genre, data.eventbrite_id, data.eventbrite, data.meetup_id, data.meetup], function(err, result) {
             //client.end();
             done();
             if(err) {
@@ -21,13 +23,13 @@ exports.create = function(data, callback) {
     });
 }
 
-exports.retrieve = function(id, callback) {
+exports.retrieve = function(callback) {
     var result = [];
 
     // Get a client from the connection pool
     pg.connect(connectionString, function(err, client, done) {
         // select
-        var query = client.query("select * from tag where tid = ($1)", [id]);
+        var query = client.query("select * from tag ORDER BY tid ASC;");
 
         // Stream results back one row at a time
         query.on('row', function(row) {
@@ -38,7 +40,7 @@ exports.retrieve = function(id, callback) {
         query.on('end', function() {
            // client.end();
             done();
-            callback(null, result[0]);
+            callback(null, result);
         });
 
         handleError(err, client, callback);

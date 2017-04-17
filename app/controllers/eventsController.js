@@ -14,21 +14,34 @@ angular.module('myApp.events', ["infinite-scroll", "ui.bootstrap", "ui.router", 
         $stateProvider.state(eventsState)
     }])
 
-    .controller('eventController', function($scope, Event){
+    .controller('eventController', function($scope, Event, Genre){
 
         $scope.lectures = [];
         $scope.allLectures = [];
+        $scope.events = [];
+        $scope.genres = [];
 
         let lastItem = 20;
 
         $scope.getEvents = function() {
             Event.getEvents()
                 .then(function(events) {
+                    $scope.events = events;
                     $scope.allLectures = events.slice(lastItem);
                     $scope.lectures = events.slice(0,lastItem);
                 },
                 function (events) {
                     console.log("Failed to get events");
+                });
+        };
+
+        $scope.getGenres = function () {
+            Genre.getGenres()
+                .then(function(genres) {
+                    $scope.genres = genres;
+                },
+                function(genres){
+                    console.log("Failed to get genres");
                 });
         };
 
@@ -42,9 +55,24 @@ angular.module('myApp.events', ["infinite-scroll", "ui.bootstrap", "ui.router", 
 
 
         $scope.getEvents();
+        $scope.getGenres();
 
 
 
+
+
+        $scope.selGenre = function (genre) {
+
+            $scope.allLectures = $scope.events.filter(function(el,i) {
+                return $scope.events[i].genre === genre;
+            });
+            $scope.lectures = $scope.allLectures.slice(0,20);
+            $scope.allLectures = $scope.allLectures.slice(20);
+
+            if(genre.length === 0){
+                $scope.getEvents();
+            }
+        }
 
     });
 
@@ -61,17 +89,7 @@ angular.module('myApp.events', ["infinite-scroll", "ui.bootstrap", "ui.router", 
         //     return $scope.lectures;
         // };
         //
-        // $scope.selGenre = function (chosen) {
-        //
-        //     $scope.lectures = $scope.allLectures;
-        //     var tempGen = $scope.lectures.filter(function(el,i){
-        //
-        //         var lectGenre = $scope.lectures[i].genre;
-        //         return lectGenre == chosen;
-        //     });
-        //     $scope.lectures = tempGen;
-        //     return $scope.lectures, $scope.myDate;
-        // }
+
         //
         // //datetime picker settings
         // $scope.myDate = new Date();

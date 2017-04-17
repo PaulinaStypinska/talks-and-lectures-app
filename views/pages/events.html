@@ -12,8 +12,9 @@
     <md-datepicker ng-model="myDate" md-placeholder="Enter date" ng-change="selectDate()"></md-datepicker>
 
 <md-input-container>
-    <md-select ng-model="gen" placeholder="Select a genre" md-on-close="selGenre(gen)" placeholder="Select a genre">
-    <md-option ng-repeat="genre in genres" value={{genre}}>{{genre}}</md-option>
+    <md-select ng-model="selectedGenre" placeholder="Select a genre" md-on-close="selGenre(selectedGenre)">
+        <md-option value=""></md-option>
+        <md-option ng-repeat="genre in genres" value={{genre.genre}}>{{genre.genre}}</md-option>
 </md-input-container>
 
    <md-autocomplete md-selected-item="selectedItem" md-search-text="searchText" md-items="lecture in getMatches(searchText)" md-item-text="lecture.title" md-min-length="0" placeholder="Search for a lecture" class="search" md-selected-item-change="getSelected(selectedItem)">
@@ -23,7 +24,8 @@
 </div> <!------------------ END OF OPTIONS ROW ------------------------------>
 
  <div class="row">
-     <div class="loading-spiner-holder" data-loading ><div class="loading-spiner"><img src="/images/spinner.gif"></div></div>
+     <div class="loading-spiner-holder" data-loading><div class="loading-spiner"><img src="/images/spinner.gif"></div></div>
+     <div ng-if="isLoading === False"><div ng-if="lectures.length === 0">There are no events matching your query (｡•́︿•̀｡)</div></div>
      <div class="all_items" infinite-scroll="loadMoreLectures()" infinite-scroll-distance="1">
         <div id="items" ng-repeat="data in lectures">
 

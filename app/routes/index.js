@@ -6,6 +6,7 @@ var path = require('path');
 //connect to the venues middleware
 var venue = require('../lib/data/venue.js');
 var lecture = require('../lib/data/lecture.js');
+var tag = require('../lib/data/tag.js');
 
 
 router.get('/api/venue', function(req, res) {
@@ -18,7 +19,6 @@ router.get('/api/venue', function(req, res) {
         return res.json(results);
     })
 
-
 });
 
 router.get('/api/event', function(req, res) {
@@ -30,6 +30,17 @@ router.get('/api/event', function(req, res) {
           return res.json(results);
         })
         
+});
+
+router.get('/api/genre', function(req, res) {
+    tag.retrieve(function(err, results){
+        if (err){
+            console.log(err);
+            return res.status(500).json({ success: false, data: err});
+        }
+        return res.json(results);
+    })
+
 });
 
 
