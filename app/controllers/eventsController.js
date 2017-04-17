@@ -19,7 +19,7 @@ angular.module('myApp.events', ["infinite-scroll", "ui.bootstrap", "ui.router", 
         $scope.lectures = [];
         $scope.allLectures = [];
 
-        let lastItem = 15;
+        let lastItem = 20;
 
         $scope.getEvents = function() {
             Event.getEvents()

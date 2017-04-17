@@ -106,3 +106,13 @@ a:hover {
             }
 
 
+        .row {
+            position: relative;
+        }
+        .loading-spiner-holder {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+        }
+
+

@@ -23,8 +23,9 @@
 </div> <!------------------ END OF OPTIONS ROW ------------------------------>
 
  <div class="row">
-    <div class="all_items" infinite-scroll="loadMoreLectures()" infinite-scroll-distance="1">
-            <div id="items" ng-repeat="data in lectures">
+     <div class="loading-spiner-holder" data-loading ><div class="loading-spiner"><img src="/images/spinner.gif"></div></div>
+     <div class="all_items" infinite-scroll="loadMoreLectures()" infinite-scroll-distance="1">
+        <div id="items" ng-repeat="data in lectures">
 
                 <table class="layout">
                     <tr class="caption">
