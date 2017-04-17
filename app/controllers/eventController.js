@@ -18,7 +18,7 @@ angular.module('myApp.event', ["ui.router"])
     .controller('evController', function($scope, $http, $routeParams){
         $scope.currentNavItem = 'event';
         $scope.lid = $routeParams.id;
-        $scope.lecture = {};
+        $scope.lecture = {};q
         $http.get('/api/event')
             .then(function(response){
                 var details = response.data;

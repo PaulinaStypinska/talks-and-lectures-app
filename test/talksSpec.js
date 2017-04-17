@@ -107,7 +107,7 @@ describe('crud test', function() {
     });
 
     it('should retrieve tags', function(done) {
-        tags.retrieve(1, function(err, result) {
+        tags.retrieve(function(err, result) {
             assert.equal(true, result.tid[1] > 0);
             done();
         });
