@@ -18,14 +18,19 @@ angular.module('myApp.venues', ["ui.router", "uiGmapgoogle-maps"])
 
 
     .controller('venuesController', function($scope, $http, Venue, uiGmapGoogleMapApi){
-        $scope.venues = {};
+        $scope.venues = [];
+        $scope.venuesForInfiniteScroll = [];
         $scope.currentNavItem = 'venue';
+
+        let lastItem = 15;
 
 
         $scope.getVenues = function(){
             Venue.getVenues()
                 .then(function(venues) {
-                        $scope.venues = venues;
+                        $scope.venuesForMarkers = venues;
+                        $scope.venuesForInfiniteScroll = venues.slice(lastItem);
+                        $scope.venues = venues.slice(0, lastItem);
                         uiGmapGoogleMapApi.then(function(maps) {
                             //filling in for the new lodash version bug
                             if( typeof _.contains === 'undefined' ) {
@@ -41,7 +46,7 @@ angular.module('myApp.venues', ["ui.router", "uiGmapgoogle-maps"])
                             $scope.markers = [];
                             // function to create an individual marker
                             $scope.createMarker = function(location) {
-                                var marker = {
+                                let marker = {
                                     id: location.vid,
                                     latitude: location.latitude,
                                     longitude: location.longitude,
@@ -53,8 +58,8 @@ angular.module('myApp.venues', ["ui.router", "uiGmapgoogle-maps"])
                             };
                             // function to fill array of markers
                             $scope.createMarkers = function() {
-                                for (var i = 0; i < $scope.venues.length; i++) {
-                                    var marker = $scope.createMarker($scope.venues[i]);
+                                for (var i = 0; i < $scope.venuesForMarkers.length; i++) {
+                                    var marker = $scope.createMarker($scope.venuesForMarkers[i]);
                                     $scope.markers.push(marker);
                                 }
                             };
@@ -63,11 +68,23 @@ angular.module('myApp.venues', ["ui.router", "uiGmapgoogle-maps"])
                         });
                     },
                     function (venues) {
-                        console.log("Failed to get events");
+                        console.log("Failed to get venues");
                     });
         };
 
         $scope.getVenues();
+
+
+        $scope.loadMoreVenues = function() {
+            let temp = $scope.venuesForInfiniteScroll.slice(0,lastItem);
+            $scope.venuesForInfiniteScroll = $scope.venuesForInfiniteScroll.slice(lastItem);
+            temp.forEach(function(el) {
+                $scope.venues.push(el);
+            });
+        };
+
+
+
         //all ng material code
 
         //select

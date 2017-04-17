@@ -16,17 +16,30 @@ angular.module('myApp.events', ["infinite-scroll", "ui.bootstrap", "ui.router", 
 
     .controller('eventController', function($scope, Event){
 
-        $scope.lectures = {};
+        $scope.lectures = [];
+        $scope.allLectures = [];
+
+        let lastItem = 15;
 
         $scope.getEvents = function() {
             Event.getEvents()
                 .then(function(events) {
-                    $scope.lectures = events;
+                    $scope.allLectures = events.slice(lastItem);
+                    $scope.lectures = events.slice(0,lastItem);
                 },
                 function (events) {
                     console.log("Failed to get events");
                 });
         };
+
+        $scope.loadMoreLectures = function() {
+            let temp = $scope.allLectures.slice(0,lastItem);
+            $scope.allLectures = $scope.allLectures.slice(lastItem);
+            temp.forEach(function(el) {
+               $scope.lectures.push(el);
+            });
+        };
+
 
         $scope.getEvents();
 

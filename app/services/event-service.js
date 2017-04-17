@@ -25,13 +25,11 @@ angular.module('myApp.services.event-service', [])
                 def.resolve(response);
                 // collection.forEach(function(el, i){
                 //
-                //     // $scope.lectures = $scope.lectures.filter(function(el,i){
-                //     //     var element = $scope.lectures;
-                //     //     var today = new Date();
-                //     //     return element[i].datetime >= new Date().toISOString();
-                //     // });
+                //     service.events.filter(function(el,i){
+                //         var today = new Date();
+                //         return service.events[i].datetime >= new Date().toISOString();
+                //     });
                 //
-                //     // $scope.allLectures = $scope.lectures;
                 // });
             })
             .error(function() {

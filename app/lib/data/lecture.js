@@ -56,7 +56,7 @@ exports.retrieve = function(callback) {
     pg.connect(connectionString, function(err, client, done) {
         // select
         var query = client.query("SELECT * FROM lecture INNER JOIN venue ON lecture.venue_id = venue.vid INNER JOIN tag " +
-            "ON lecture.tag_id = tag.tid ORDER BY lecture.lid ASC;");
+            "ON lecture.tag_id = tag.tid ORDER BY lecture.datetime ASC;");
 
         // Stream results back one row at a time
         query.on('row', function(row) {
