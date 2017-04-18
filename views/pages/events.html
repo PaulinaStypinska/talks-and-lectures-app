@@ -17,9 +17,12 @@
         <md-option ng-repeat="genre in genres" value={{genre.genre}}>{{genre.genre}}</md-option>
 </md-input-container>
 
-   <md-autocomplete md-selected-item="selectedItem" md-search-text="searchText" md-items="lecture in getMatches(searchText)" md-item-text="lecture.title" md-min-length="0" placeholder="Search for a lecture" class="search" md-selected-item-change="getSelected(selectedItem)">
+   <md-autocomplete md-selected-item="selectedItem" md-search-text="searchText" md-items="lecture in getMatches(searchText)"
+                    md-item-text="lecture.title" md-min-length="0" placeholder="Search for a lecture" class="search"
+                    md-selected-item-change="getSelected(selectedItem)">
     <span md-highlight-text="searchText">{{lecture.title}}</span>
 </md-autocomplete>
+    <md-button class="md-primary" ng-click="clear()">Clear search</md-button>
 
 </div> <!------------------ END OF OPTIONS ROW ------------------------------>
 
