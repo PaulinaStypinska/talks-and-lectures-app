@@ -20,6 +20,9 @@ angular.module('myApp.events', ["infinite-scroll", "ui.bootstrap", "ui.router", 
         $scope.allLectures = [];
         $scope.events = [];
         $scope.genres = [];
+        $scope.selectedDate = new Date();
+        $scope.selectedGenre = "";
+
 
         let lastItem = 20;
 
@@ -60,11 +63,11 @@ angular.module('myApp.events', ["infinite-scroll", "ui.bootstrap", "ui.router", 
 
 
 
-
         $scope.selGenre = function (genre) {
+            console.log($scope.selectedGenre);
 
             $scope.allLectures = $scope.events.filter(function(el,i) {
-                return $scope.events[i].genre === genre;
+                return $scope.events[i].genre === genre && $scope.events[i].datetime >= $scope.selectedDate.toISOString();
             });
             $scope.lectures = $scope.allLectures.slice(0,20);
             $scope.allLectures = $scope.allLectures.slice(20);
@@ -72,7 +75,22 @@ angular.module('myApp.events', ["infinite-scroll", "ui.bootstrap", "ui.router", 
             if(genre.length === 0){
                 $scope.getEvents();
             }
-        }
+        };
+
+
+
+        //datetime picker settings
+
+        $scope.selectDate = function (){
+
+            $scope.allLectures = $scope.events.filter(function(el,i){
+                return $scope.events[i].datetime >= $scope.selectedDate.toISOString() && $scope.events[i].genre === $scope.selectedGenre;
+            });
+
+            $scope.lectures = $scope.allLectures.slice(0,20);
+            $scope.allLectures = $scope.allLectures.slice(20);
+
+        };
 
     });
 
@@ -90,23 +108,7 @@ angular.module('myApp.events', ["infinite-scroll", "ui.bootstrap", "ui.router", 
         // };
         //
 
-        //
-        // //datetime picker settings
-        // $scope.myDate = new Date();
-        //
-        // $scope.selectDate = function (){
-        //     $scope.lectures = $scope.allLectures;
-        //
-        //     var temp = $scope.lectures.filter(function(el,i){
-        //         var chosenDate = $scope.myDate;
-        //         var cdString = chosenDate.toISOString();
-        //         return $scope.lectures[i].datetime >= cdString;
-        //
-        //     });
-        //     console.log(temp);
-        //     $scope.lectures = temp;
-        //     return $scope.lectures;
-        // };
+
 
 
 
