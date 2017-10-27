@@ -1,19 +1,27 @@
 
-describe("link option: isLoading property", function () {
-    var scope, http;
+describe("link option: isLoading property set to false", function () {
+    var scope, elm, http;
     
-      beforeEach(module('myApp'));
-    
-      beforeEach(inject(function($rootScope, $compile) {
+      beforeEach(inject(function($rootScope, $http, $compile) {
         elm = angular.element(
-          '<p>Directive test</p>'
+          '<div data-loading>Directive test</div>'
         );
-        $http = {
+        http = $http;
+        http = {
             pendingRequests: []
         };
-        scope = $rootScope;
-        $compile(scope);
+        scope = $rootScope.$new();
+        $compile(elm)(scope);
         scope.$digest();
       }));
+
+      it("should return false for isLoading attribute", function() {   
+        expect(scope.isLoading).toBe(false);
+      });
+
+      it("should trigger hide method on the element", function() {
+        spyOn(elm, "hide");
+        expect(elm.hide).toHaveBeenCalled();
+      });
 
 });

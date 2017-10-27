@@ -3,9 +3,17 @@ module.exports = function(config) {
     basePath: '',
     frameworks: ['jasmine'],
     files: [
-      './node_modules/angular/angular.js',                             // angular
+      './node_modules/lodash/lodash.js',
+      './node_modules/angular/angular.js',   
       './node_modules/angular-ui-router/release/angular-ui-router.js', // ui-router
       './node_modules/angular-mocks/angular-mocks.js', 
+      './node_modules/angular-google-maps/dist/angular-google-maps.js',            
+      './node_modules/ng-infinite-scroll/build/ng-infinite-scroll.min.js', 
+      './node_modules/angular-simple-logger/dist/angular-simple-logger.js',
+      './node_modules/angular-ui-bootstrap/dist/ui-bootstrap.js',      
+      './node_modules/angular-aria/angular-aria.js',
+      './node_modules/angular-animate/angular-animate.js',
+      './node_modules/angular-material/angular-material.js',
       './app/app.js',
       './app/directives/directives.spec.js',
       './app/directives/loading.spec.js'
