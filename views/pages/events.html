@@ -28,7 +28,7 @@
 
  <div class="row">
      <div class="loading-spiner-holder" data-loading><div class="loading-spiner"><img src="/images/spinner.gif"></div></div>
-     <div ng-if="isLoading === False"><div ng-if="lectures.length === 0">There are no events matching your query (｡•́︿•̀｡)</div></div>
+     <div ng-if="isLoading === False"><div ng-if="lectures.length === 0">There are no events matching your query.</div></div>
      <div class="all_items" infinite-scroll="loadMoreLectures()" infinite-scroll-distance="1">
         <div id="items" ng-repeat="data in lectures">
 

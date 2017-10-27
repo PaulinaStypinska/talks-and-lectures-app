@@ -8,7 +8,8 @@ angular.module('myApp.services.event-service', [])
 
         var service = {
             events: {},
-            getEvents: getEvents
+            getEvents: getEvents,
+            getGreeting: getGreeting
         };
 
         return service;
@@ -30,5 +31,9 @@ angular.module('myApp.services.event-service', [])
             });
         return def.promise;
     }
+
+    getGreeting: function (name) {
+        return "Hello " + name;
+      }
 
 });
