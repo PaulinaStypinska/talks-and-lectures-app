@@ -15,7 +15,7 @@ angular.module('myApp.directives.loading', [])
                 {
                     if(v){
                         elm.show();
-                    }else{
+                    } else {
                         elm.hide();
                     }
                 });

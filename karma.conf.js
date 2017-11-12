@@ -3,6 +3,7 @@ module.exports = function(config) {
     basePath: '',
     frameworks: ['jasmine'],
     files: [
+      './node_modules/jquery/dist/jquery.min.js',
       './node_modules/lodash/lodash.js',
       './node_modules/angular/angular.js',   
       './node_modules/angular-ui-router/release/angular-ui-router.js', // ui-router
@@ -15,8 +16,10 @@ module.exports = function(config) {
       './node_modules/angular-animate/angular-animate.js',
       './node_modules/angular-material/angular-material.js',
       './app/app.js',
-      './app/directives/directives.spec.js',
-      './app/directives/loading.spec.js'
+      {pattern: './app/controllers/*.js', watched: true},
+      {pattern: './app/directives/*.js', watched: true},
+      {pattern: './app/services/*.js', watched: true},
+      {pattern: './app/filters/*.js', watched: true}
     ],
     exclude: [
     ],
