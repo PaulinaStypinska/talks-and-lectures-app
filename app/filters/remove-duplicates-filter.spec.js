@@ -17,7 +17,6 @@ describe("Filter: remove-duplicates-filter", function () {
 
   it("should return a filtered array when evaluating an array with duplicates", function () {
     var data = [1, 1, 2, 3];
-    console.log($filter("removeDups")(data));
     expect($filter("removeDups")(data)).toEqual([1,2,3]);
   });
 
