@@ -111,8 +111,6 @@ angular.module('myApp.events', ["infinite-scroll", "ui.bootstrap", "ui.router", 
             $scope.getEvents();
         }
 
-
-
     });
 
 
