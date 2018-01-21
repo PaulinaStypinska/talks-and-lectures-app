@@ -7,14 +7,14 @@ angular.module('myApp.events', ["infinite-scroll", "ui.bootstrap", "ui.router", 
         var eventsState = {
             url: '/event',
             templateUrl: 'pages/events.html',
-            controller: 'eventController',
+            controller: 'mainEventsController',
             name: 'event'
         };
 
         $stateProvider.state(eventsState)
     }])
 
-    .controller('eventController', function($scope, Event, Genre){
+    .controller('mainEventsController', function($scope, Event, Genre){
 
         $scope.lectures = [];
         $scope.allLectures = [];
