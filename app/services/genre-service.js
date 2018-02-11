@@ -2,8 +2,6 @@
 
 angular.module('myApp.services.genre-service', [])
 
-
-
     .factory('Genre', function Genre ($http, $q) {
 
         let service = {

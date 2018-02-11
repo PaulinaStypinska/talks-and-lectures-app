@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('myApp.event', ["ui.router"])
 
     .config(['$stateProvider', function($stateProvider) {
@@ -7,7 +5,7 @@ angular.module('myApp.event', ["ui.router"])
         var eventState = {
             url:'/event/:id',
             templateUrl: 'pages/event.html',
-            controller: 'evController',
+            controller: 'eventController',
             name: 'event/:id'
         };
 
@@ -15,10 +13,10 @@ angular.module('myApp.event', ["ui.router"])
 
     }])
 
-    .controller('evController', function($scope, $http, $routeParams){
+    .controller('eventController', function($scope, $http, $stateParams){
         $scope.currentNavItem = 'event';
-        $scope.lid = $routeParams.id;
-        $scope.lecture = {};q
+        $scope.lid = $stateParams.id;
+        $scope.lecture = {};
         $http.get('/api/event')
             .then(function(response){
                 var details = response.data;
@@ -28,6 +26,7 @@ angular.module('myApp.event', ["ui.router"])
 
             }, function(error){
                 console.log('Error: ' + error);
+                throw (error);
             });
 
     });

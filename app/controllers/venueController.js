@@ -15,9 +15,9 @@ angular.module('myApp.venue', ["ui.bootstrap", "ui.router", "uiGmapgoogle-maps",
         $stateProvider.state(venueState);
     }])
 
-    .controller('venueController', function($scope, $http, $routeParams, uiGmapGoogleMapApi){
+    .controller('venueController', function($scope, $http, $stateParams, uiGmapGoogleMapApi){
         $scope.currentNavItem = 'venue';
-        $scope.vid = $routeParams.id;
+        $scope.vid = $stateParams.id;
         $scope.venue = {};
 
         $http.get('/api/venue')

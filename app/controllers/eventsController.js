@@ -7,14 +7,14 @@ angular.module('myApp.events', ["infinite-scroll", "ui.bootstrap", "ui.router", 
         var eventsState = {
             url: '/event',
             templateUrl: 'pages/events.html',
-            controller: 'eventController',
+            controller: 'mainEventsController',
             name: 'event'
         };
 
         $stateProvider.state(eventsState)
     }])
 
-    .controller('eventController', function($scope, Event, Genre){
+    .controller('mainEventsController', function($scope, Event, Genre){
 
         $scope.lectures = [];
         $scope.allLectures = [];
@@ -59,12 +59,8 @@ angular.module('myApp.events', ["infinite-scroll", "ui.bootstrap", "ui.router", 
             });
         };
 
-
         $scope.getEvents();
         $scope.getGenres();
-
-
-
 
         $scope.selGenre = function (genre) {
 
@@ -79,8 +75,7 @@ angular.module('myApp.events', ["infinite-scroll", "ui.bootstrap", "ui.router", 
             }
         };
 
-
-        $scope.selectDate = function (){
+        $scope.selectDate = function () {
 
             $scope.allLectures = $scope.events.filter(function(el,i){
                 return $scope.events[i].datetime >= $scope.selectedDate.toISOString() && $scope.events[i].genre === $scope.selectedGenre;
@@ -91,7 +86,7 @@ angular.module('myApp.events', ["infinite-scroll", "ui.bootstrap", "ui.router", 
 
         };
 
-        $scope.getMatches = function (searchText){
+        $scope.getMatches = function (searchText) {
             if (!searchText || searchText.length < 3) {
                 return [];
             } else {
@@ -102,16 +97,14 @@ angular.module('myApp.events', ["infinite-scroll", "ui.bootstrap", "ui.router", 
                 $scope.allLectures = $scope.allLectures.slice(20);
             }
         };
-
-        $scope.clear = function (){
+         
+        $scope.clear = function () {
             $scope.selectedItem = null;
             $scope.searchTest = "";
             $scope.selectedGenre = "";
             $scope.myDate = new Date();
             $scope.getEvents();
         }
-
-
 
     });
 

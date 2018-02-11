@@ -23,8 +23,7 @@ angular.module('myApp.venues', ["ui.router", "uiGmapgoogle-maps"])
         $scope.currentNavItem = 'venue';
 
         let lastItem = 15;
-
-
+        
         $scope.getVenues = function(){
             Venue.getVenues()
                 .then(function(venues) {
@@ -82,29 +81,6 @@ angular.module('myApp.venues', ["ui.router", "uiGmapgoogle-maps"])
                 $scope.venues.push(el);
             });
         };
-
-
-
-        //all ng material code
-
-        //select
-        //
-        // $scope.selVenue = function (chosen) {
-        //     $scope.venues = $scope.allVenues;
-        //     var tempVenue = $scope.venues.filter(function(el,i){
-        //
-        //         var venueName = $scope.venues[i].name;
-        //         return venueName == chosen;
-        //     });
-        //     $scope.venues = tempVenue;
-        //     return $scope.venues;
-        // };
-
-
-
-    //http get
-
-
 
         //seo settings
 
