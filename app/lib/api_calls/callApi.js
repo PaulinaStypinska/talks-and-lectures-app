@@ -11,4 +11,4 @@ function getEvents (origin) {
  }
 
 
-getEvents('eventbrite');
+getEvents('meetup');

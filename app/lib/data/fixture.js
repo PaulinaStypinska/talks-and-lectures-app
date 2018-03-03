@@ -1,15 +1,21 @@
-var pg = require('pg');
-var async = require('async');
-var talks = require('./talk.json'); //now references the joint json file (renamed talks, previous file still kept as they are for reference)
-var util = require('util');
+const { Pool, Client } = require('pg')
+
+const connectionString = process.env.DB_CONNECTION_STRING || 'postgres://localhost:5432/talks';
+
+const pool = new Pool({
+    connectionString: connectionString,
+  });
+const async = require('async');
+const talks = require('./talk.json'); //now references the joint json file (renamed talks, previous file still kept as they are for reference)
+const util = require('util');
 //requires dotenv and splits config for clarity
 
 //schemas
-var lectureschema = require('./schema/schemaLecture');
-var venueschema = require('./schema/schemaVenue');
-var speakerschema = require('./schema/schemaSpeaker');
-var tagschema = require('./schema/schemaTag');
-var linkSchema = require('./schema/schemaLectureTag');
+const lectureschema = require('./schema/schemaLecture');
+const venueschema = require('./schema/schemaVenue');
+const speakerschema = require('./schema/schemaSpeaker');
+const tagschema = require('./schema/schemaTag');
+const linkSchema = require('./schema/schemaLectureTag');
 
 exports.dropAll = function(databaseName, callback) {
     async.series([
@@ -72,24 +78,23 @@ exports.createAll = function(databaseName, callback) {
         });
 }
 
-exports.createFixtures = function (databaseName, callback) {
+exports.createFixtures = (databaseName, callback) => {
 
-var connectionString = process.env.DB_CONNECTION_STRING || 'postgres://localhost:5432/talks';
-    pg.connect(connectionString, function (err, client) {
+    pool.connect((err, client) => {
         if (err) throw err;
         async.series([
-            function(callback) {
-                deleteAll(client, function(err, result) {
+            (callback) => {
+                deleteAll(client, (err, result) => {
                     callback(err, result);
                 })
             },
-            function(callback) {
-                createVenues(client, talks.venues, function(err, result) {
+            (callback) => {
+                createVenues(client, talks.venues, (err, result) => {
                     callback(err, result);
                 })
             },
-            function(callback) {
-                createTags(client, talks.tags, function(err, result) {
+            (callback) => {
+                createTags(client, talks.tags, (err, result) => {
                     callback(err, result);
                 })
             },
@@ -99,8 +104,8 @@ var connectionString = process.env.DB_CONNECTION_STRING || 'postgres://localhost
                     callback(err, result);
                 })
             },*/
-            function(callback) {
-                createLectures(client, talks.lectures, function(err, result) {
+            (callback) => {
+                createLectures(client, talks.lectures, (err, result) => {
                     callback(err, result);
                 })
             }
@@ -111,7 +116,7 @@ var connectionString = process.env.DB_CONNECTION_STRING || 'postgres://localhost
                 })
             }*/
             ],
-            function(err, results) {
+            (err, results) => {
                 callback(err, results);
             });
     });
@@ -121,38 +126,38 @@ function deleteAll(client, callback) {
 
     //  should work in this order if on delete cascade and on delete update is specified when creating the foreign key
     async.series([
-            function (callback) {
-                client.query('delete from lecturetag', function (err, result) {
+             (callback) => {
+                client.query('delete from lecturetag', (err, result) => {
                     console.log('deleted all link table data');
                     callback(err, result);
                 });
             },
-            function(callback) {
-                client.query('delete from lecture', function(err, result) {
+            (callback) => {
+                client.query('delete from lecture', (err, result) => {
                     console.log('Deleted all Lectures');
                     callback(err, result);
                 });
             },
-            function(callback) {
-                client.query('delete from tag', function(err, result) {
+            (callback) => {
+                client.query('delete from tag', (err, result) => {
                     console.log('Deleted all Tags');
                     callback(err, result);
                 });
             },
-            function(callback) {
-                client.query('delete from speaker', function(err, result) {
+            (callback) => {
+                client.query('delete from speaker', (err, result) => {
                     console.log('Deleted all Speakers');
                     callback(err, result);
                 });
             },
-            function(callback) {
-                client.query('delete from venue', function (err, result) {
+            (callback) => {
+                client.query('delete from venue', (err, result) => {
                     console.log('Deleted all Venues');
                     callback(err, result);
                 });
             }],
             // Delete contents of other tables
-            function(err, results) {
+            (err, results) => {
                 callback();
             });
 }
