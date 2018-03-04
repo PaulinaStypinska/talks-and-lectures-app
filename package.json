@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node server.js",
     "test": "mocha ./test/*.js",
-    "posttest": "./cleanDB.sh"
+    "posttest": "./cleanDB.sh",
+    "populate": "./populateDatabase.sh"
   },
   "repository": {
     "type": "git",
