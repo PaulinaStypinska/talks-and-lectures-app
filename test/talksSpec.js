@@ -130,7 +130,7 @@ describe('crud test', function() {
         });
     });
 
-    it('should retrieve a lecture', function(done) {
+    it('should retrieve lectures', function(done) {
         lecture.retrieve(function(err, result) {
             assert.equal(true, result[1].lid > 0);
             done();

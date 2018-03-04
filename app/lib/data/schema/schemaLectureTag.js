@@ -1,8 +1,10 @@
-var pg = require('pg');
-
+var { Pool, Client } = require('pg')
 
 var connectionString = process.env.DB_CONNECTION_STRING || 'postgres://localhost:5432/talks';
 
+var pool = new Pool({
+    connectionString: connectionString,
+  });
 var createLectureTagTable = 'create table lecturetag \ \
                   ( \
                     id int primary key not null, \
@@ -14,20 +16,20 @@ var createLectureTagTable = 'create table lecturetag \ \
                       alter table lecturetag alter column id set default nextval(\'lecturetag_id_seq\')';
                       
 
-exports.drop = function(databaseName, callback) {
-    pg.connect(connectionString, function(err, client) {
+exports.drop = (databaseName, callback) => {
+    pool.connect((err, client) => {
         if (err) throw err;
-        client.query('drop table if exists lecturetag cascade', function(err, result) {
+        client.query('drop table if exists lecturetag cascade', (err, result) => {
             client.end();
             callback(err, result);
         })
     });
 }
 
-exports.createSchema = function(databaseName, callback) {
-    pg.connect(connectionString, function(err, client) {
+exports.createSchema = (databaseName, callback) => {
+    pool.connect((err, client) => {
         if (err) throw err;
-        client.query(createLectureTagTable, function(err, result) {
+        client.query(createLectureTagTable, (err, result) => {
             if(!err) {
                 console.log('Created LectureTag Table');
             }
